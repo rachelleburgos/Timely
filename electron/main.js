@@ -2,9 +2,12 @@ const {MongoClient} = require('mongodb');
 
 async function startserver(){
     while(true){
-    const username="";
-    const password="";
-    const cluster="";
+    console.log("\n enter username:");
+    const username=prompt();
+    console.log("\n enter password:");
+    const password=prompt();
+    console.log("\n enter cluster:");
+    const cluster=prompt();
     const uri =`mongodb+srv://${username}:${password}@${cluster}/test?retryWrites=true&w=majority`;
     try{const client=new MongoClient(uri);
     await client.connect();

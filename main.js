@@ -1,14 +1,15 @@
 const {MongoClient} = require('mongodb');
+let package=require('./package.json');
 
 async function startserver(){
     while(true){
-    const username="linustrahair";
-    const password="knuckles";
-    const cluster="cluster0.5xyhlnf.mongodb.net";
+    const username=package.server.username;
+    const password=package.server.password;
+    const cluster=package.server.cluster;
     const uri =`mongodb+srv://${username}:${password}@${cluster}/test?retryWrites=true&w=majority`;
-    try{const client=new MongoClient(uri);
-    await client.connect();
-    await run(client);
+    try{global.client=new MongoClient(uri);
+    await global.client.connect();
+    await run(global.client);
     }
     catch(error){
         console.log("\n incorrect settings re-enter");

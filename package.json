@@ -3,6 +3,11 @@
   "private": true,
   "version": "0.0.0",
   "main": "main.js",
+  "server":{
+    "username":"linustrahair",
+    "password":"knuckles",
+    "cluster":"cluster0.5xyhlnf.mongodb.net"
+  },
   "scripts": {
     "dev": "vite",
     "start": "electron .",

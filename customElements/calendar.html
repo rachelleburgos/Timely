@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            html{width:100%;
+            height:100%;
+        margin:0;}
+            body{
+                margin:0;
+                width:100%;
+            height:100%;
+            font-family: Inter;
+            }
+            .background
+            {
+                width:100%;
+                height:100%;
+                background:radial-gradient(#e2ceeb,#FFFFFF)
+            }
+            .weekView{
+                position:absolute;
+                left:10%;
+                top:30%;
+                width:87%;
+                bottom: 0%;
+                padding-bottom: 0%;
+                background-color: white;
+                border-radius: 20px;
+                box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.15);
+
+            }
+            .dayRapper{
+                position:absolute;
+                height:22%;
+                width:75px;
+                justify-content:center;
+                align-items: center;
+                top:13%;
+            }
+            .day{
+                position:absolute;
+                width:60px;
+                height:60px;
+                top: 45px;
+                justify-content:center;
+                align-items: center;
+                border-radius: 100%;
+                background-color:white;
+                box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.15);
+            }
+            .day[selected]{background-color: rgb(176, 104, 180);}
+            .day h1{
+                text-align: center;
+                line-height: 2.6   ;
+                font-family: Inter;
+                font-size: 16px;
+            }
+            #day1{
+                left:15%;
+            }
+            #day2{
+                left:27.5%;
+            }
+            #day3{
+                left:40%;
+            }
+            #day4{
+                left:52.5%;
+            }
+            #day5{
+                left:65%;
+            }
+            #day6{
+                left:77.5%;
+            }
+            #day7{
+                left:90%;
+            }
+            #addbutton::after{
+                width:60px;
+                height:60px;
+                border-radius: 37.5px;
+                box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.15);
+                background-color:#8876f5;
+                bottom:2.5%;
+                z-index: 20;
+                right:2.5%;
+                color:white;
+                content:"+";
+                text-align: center;
+                font-size:50px;
+                line-height: 1.1;
+                position:absolute;
+            }
+            .sequence{
+                left:15.5%;
+                position: absolute;
+                width:100%;
+                height:50px;
+                
+            }
+            @font-face {
+                font-family:"Inter";
+                src: url("Inter/Inter-VariableFont_slnt\,wght.ttf");
+            }
+            .dayRapper .daytitle{
+                position: relative;
+                margin-bottom:0;
+                margin-top:0;
+                line-height: 3;
+                right: 10px;
+                text-align: center;
+                font-size:16px;
+                color:#8C8C8C;
+                font-family:Inter;
+            }
+            .line{width:30px;
+                border:3px solid grey; 
+                margin-bottom:5px;
+                
+                border-radius:5px;}
+            #burg{  padding:10px;
+                    border-radius: 36px;
+                    width:36px;
+                    height: 26px;
+                    top:20px;
+                    left:20px;
+                    position:absolute;
+                    }
+            br{display:block;
+            margin:0;}
+            .sequence h1{float:left; margin-right:8%;}
+            
+        </style>
+
+    </head>
+    <body>
+        <div class="background">
+        <h2 style="color:black; position:absolute;font-size:30px; left:10%;">September <span style = "color: #8876f5;">2023</span></h2>
+        <div id="addbutton"></div>
+            <div class="dayRapper" id="day1"><h1 class="daytitle">Sun</h1><div class="day"><h1>11</h1></div></div>
+            <div class="dayRapper" id="day2"><h1 class="daytitle">Mon</h1><div class="day" ><h1>11</h1></div></div>
+            <div class="dayRapper" id="day3"><h1 class="daytitle">Tue</h1><div class="day" ><h1>11</h1></div></div>
+            <div class="dayRapper" id="day4"><h1 class="daytitle">Wed</h1><div class="day" ><h1>11</h1></div></div>
+            <div class="dayRapper" id="day5"><h1 class="daytitle">Thu</h1><div class="day" ><h1>11</h1></div></div>
+            <div class="dayRapper" id="day6"><h1 class="daytitle">Fri</h1><div class="day" ><h1>11</h1></div></div>
+            <div class="dayRapper" id="day7"><h1 class="daytitle">Sat</h1><div class="day" ><h1>11</h1></div></div>
+
+            <div class="weekView"></div>
+        <div id="burg">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+        </div>
+    </div class=>
+    </body>
+</html>

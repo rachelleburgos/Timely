@@ -1,5 +1,5 @@
-appId: com.electron.app
-productName: timely
+appId: com.timely.app
+productName: Timely
 directories:
   buildResources: build
 files:
@@ -12,7 +12,8 @@ files:
 asarUnpack:
   - resources/**
 win:
-  executableName: timely
+  executableName: Timely
+  icon: ../resources/icons/win/icon.ico
 nsis:
   artifactName: ${name}-${version}-setup.${ext}
   shortcutName: ${productName}
@@ -20,6 +21,7 @@ nsis:
   createDesktopShortcut: always
 mac:
   entitlementsInherit: build/entitlements.mac.plist
+  icon: ../resources/icons/mac/icon.icns
   extendInfo:
     - NSCameraUsageDescription: Application requests access to the device's camera.
     - NSMicrophoneUsageDescription: Application requests access to the device's microphone.
@@ -33,6 +35,7 @@ linux:
     - AppImage
     - snap
     - deb
+  icon: ../resources/icons/png/
   maintainer: electronjs.org
   category: Utility
 appImage:
@@ -40,4 +43,4 @@ appImage:
 npmRebuild: false
 publish:
   provider: generic
-  url: https://example.com/auto-updates
+  url: www.example.com

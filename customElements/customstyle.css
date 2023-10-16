@@ -1,0 +1,188 @@
+.weekRapper{
+    height:100px;
+    width:1259.25px;
+    margin-bottom:30px;
+}
+html{
+    width:100%;
+    height:100%;
+    margin:0;
+}
+body{
+    margin:0;
+    width:100%;
+    height:100%;
+    font-family: Inter;
+    overflow-y:hidden;
+}
+.background
+{
+    width:100%;
+    height:100%;
+    background:radial-gradient(#e2ceeb,#FFFFFF)
+}
+.weekView{
+    position:relative;
+    height:79%;
+    bottom: 0%;
+    width:1259px;
+    padding-bottom: 0%;
+    background-color: white;
+    border-radius: 20px;
+    border-bottom-left-radius:0 ;
+    border-bottom-right-radius:0 ;
+
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.15);
+
+}
+.dayRapper{
+    position:relative;
+    float: left;
+    margin-left:100px;
+    height:22%;
+    width:75px;
+    justify-content:center;
+    align-items: center;
+    top:13%;
+}
+.day{
+    
+    width:60px;
+    height:60px;
+    top: 25%;
+    justify-content:center;
+    align-items: center;
+    border-radius: 100%;
+    background-color:white;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.15);
+}
+.day[selected]{background-color: rgb(176, 104, 180);}
+.day h1{
+    margin:0;
+    top:10%;
+    position:relative;
+    text-align: center;
+    line-height: 2.6   ;
+    font-family: Inter;
+    font-size: 16px;
+}
+
+#addbutton::after{
+    width:60px;
+    height:60px;
+    border-radius: 37.5px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.15);
+    background-color:#8876f5;
+    bottom:2.5%;
+    z-index: 20;
+    right:5%;
+    color:white;
+    content:"+";
+    text-align: center;
+    font-size:50px;
+    line-height: 1.1;
+    position:absolute;
+}
+  
+#addinbox{
+    margin-left: 37%;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.15);
+   width:50px;
+   height:50px;
+   border-radius: 35px;
+   position:relative;
+   background-color: #8876f5;
+   color:white;
+}
+#addinbox::after{
+    content:"+";
+    font-size:35px;
+    text-align: center;
+}
+.inbox{
+    position: relative;
+    font-family: Inter;
+    text-align: center;
+    top: 130px;
+    left: 20px;
+}
+
+.inboxTitle{
+    text-align: center;
+    top: 20%;
+    left: 1%;
+}
+
+.sequence{
+    left:15.5%;
+    position: absolute;
+    width:100%;
+    height:50px;
+    
+}
+@font-face {
+    font-family:"Inter";
+    src: url("Inter/Inter-VariableFont_slnt\,wght.ttf");
+}
+.dayRapper .daytitle{
+    position: relative;
+    margin-bottom:0;
+    margin-top:0;
+    line-height: 3;
+    right: 10px;
+    text-align: center;
+    font-size:16px;
+    color:#8C8C8C;
+    font-family:Inter;
+}
+.line{
+    width:30px;
+    border:3px solid grey; 
+    margin-bottom:5px;
+    
+    border-radius:5px;
+}
+#burg{  position:relative;
+        float:left;
+        padding:10px;
+        border-radius: 36px;
+        width:36px;
+        margin:10px;
+        height: 26px;
+
+
+}
+br{
+    display:block;
+    margin:0;
+}
+.sequence h1{
+    float:left; 
+    margin-right:8%;
+}
+
+#month{
+    color:black; font-size:30px;
+    margin:12px;
+}
+.cal{
+    position:absolute;
+    width:82%;
+    left:15%;
+    top:10%;
+    height:90%;
+
+}
+
+.navbar{
+    position:absolute;
+    width:100%;
+    height:10%;
+
+}
+.inbox{
+    position: absolute;
+    left:0;
+    width:15%;
+    height:90%;
+}

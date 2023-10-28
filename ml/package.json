@@ -1,5 +1,10 @@
 {
+  "scripts": {
+    "start": "node src/dataset.js"
+  },
   "dependencies": {
-    "brain-js": "^0.1.2"
-  }
+    "brain-js": "^0.1.2",
+    "csv-parser": "^3.0.0"
+  }, 
+  "type": "module"
 }

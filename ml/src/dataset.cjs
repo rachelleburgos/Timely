@@ -5,37 +5,33 @@ const data_path = './data/sample_data.csv';
 const output_path = './data/preprocessed_data.json'
 let trainingData = [];
 
-/*                      IN ICAL FORMAT
-                      CONVERTS DATA.CSV INTO JSON FILE
-*/
-// TODO: Get the correct types for each column value
-//       Write it to the output path
-
 createReadStream(data_path)
     .pipe(csv({ headers: false }))
     .on('data', (rowArray) => {
         const rt_feature = new Date(rowArray[3].slice(0 , -6));
+        // Converts date string for register_time into JS Date objects
         const st_feature =  new Date(rowArray[4].slice(0, -6));
+        //Converts date string for start_time into JS Date objects
         trainingData.push({
             input: {
-                email_address: rowArray[0], //stores as a string
-                title: rowArray[1], //Stores as a string
-                duration_minute: +rowArray[2], //Stores as a signed INT
-                register_time: {
-                    year: rt_feature.getFullYear(),
-                    month: rt_feature.getMonth() + 1,
-                    day: rt_feature.getDate(),
-                    hour: rt_feature.getHours(),
-                    minute: rt_feature.getMinutes(),
-                    second: rt_feature.getSeconds(),
-                }, //Stores register_time, as an object with a feature for each individual component related to time
+                email_address: rowArray[0], // Stores as a string
+                title: rowArray[1], // Stores as a string
+                duration_minute: +rowArray[2], // Stores as a signed INT
+                register_time: {  
+                    year: rt_feature.getFullYear(), // Returns the year of the specified date according to local time
+                    month: rt_feature.getMonth() + 1, // Returns the hour of the specified date according to local time, +1 because months start from 0
+                    day: rt_feature.getDate(), // Returns the day(DD) of the specified date according to local time
+                    hour: rt_feature.getHours(), // Returns the hour(HH) of the specified date according to local time
+                    minute: rt_feature.getMinutes(), // Returns the minutes(MM) of the specified date according to local time
+                    second: rt_feature.getSeconds(), // Returns the seconds(SS) of the specified date according to local time
+                }, // Stores register_time, as an object with a feature for each individual component related to time
                 start_time: {
-                    year: st_feature.getFullYear(),
-                    month: st_feature.getMonth() + 1,
-                    day: st_feature.getDate(),
-                    hour: st_feature.getHours(),
-                    minute: st_feature.getMinutes(),
-                    second: st_feature.getSeconds(),
+                    year: st_feature.getFullYear(), // Returns the year of the specified date according to local time
+                    month: st_feature.getMonth() + 1, // Returns the hour of the specified date according to local time, +1 because months start from 0
+                    day: st_feature.getDate(), // Returns the day(DD) of the specified date according to local time
+                    hour: st_feature.getHours(), // Returns the hour(HH) of the specified date according to local time
+                    minute: st_feature.getMinutes(), // Returns the minutes(MM) of the specified date according to local time
+                    second: st_feature.getSeconds(), // Returns the seconds(SS) of the specified date according to local time
                 }, //Stores start_time, as an object with a feature for each individual component related to time
                 start_iso_year: +rowArray[5], //Stores as a signed INT
                 start_iso_week: +rowArray[6], //Stores as a signed INT
@@ -51,7 +47,7 @@ createReadStream(data_path)
         console.log('CSV file successfully processed');
         console.log(trainingData); // This is the data that will be used to train the network
 
-        fs.writeFileSync(output_path, JSON.stringify(trainingData, null, 2));
+        fs.writeFileSync(output_path, JSON.stringify(trainingData, null, 2)); //the last 2 paramaters are for indentation and formatting
         //Writes the data to the output path
         console.log('Successfully written to output path');
     });

@@ -1,8 +1,8 @@
 const fs = require('fs');
 const {createReadStream} = require('fs');
 const csv = require('csv-parser');
-const data_path = '../data/sample_data.csv';
-const output_path = '../data/preprocessed_data.json'
+const data_path = './data/sample_data.csv';
+const output_path = './data/preprocessed_data.json'
 let trainingData = [];
 
 /*                      IN ICAL FORMAT

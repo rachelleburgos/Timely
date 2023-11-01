@@ -1,4 +1,6 @@
-import mongoose from 'mongoose';
+import mongoose from 'mongoose'
+
+import User from './user.js';
 
 const { Schema } = mongoose;
 
@@ -23,6 +25,11 @@ const EventSchema = new Schema({
         required: [true, 'Event description is required'],
         minLength: [1, 'Event description should be at least 1 character'],
         maxLength: [1000, 'Event description cannot exceed 1000 characters'],
+    },
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: [true, 'Event user is required'],
     },
 }, { timestamps: true });
 

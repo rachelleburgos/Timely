@@ -1,9 +1,10 @@
-import Calendar from 'react-calendar'
+import FullCalendar from '@fullcalendar/react'
+import daygridPlugin from '@fullcalendar/daygrid'
 
-export function MainCalendar() {
+export const MyCalendar = () => {
   return (
-    <div className="calendar">
-      <Calendar />
+    <div>
+      <FullCalendar plugins={[daygridPlugin]} />
     </div>
   )
 }

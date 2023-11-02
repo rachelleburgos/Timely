@@ -3,7 +3,7 @@
     "preprocess": "node ./src/dataset.cjs"
   },
   "dependencies": {
-    "brain-js": "^0.1.2",
+    "brain.js": "^1.6.1",
     "csv-parser": "^3.0.0"
   },
   "type": "commonjs"

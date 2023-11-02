@@ -36,6 +36,7 @@ export const MyCalendar = () => {
         }}
         plugins={[daygridPlugin, interactionPlugin]}
         views={['dayGridMonth', 'dayGridWeek', 'dayGridDay']}
+        initialView="dayGridDay"
       />
     </div>
   )

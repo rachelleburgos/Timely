@@ -27,3 +27,47 @@ export const getUserProfile = async (req, res) => {
         res.status(500).json({ error: 'An error occurred while fetching the user profile' });
     }
 }
+
+// Get all user profiles
+export const getAllUserProfiles = async (req, res) => {
+    try {
+        const users = await User.find();
+        res.status(200).json(users);
+    } catch (error) {
+        console.error('Error getting user profiles:', error);
+        res.status(500).json({ error: 'An error occurred while fetching the user profiles' });
+    }
+}
+
+// Update a user profile
+export const updateUserProfile = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const userData = req.body;
+        const user = await User.findById(id);
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+        const updatedUser = await User.findByIdAndUpdate(id, userData, { new: true });
+        res.status(200).json({ message: 'User updated successfully', user: updatedUser });
+    } catch (error) {
+        console.error('Error updating user profile:', error);
+        res.status(500).json({ error: 'An error occurred while updating the user profile' });
+    }
+}
+
+// Delete a user profile
+export const deleteUserProfile = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const user = await User.findById(id);
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+        await User.findByIdAndDelete(id);
+        res.status(200).json({ message: 'User deleted successfully' });
+    } catch (error) {
+        console.error('Error deleting user profile:', error);
+        res.status(500).json({ error: 'An error occurred while deleting the user profile' });
+    }
+}

@@ -1,24 +1,16 @@
 import { app, shell, BrowserWindow } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
+import icon from '../../resources/icon.png?asset'
 
-// Path to the icon file, different for each platform
-const iconPaths = {
-  win32: '../../resources/icons/win/icon.ico',
-  darwin: '../resources/icons/mac/icon.icns',
-  default: '../../resources/icons/icon.png'
-}
-const iconPath = join(__dirname, iconPaths[process.platform] || iconPaths.default);
-
-
-function createWindow(): void {
+function createWindow() {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    icon: iconPath,
     width: 900,
     height: 670,
     show: false,
     autoHideMenuBar: true,
+    ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
       sandbox: false

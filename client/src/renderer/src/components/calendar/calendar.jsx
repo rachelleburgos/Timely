@@ -1,4 +1,18 @@
-import { useState, useCallback } from 'react'
+/**
+ * TODO:
+ *  - Add event details modal
+ *  - Add edit event modal
+ *  - Add delete event modal
+ *  - Drag and drop events
+ *  - Choose event times
+ *    - Beginning and end times, including all day events
+ *  - Drag from todo list to calendar
+ *  - Date picker
+ *  - Database integration
+ *  - Show one year's months at a time (popup, multi-month view)
+ */
+
+import { useState } from 'react'
 import FullCalendar from '@fullcalendar/react'
 import daygridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from '@fullcalendar/interaction'
@@ -11,48 +25,51 @@ const MyCalendar = () => {
   const [isModalOpen, setModalOpen] = useState(false)
   const [selectedDate, setSelectedDate] = useState(null)
 
-  const handleSelect = useCallback((info) => {
+  const handleSelect = (info) => {
     setSelectedDate(info.start)
     setModalOpen(true)
-  }, [])
+  }
 
-  const handleCloseModal = useCallback(() => {
+  const handleCloseModal = () => {
     setSelectedDate(null)
     setModalOpen(false)
-  }, [])
+  }
 
-  const createEvent = (eventName) => ({
-    start: selectedDate,
-    end: selectedDate,
-    title: eventName,
-    id: uuid()
-  })
-
-  const handleSubmitModal = useCallback(
-    (eventName) => {
-      if (selectedDate) {
-        setEvents((prevEvents) => [...prevEvents, createEvent(eventName)])
-      }
-      setModalOpen(false)
-    },
-    [selectedDate]
-  )
+  const handleSubmitModal = (eventName) => {
+    if (selectedDate) {
+      setEvents([
+        ...events,
+        {
+          start: selectedDate,
+          end: selectedDate,
+          title: eventName,
+          id: uuid()
+        }
+      ])
+    }
+    setModalOpen(false)
+  }
 
   return (
     <div>
       <FullCalendar
-        editable
-        selectable
+        initialView="dayGridDay"
+        views={['dayGridMonth', 'dayGridWeek', 'dayGridDay']}
         events={events}
-        select={handleSelect}
+        // eventClick={function(){}} // TODO: Show modal to show event details, edit, or delete
+        // eventAdd={function(){}} // TODO: Add event to database
+        // eventChange={function(){}} // TODO: Update event in database
+        // eventRemove={function(){}} // TODO: Remove event from database
+        // eventDrop={function(){}} // TODO: Update event in database
         headerToolbar={{
           start: 'today prev next',
-          middle: 'month',
+          center: 'title',
           end: 'dayGridMonth dayGridWeek dayGridDay'
         }}
         plugins={[daygridPlugin, interactionPlugin]}
-        views={['dayGridMonth', 'dayGridWeek', 'dayGridDay']}
-        initialView="dayGridDay"
+        editable={true}
+        selectable={true}
+        select={handleSelect}
       />
       <Modal isOpen={isModalOpen} onClose={handleCloseModal} onSubmit={handleSubmitModal} />
     </div>

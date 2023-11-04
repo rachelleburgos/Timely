@@ -1,67 +1,70 @@
-import { useState } from 'react'
+import { useState, useCallback, useEffect } from 'react'
+import update from 'immutability-helper'
 import PropTypes from 'prop-types'
-
 import InboxItem from './InboxItem.jsx'
 
-function InboxList({ inboxItems = [], onDragStart }) {
-  const [newInboxItem, setNewInboxItem] = useState('')
-  const [inboxList, setInboxList] = useState(inboxItems)
+const InboxList = ({ inboxItems, onRemoveFromInbox, onAddToInbox }) => {
+  const [items, setItems] = useState(inboxItems)
+  const [newItemTitle, setNewItemTitle] = useState('')
 
-  function handleAddInboxItem() {
-    if (newInboxItem.trim() !== '') {
-      setInboxList([...inboxList, { title: newInboxItem }])
-      setNewInboxItem('')
+  const moveItem = useCallback((dragIndex, hoverIndex) => {
+    setItems((prevItems) =>
+      update(prevItems, {
+        $splice: [
+          [dragIndex, 1],
+          [hoverIndex, 0, prevItems[dragIndex]]
+        ]
+      })
+    )
+  }, [])
+
+  useEffect(() => {
+    setItems(inboxItems)
+  }, [inboxItems])
+
+  const handleAddItem = (e) => {
+    e.preventDefault()
+    if (newItemTitle.trim() !== '') {
+      onAddToInbox(newItemTitle)
+      setNewItemTitle('')
     }
   }
 
-  function handleRemoveInboxItem(index) {
-    const newInboxList = [...inboxList]
-    newInboxList.splice(index, 1)
-    setInboxList(newInboxList)
-  }
-
-  // Define moveItem function here
-  function moveItem(dragIndex, hoverIndex) {
-    const dragItem = inboxList[dragIndex]
-    const hoverItem = inboxList[hoverIndex]
-    // Swap the items in the array
-    let updatedInboxList = [...inboxList]
-    updatedInboxList[dragIndex] = hoverItem
-    updatedInboxList[hoverIndex] = dragItem
-
-    setInboxList(updatedInboxList)
-  }
-
   return (
-    <div>
-      <h2>Inbox</h2>
-      <div>
-        <input type="text" value={newInboxItem} onChange={(e) => setNewInboxItem(e.target.value)} />
-        <button onClick={handleAddInboxItem}>Add Item</button>
-      </div>
-      {inboxList.length === 0 ? (
-        <p>No items to display</p>
-      ) : (
+    <>
+      <h1>Inbox</h1>
+      <form onSubmit={handleAddItem}>
+        <input
+          type="text"
+          value={newItemTitle}
+          onChange={(e) => setNewItemTitle(e.target.value)}
+          placeholder="Add new item..."
+        />
+        <button type="submit">Add</button>
+      </form>
+      {items.length > 0 ? (
         <ul>
-          {inboxList.map((item, index) => (
+          {items.map((item, index) => (
             <InboxItem
-              key={index}
+              key={item.id}
               item={item}
-              index={index} // Pass the index prop to InboxItem
-              onRemove={() => handleRemoveInboxItem(index)}
-              onDragStart={onDragStart}
-              moveItem={moveItem} // Pass the moveItem function to InboxItem
+              index={index}
+              moveItem={moveItem}
+              onRemove={onRemoveFromInbox}
             />
           ))}
         </ul>
+      ) : (
+        <p>No items in the inbox.</p>
       )}
-    </div>
+    </>
   )
 }
 
 InboxList.propTypes = {
-  inboxItems: PropTypes.array,
-  onDragStart: PropTypes.func.isRequired
+  inboxItems: PropTypes.array.isRequired,
+  onRemoveFromInbox: PropTypes.func.isRequired,
+  onAddToInbox: PropTypes.func.isRequired
 }
 
 export default InboxList

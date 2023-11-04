@@ -9,7 +9,7 @@ function Modal({ isOpen, onClose, onSubmit }) {
     event.preventDefault()
     const eventName = event.target.elements.eventName.value
     onSubmit(eventName)
-    onClose() // Close the modal after submission
+    onClose()
   }
 
   return (

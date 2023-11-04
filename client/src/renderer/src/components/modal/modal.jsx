@@ -1,18 +1,21 @@
 import PropTypes from 'prop-types'
 
-function Modal({ isOpen, onClose, onSubmit }) {
+function Modal({ isOpen, eventDetails, setEventDetails, onClose, onSubmit }) {
   if (!isOpen) {
     return null
   }
 
+  const handleInputChange = (event) => {
+    const { name, value } = event.target
+    setEventDetails((prevDetails) => ({
+      ...prevDetails,
+      [name]: value
+    }))
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault()
-    const eventName = event.target.elements.eventName.value
-    const startDate = event.target.elements.startDate.value
-    const startTime = event.target.elements.startTime.value
-    const endDate = event.target.elements.endDate.value
-    const endTime = event.target.elements.endTime.value
-    onSubmit({ eventName, startDate, startTime, endDate, endTime })
+    onSubmit(eventDetails)
     onClose()
   }
 
@@ -27,23 +30,53 @@ function Modal({ isOpen, onClose, onSubmit }) {
         <form onSubmit={handleSubmit}>
           <label htmlFor="eventName">
             Event name:
-            <input name="eventName" type="text" id="eventName" />
+            <input
+              name="eventName"
+              type="text"
+              id="eventName"
+              value={eventDetails.eventName}
+              onChange={handleInputChange}
+            />
           </label>
           <label htmlFor="startDate">
             Start date:
-            <input name="startDate" type="date" id="startDate" />
+            <input
+              name="startDate"
+              type="date"
+              id="startDate"
+              value={eventDetails.startDate}
+              onChange={handleInputChange}
+            />
           </label>
           <label htmlFor="startTime">
             Start time:
-            <input name="startTime" type="time" id="startTime" />
+            <input
+              name="startTime"
+              type="time"
+              id="startTime"
+              value={eventDetails.startTime}
+              onChange={handleInputChange}
+            />
           </label>
           <label htmlFor="endDate">
             End date:
-            <input name="endDate" type="date" id="endDate" />
+            <input
+              name="endDate"
+              type="date"
+              id="endDate"
+              value={eventDetails.endDate}
+              onChange={handleInputChange}
+            />
           </label>
           <label htmlFor="endTime">
             End time:
-            <input name="endTime" type="time" id="endTime" />
+            <input
+              name="endTime"
+              type="time"
+              id="endTime"
+              value={eventDetails.endTime}
+              onChange={handleInputChange}
+            />
           </label>
           <button type="submit">Submit</button>
           <button type="button" onClick={onClose}>
@@ -57,6 +90,14 @@ function Modal({ isOpen, onClose, onSubmit }) {
 
 Modal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
+  eventDetails: PropTypes.shape({
+    eventName: PropTypes.string,
+    startDate: PropTypes.string,
+    startTime: PropTypes.string,
+    endDate: PropTypes.string,
+    endTime: PropTypes.string
+  }).isRequired,
+  setEventDetails: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired
 }

@@ -4,7 +4,8 @@ import PropTypes from 'prop-types'
 
 const ItemType = 'INBOX_ITEM'
 
-const InboxItem = ({ item, index, moveItem, onRemove }) => {
+const InboxItem = ({ item, index, moveItem, onRemove, onDropToCalendar }) => {
+  // Added onDropToCalendar prop
   const ref = useRef(null)
 
   const [, drop] = useDrop({
@@ -19,7 +20,14 @@ const InboxItem = ({ item, index, moveItem, onRemove }) => {
 
   const [{ isDragging }, drag] = useDrag(() => ({
     type: ItemType,
-    item: { ...item, index }, // Pass the current index for reordering
+    item: { id: item.id, title: item.title, duration: item.duration }, // You can add more item properties if needed
+    end: (draggedItem, monitor) => {
+      const dropResult = monitor.getDropResult()
+      if (draggedItem && dropResult) {
+        // Call the onDropToCalendar function with the dragged item and drop result
+        onDropToCalendar(draggedItem, dropResult)
+      }
+    },
     collect: (monitor) => ({
       isDragging: monitor.isDragging()
     })
@@ -29,7 +37,7 @@ const InboxItem = ({ item, index, moveItem, onRemove }) => {
 
   return (
     <li ref={ref} style={{ opacity: isDragging ? 0.5 : 1 }}>
-      {item.title}
+      {item.title} - {item.duration} mins
       <button onClick={() => onRemove(item.id)}>Remove</button>
     </li>
   )
@@ -38,11 +46,13 @@ const InboxItem = ({ item, index, moveItem, onRemove }) => {
 InboxItem.propTypes = {
   item: PropTypes.shape({
     id: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired
+    title: PropTypes.string.isRequired,
+    duration: PropTypes.number.isRequired
   }).isRequired,
   index: PropTypes.number.isRequired,
   moveItem: PropTypes.func.isRequired,
-  onRemove: PropTypes.func.isRequired
+  onRemove: PropTypes.func.isRequired,
+  onDropToCalendar: PropTypes.func.isRequired // Add PropTypes for the new prop
 }
 
 export default InboxItem

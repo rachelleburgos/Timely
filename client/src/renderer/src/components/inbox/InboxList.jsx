@@ -40,7 +40,7 @@ const InboxList = ({
   }
 
   return (
-    <>
+    <div className="inbox">
       <h1>Inbox</h1>
       <form onSubmit={handleAddItem}>
         <input
@@ -82,7 +82,7 @@ const InboxList = ({
       ) : (
         <p>No items in the inbox.</p>
       )}
-    </>
+    </div>
   )
 }
 

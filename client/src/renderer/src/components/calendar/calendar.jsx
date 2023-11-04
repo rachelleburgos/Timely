@@ -130,11 +130,11 @@ const MyCalendar = ({ onRemoveFromInbox }) => {
   }
 
   return (
-    <div ref={drop}>
+    <div className="calendar" ref={drop}>
       <FullCalendar
         ref={calendarRef}
         plugins={[dayGridPlugin, interactionPlugin]}
-        initialView="dayGridMonth"
+        initialView="dayGridDay"
         events={events}
         droppable={true}
         editable={true}

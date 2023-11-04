@@ -17,8 +17,8 @@
 
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
-import MyCalendar from './components/calendar/calendar.jsx'
-import InboxList from './components/inbox/inbox.jsx'
+import MyCalendar from './components/calendar/Calendar.jsx'
+import InboxList from './components/inbox/InboxList.jsx'
 
 function App() {
   return (

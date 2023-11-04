@@ -5,7 +5,7 @@ import interactionPlugin from '@fullcalendar/interaction'
 import { useDrop } from 'react-dnd'
 import { v4 as uuid } from 'uuid'
 
-import Modal from '../modal/modal'
+import Modal from '../modal/Modal'
 
 const MyCalendar = () => {
   const [events, setEvents] = useState([])

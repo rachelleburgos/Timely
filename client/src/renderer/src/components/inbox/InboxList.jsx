@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import PropTypes from 'prop-types'
 
-import InboxItem from './inboxitem.jsx'
+import InboxItem from './InboxItem.jsx'
 
 function InboxList({ inboxItems = [], onDragStart }) {
   const [newInboxItem, setNewInboxItem] = useState('')

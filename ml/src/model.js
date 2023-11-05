@@ -33,18 +33,11 @@ const getData = function (content) {
 
             //Calls function Map to num and then converts it to a value between [0,1]
             title: (mapToNum(sample.input.title))/10,
-
-            //start_time_year: parseFloat((+sample.input.start_time.year / 9999).toFixed(4)),
-            //start_time_month: +sample.input.start_time.month / 100,
+            
             start_time_day: +sample.input.start_time.day / 100,
             start_time_hour: +sample.input.start_time.hour / 100,
             start_time_minute: +sample.input.start_time.minute / 100,
-            //start_time_second: +sample.input.start_time.second / 100,
-
-            //start_iso_year: parseFloat((+sample.input.start_iso_year / 9999).toFixed(4)),
-            //start_iso_week: +sample.input.start_iso_week / 100,
-
-            //register_start_week_distance: +sample.input.register_start_week_distance / 10,
+            
             register_start_day_distance: sample.input.register_start_day_distance/ 10,
 
         };
@@ -78,7 +71,7 @@ trainingData = getData(PP_DATA);
 
 //CREATION OF NEURAL NETWORK
 const config = {
-    //[Title, year, month, day, hour, minute, reg_dist]
+    //[Title, month, day, hour, minute, reg_dist]
     hiddenLayers: [4, 31, 24, 60, 60, 7] // Current config has low accuracy
 };
 
@@ -91,7 +84,7 @@ net.train(trainingData, {
     log: true,
     logPeriod: 1,
     learningRate: 0.5,
-    momentum: 0.17,
+    momentum: 0.15,
     activation: 'relu',
     leakyReluAlpha: 0.01, // supported for activation type 'leaky-relu'
 });
@@ -101,9 +94,9 @@ net.train(trainingData, {
 //     title: .1,
 //     start_time_day: 
 // }
-const sampleToPredict = trainingData[1];
+const sampleToPredict = trainingData[39];
 const prediction = net.run(sampleToPredict.input);
-console.log(trainingData[1]); // To check the if the data is parsed correctly
+console.log(trainingData[39]); // To check the if the data is parsed correctly
 
 console.log(`Got ${trainingData.length} samples for training`);
 
@@ -113,4 +106,5 @@ const savedModel = JSON.parse(fs.readFileSync('trained.json', 'utf8'));
 
 
 net.fromJSON(savedModel);
-console.log('Prediction: ', prediction); // prints out predicted output of when to start cscheduled task for the first index in data
+const predJson = net.run(sampleToPredict.input)
+console.log('Prediction: ', predJson); // prints out predicted output of when to start cscheduled task for the first index in data

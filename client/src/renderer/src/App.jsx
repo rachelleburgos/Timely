@@ -1,3 +1,4 @@
+
 import { useState } from 'react'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
@@ -8,39 +9,43 @@ import InboxList from './components/inbox/InboxList.jsx'
 import './assets/App.css'
 
 function App() {
+  // State for tracking inbox items
   const [inboxItems, setInboxItems] = useState([])
 
+  // Function to remove an item from the inbox
   const removeFromInbox = (id) => {
     setInboxItems((prevItems) => prevItems.filter((item) => item.id !== id))
   }
 
+  // Function to add a new item to the inbox
   const addInboxItem = (item) => {
-    const newId = Date.now().toString() // for simplicity, using timestamp as ID
-    const newItem = { id: newId, ...item } // spread the item to include both title and duration
+    // For simplicity, using timestamp as ID, consider using a more robust ID system
+    const newId = Date.now().toString() 
+    const newItem = { id: newId, ...item }
     setInboxItems((prevItems) => [...prevItems, newItem])
   }
 
-  // Function to handle the drop of an item onto the calendar
+  // TODO: Implement the logic to handle the drop of an item onto the calendar
+  // This should include validation and updating both the calendar and inbox state if necessary
   const onDropToCalendar = (item, date) => {
-    // Define the logic to add the item as an event to the calendar here
-    // You may need to define an 'addEventToCalendar' function and call it
-    console.log('Dropped item on calendar:', item, 'on date:', date)
-    // For now, just removing the item from the inbox
-    removeFromInbox(item.id)
+    // Implement the logic to add the item as an event to the calendar here
+    // This may include defining an 'addEventToCalendar' function and calling it
   }
 
   return (
-    <DndProvider backend={HTML5Backend}>
-      <div className="app-container">
-        <InboxList
-          inboxItems={inboxItems}
-          onRemoveFromInbox={removeFromInbox}
-          onAddToInbox={addInboxItem}
-          onDropToCalendar={onDropToCalendar} // Pass the function here
+    <div className="App">
+      <DndProvider backend={HTML5Backend}>
+        <InboxList 
+          inboxItems={inboxItems} 
+          removeItem={removeFromInbox} 
+          addItem={addInboxItem} 
         />
-        <MyCalendar onRemoveFromInbox={removeFromInbox} />
-      </div>
-    </DndProvider>
+        <MyCalendar 
+          onDropEvent={onDropToCalendar}
+          // Pass any other necessary props
+        />
+      </DndProvider>
+    </div>
   )
 }
 

@@ -1,10 +1,14 @@
 import PropTypes from 'prop-types'
 
+// TODO: Import a custom hook if complex logic is needed for managing the modal's state and lifecycle
+
 function Modal({ isOpen, eventDetails, setEventDetails, onClose, onSubmit }) {
+  // If the modal is not open, do not render anything
   if (!isOpen) {
     return null
   }
 
+  // Handle changes to form inputs
   const handleInputChange = (event) => {
     const { name, value } = event.target
     setEventDetails((prevDetails) => ({
@@ -13,21 +17,25 @@ function Modal({ isOpen, eventDetails, setEventDetails, onClose, onSubmit }) {
     }))
   }
 
+  // Handle the submission of the form
   const handleSubmit = (event) => {
     event.preventDefault()
     onSubmit(eventDetails)
-    onClose()
+    onClose() // Close the modal after submission
   }
 
+  // TODO: Consider using a portal for rendering the modal to avoid issues with overflow and positioning
   return (
     <div
       className="modal-overlay"
       aria-labelledby="modal-title"
       aria-describedby="modal-description"
+      // TODO: Manage focus when the modal opens and ensure it traps focus within the modal for accessibility
     >
       <div className="modal">
         <h2 id="modal-title">Enter Event Details</h2>
         <form onSubmit={handleSubmit}>
+          {/* Form inputs for event details */}
           <label htmlFor="eventName">
             Event name:
             <input
@@ -36,51 +44,14 @@ function Modal({ isOpen, eventDetails, setEventDetails, onClose, onSubmit }) {
               id="eventName"
               value={eventDetails.eventName}
               onChange={handleInputChange}
+              required // Ensure the input is not empty upon submission
             />
           </label>
-          <label htmlFor="startDate">
-            Start date:
-            <input
-              name="startDate"
-              type="date"
-              id="startDate"
-              value={eventDetails.startDate}
-              onChange={handleInputChange}
-            />
-          </label>
-          <label htmlFor="startTime">
-            Start time:
-            <input
-              name="startTime"
-              type="time"
-              id="startTime"
-              value={eventDetails.startTime}
-              onChange={handleInputChange}
-            />
-          </label>
-          <label htmlFor="endDate">
-            End date:
-            <input
-              name="endDate"
-              type="date"
-              id="endDate"
-              value={eventDetails.endDate}
-              onChange={handleInputChange}
-            />
-          </label>
-          <label htmlFor="endTime">
-            End time:
-            <input
-              name="endTime"
-              type="time"
-              id="endTime"
-              value={eventDetails.endTime}
-              onChange={handleInputChange}
-            />
-          </label>
+          {/* Add other form fields here */}
+          {/* Submit and close buttons */}
           <button type="submit">Submit</button>
           <button type="button" onClick={onClose}>
-            Close
+            Cancel
           </button>
         </form>
       </div>
@@ -90,13 +61,7 @@ function Modal({ isOpen, eventDetails, setEventDetails, onClose, onSubmit }) {
 
 Modal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
-  eventDetails: PropTypes.shape({
-    eventName: PropTypes.string,
-    startDate: PropTypes.string,
-    startTime: PropTypes.string,
-    endDate: PropTypes.string,
-    endTime: PropTypes.string
-  }).isRequired,
+  eventDetails: PropTypes.object.isRequired,
   setEventDetails: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired

@@ -2,20 +2,19 @@ import { useState, useEffect } from 'react'
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin, { Draggable } from '@fullcalendar/interaction'
-import { v4 as uuidv4 } from 'uuid' // Corrected import statement
+import { v4 as uuidv4 } from 'uuid'
 
 const MyCalendar = () => {
   const [events, setEvents] = useState([])
 
   useEffect(() => {
-    // This will make sure Draggable is initialized once upon component mount
     let draggableEl = document.getElementById('external-events')
     if (draggableEl) {
       new Draggable(draggableEl, {
         itemSelector: '.draggable-event',
         eventData: function (eventEl) {
           let title = eventEl.innerText
-          let id = `event-${uuidv4()}` // Generate a new ID for each event
+          let id = `event-${uuidv4()}`
           return {
             title: title,
             id: id,
@@ -40,10 +39,10 @@ const MyCalendar = () => {
   }
 
   return (
-    <div>
+    <div id="my-calendar">
       <FullCalendar
         plugins={[dayGridPlugin, interactionPlugin]}
-        initialView="dayGridMonth"
+        initialView="dayGridDay"
         editable
         selectable
         droppable

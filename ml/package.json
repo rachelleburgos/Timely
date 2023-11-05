@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "preprocess": "node ./src/dataset.cjs"
+  },
+  "dependencies": {
+    "brain.js": "^1.6.1",
+    "csv-parser": "^3.0.0"
+  },
+  "type": "commonjs"
+}

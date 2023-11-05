@@ -28,6 +28,7 @@
     "@fullcalendar/timegrid": "^6.1.9",
     "@mui/icons-material": "^5.14.16",
     "electron-updater": "^6.1.1",
+    "immutability-helper": "^3.1.1",
     "react-datepicker": "^4.21.0",
     "react-dnd": "^16.0.1",
     "react-dnd-html5-backend": "^16.0.1",

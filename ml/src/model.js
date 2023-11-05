@@ -5,11 +5,11 @@ const fs = require('fs');
 // Data will have an input and output
 
 /*
-Inputs will include: 'duration_minute', 'register_time'
+Inputs will include: 'Title', 'Start_time'
 */
 
 /*
-Outputs will include: 'start_time', 'is_reccurent'
+Outputs will include: 'start_time_slot'
 */
 
 /*
@@ -22,31 +22,35 @@ let trainingData = [];
 const getData = function (content) {
     var jsonData = JSON.parse(fs.readFileSync('../data/preprocessed_data.json', 'utf-8'));
     var data = [];
-    for (var i = 0; i <jsonData.length; i++)
+    for (var i = 0; i < 100; i++)
     {
         var sample = jsonData[i];
         var input = {
-            duration_minute: sample.input.duration_minute,
+            //duration_minute: sample.input.duration_minute /100,
             // Brain expects a consistent format of input and output, so the features of register_time have been flattened to be individual numbers
             // Rather than [ num, arr{}, num ...]
             // The following values are converted to decimal values between [0,1]
-            register_time_year: parseFloat((+sample.input.register_time.year / 9999).toFixed(4)), // converts rty into a float with percision 4
-            register_time_month: +sample.input.register_time.month / 100, //maps rtm to a float 0.MM
-            register_time_day: +sample.input.register_time.day / 100, // maps rtd to a float 0.DD
-            register_time_hour: +sample.input.register_time.hour / 100, // maps rth to a float 0.HH
-            register_time_minute: +sample.input.register_time.minute / 100, // maps rtmin to a float 0.MM
-            register_time_second: +sample.input.register_time.second / 100, // maps rts to a float 0.SS
 
-        };
-        var output = {
-            // conversions function the same as for input 
+            //Calls function Map to num and then converts it to a value between [0,1]
+            title: (mapToNum(sample.input.title))/10,
+
             start_time_year: parseFloat((+sample.input.start_time.year / 9999).toFixed(4)),
             start_time_month: +sample.input.start_time.month / 100,
             start_time_day: +sample.input.start_time.day / 100,
             start_time_hour: +sample.input.start_time.hour / 100,
             start_time_minute: +sample.input.start_time.minute / 100,
-            start_time_second: +sample.input.start_time.second / 100,
-            is_reccurent: sample.input.is_reccurent ? 1:0, // returns a value of 0 or 1 depending on if the boolean value is true or false
+            //start_time_second: +sample.input.start_time.second / 100,
+
+            //start_iso_year: parseFloat((+sample.input.start_iso_year / 9999).toFixed(4)),
+            //start_iso_week: +sample.input.start_iso_week / 100,
+
+            //register_start_week_distance: +sample.input.register_start_week_distance / 10,
+            register_start_day_distance: sample.input.register_start_day_distance/ 10,
+
+        };
+        var output = {
+            //THe output should be the 30 minute slot of the week the task is scheduled for
+            start_time_slot: parseFloat((+sample.input.start_time_slot / 1000).toFixed(4)),
         };
         data.push({
             input: input,
@@ -56,24 +60,38 @@ const getData = function (content) {
     return data;
 }
 
-trainingData = getData(PP_DATA);
+function mapToNum(title) {
+    //Converts string title into a number because 
+    switch (title) {
+        case "Personal":
+            return 1;
+        case "Work":
+            return 2;
+        case "School":
+            return 3;
+        case "Recreation":
+            return 4;
+    }
+}
 
+trainingData = getData(PP_DATA);
 
 //CREATION OF NEURAL NETWORK
 const config = {
-    hiddenLayers: [164, 4] // Current config takes very long with minimal improvement in accuracy (already low)
+    //[Title, year, month, day, hour, minute, reg_dist]
+    hiddenLayers: [4, 20, 12, 30, 24, 60, 60, 7] // Current config has low accuracy
 };
 
 const net = new brain.NeuralNetwork(config);
 
-
 //TRAINING PARAMETERS
 net.train(trainingData, {
     errorThresh: 0.0025,
-    iterations: 20000,
+    iterations: 1000,
     log: true,
     logPeriod: 1,
-    learningRate: 0.5,
+    learningRate: 0.25,
+    momentum: 0.15,
 });
 
 

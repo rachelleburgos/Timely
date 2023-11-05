@@ -2,7 +2,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "Noryangjin",
+      "title": "Personal",
       "duration_minute": 60,
       "register_time": {
         "year": 2010,
@@ -32,7 +32,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "graduate interview",
+      "title": "School",
       "duration_minute": 120,
       "register_time": {
         "year": 2010,
@@ -62,7 +62,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "docs sending",
+      "title": "School",
       "duration_minute": 60,
       "register_time": {
         "year": 2010,
@@ -92,7 +92,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "paper meeting",
+      "title": "School",
       "duration_minute": 30,
       "register_time": {
         "year": 2010,
@@ -122,7 +122,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "presentation",
+      "title": "School",
       "duration_minute": 10,
       "register_time": {
         "year": 2010,
@@ -152,7 +152,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "PCHS alumni association",
+      "title": "School",
       "duration_minute": 30,
       "register_time": {
         "year": 2010,
@@ -182,7 +182,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "Mobile Computing final exam",
+      "title": "School",
       "duration_minute": 60,
       "register_time": {
         "year": 2010,
@@ -212,7 +212,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "KU graduate admission result",
+      "title": "School",
       "duration_minute": 60,
       "register_time": {
         "year": 2010,
@@ -242,7 +242,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "K wedding",
+      "title": "School",
       "duration_minute": 60,
       "register_time": {
         "year": 2010,
@@ -272,7 +272,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "Prof. K",
+      "title": "School",
       "duration_minute": 60,
       "register_time": {
         "year": 2010,
@@ -302,7 +302,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "paper meeting",
+      "title": "School",
       "duration_minute": 60,
       "register_time": {
         "year": 2010,
@@ -332,7 +332,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "restaurant",
+      "title": "Personal",
       "duration_minute": 60,
       "register_time": {
         "year": 2010,
@@ -362,7 +362,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "electric charges",
+      "title": "Work",
       "duration_minute": 60,
       "register_time": {
         "year": 2010,
@@ -392,7 +392,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "paper meeting",
+      "title": "School",
       "duration_minute": 60,
       "register_time": {
         "year": 2010,
@@ -422,7 +422,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "notice print",
+      "title": "School",
       "duration_minute": 60,
       "register_time": {
         "year": 2010,
@@ -452,7 +452,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "paper submission (mail)",
+      "title": "School",
       "duration_minute": 60,
       "register_time": {
         "year": 2010,
@@ -482,7 +482,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "paper submission",
+      "title": "School",
       "duration_minute": 60,
       "register_time": {
         "year": 2010,
@@ -512,7 +512,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "Prof. P",
+      "title": "School",
       "duration_minute": 60,
       "register_time": {
         "year": 2011,
@@ -542,7 +542,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "gangnam",
+      "title": "Personal",
       "duration_minute": 60,
       "register_time": {
         "year": 2011,
@@ -572,7 +572,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "H square fitness",
+      "title": "Personal",
       "duration_minute": 60,
       "register_time": {
         "year": 2011,
@@ -602,7 +602,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "donate blood",
+      "title": "Personal",
       "duration_minute": 30,
       "register_time": {
         "year": 2010,
@@ -632,7 +632,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "K bro",
+      "title": "Personal",
       "duration_minute": 60,
       "register_time": {
         "year": 2011,
@@ -662,7 +662,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "marines",
+      "title": "Work",
       "duration_minute": 270,
       "register_time": {
         "year": 2011,
@@ -692,7 +692,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "seminar",
+      "title": "School",
       "duration_minute": 60,
       "register_time": {
         "year": 2011,
@@ -722,7 +722,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "K",
+      "title": "School",
       "duration_minute": 60,
       "register_time": {
         "year": 2011,
@@ -752,7 +752,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "Prof. P lunch",
+      "title": "School",
       "duration_minute": 60,
       "register_time": {
         "year": 2011,
@@ -782,7 +782,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "B seminar- HCI",
+      "title": "School",
       "duration_minute": 60,
       "register_time": {
         "year": 2011,
@@ -812,7 +812,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "lab meeting",
+      "title": "School",
       "duration_minute": 60,
       "register_time": {
         "year": 2011,
@@ -842,7 +842,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "badminton",
+      "title": "Recreation",
       "duration_minute": 60,
       "register_time": {
         "year": 2011,
@@ -872,7 +872,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "badminton",
+      "title": "Recreation",
       "duration_minute": 120,
       "register_time": {
         "year": 2011,
@@ -902,7 +902,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "phone plan",
+      "title": "Personal",
       "duration_minute": 60,
       "register_time": {
         "year": 2011,
@@ -932,7 +932,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "OT",
+      "title": "Work",
       "duration_minute": 120,
       "register_time": {
         "year": 2010,
@@ -962,7 +962,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "banquet",
+      "title": "Personal",
       "duration_minute": 60,
       "register_time": {
         "year": 2011,
@@ -992,7 +992,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "change phone payment method",
+      "title": "Personal",
       "duration_minute": 60,
       "register_time": {
         "year": 2011,
@@ -1022,7 +1022,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "Haircut",
+      "title": "Personal",
       "duration_minute": 60,
       "register_time": {
         "year": 2011,
@@ -1052,7 +1052,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "PCHS alumni association",
+      "title": "School",
       "duration_minute": 60,
       "register_time": {
         "year": 2011,
@@ -1082,7 +1082,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "lecture",
+      "title": "School",
       "duration_minute": 60,
       "register_time": {
         "year": 2011,
@@ -1112,7 +1112,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "space reservation",
+      "title": "Personal",
       "duration_minute": 60,
       "register_time": {
         "year": 2011,
@@ -1142,7 +1142,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "paper selection, hash",
+      "title": "School",
       "duration_minute": 60,
       "register_time": {
         "year": 2011,
@@ -1172,7 +1172,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "read indexing docs, tf calc storage check",
+      "title": "School",
       "duration_minute": 60,
       "register_time": {
         "year": 2011,
@@ -1202,7 +1202,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "K pizza",
+      "title": "Personal",
       "duration_minute": 60,
       "register_time": {
         "year": 2011,
@@ -1232,7 +1232,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "Bio term project",
+      "title": "Personal",
       "duration_minute": 60,
       "register_time": {
         "year": 2011,
@@ -1262,7 +1262,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "K and K",
+      "title": "Personal",
       "duration_minute": 60,
       "register_time": {
         "year": 2011,
@@ -1292,7 +1292,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "ip call",
+      "title": "School",
       "duration_minute": 60,
       "register_time": {
         "year": 2011,
@@ -1322,7 +1322,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "classmate",
+      "title": "School",
       "duration_minute": 120,
       "register_time": {
         "year": 2011,
@@ -1352,7 +1352,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "experiments",
+      "title": "School",
       "duration_minute": 60,
       "register_time": {
         "year": 2011,
@@ -1382,7 +1382,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "S",
+      "title": "Personal",
       "duration_minute": 60,
       "register_time": {
         "year": 2011,
@@ -1412,7 +1412,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "Beijing",
+      "title": "Personal",
       "duration_minute": 60,
       "register_time": {
         "year": 2011,
@@ -1442,7 +1442,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "notice",
+      "title": "School",
       "duration_minute": 60,
       "register_time": {
         "year": 2011,
@@ -1472,7 +1472,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "payment in installments",
+      "title": "Personal",
       "duration_minute": 60,
       "register_time": {
         "year": 2011,
@@ -1502,7 +1502,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "Enrollment",
+      "title": "School",
       "duration_minute": 60,
       "register_time": {
         "year": 2011,
@@ -1532,7 +1532,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "Hoengseong",
+      "title": "Personal",
       "duration_minute": 60,
       "register_time": {
         "year": 2011,
@@ -1562,7 +1562,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "Course correction",
+      "title": "School",
       "duration_minute": 60,
       "register_time": {
         "year": 2011,
@@ -1592,7 +1592,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "notice print",
+      "title": "School",
       "duration_minute": 60,
       "register_time": {
         "year": 2011,
@@ -1622,7 +1622,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "DS groupping",
+      "title": "School",
       "duration_minute": 60,
       "register_time": {
         "year": 2011,
@@ -1652,7 +1652,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "L wedding",
+      "title": "Personal",
       "duration_minute": 60,
       "register_time": {
         "year": 2011,
@@ -1682,7 +1682,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "p2012 release",
+      "title": "School",
       "duration_minute": 60,
       "register_time": {
         "year": 2011,
@@ -1712,7 +1712,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "registration fee 2nd",
+      "title": "Personal",
       "duration_minute": 60,
       "register_time": {
         "year": 2011,
@@ -1742,7 +1742,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "lunch",
+      "title": "Personal",
       "duration_minute": 60,
       "register_time": {
         "year": 2011,
@@ -1772,7 +1772,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "lunch 09",
+      "title": "Personal",
       "duration_minute": 60,
       "register_time": {
         "year": 2011,
@@ -1802,7 +1802,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "classmate",
+      "title": "School",
       "duration_minute": 60,
       "register_time": {
         "year": 2011,
@@ -1832,7 +1832,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "Nonhyeon K",
+      "title": "Personal",
       "duration_minute": 60,
       "register_time": {
         "year": 2011,
@@ -1862,7 +1862,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "fitness registration",
+      "title": "Recreation",
       "duration_minute": 60,
       "register_time": {
         "year": 2011,
@@ -1892,7 +1892,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "3rd",
+      "title": "Personal",
       "duration_minute": 60,
       "register_time": {
         "year": 2011,
@@ -1922,7 +1922,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "4th",
+      "title": "Personal",
       "duration_minute": 60,
       "register_time": {
         "year": 2011,
@@ -1952,7 +1952,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "SD hospital",
+      "title": "Personal",
       "duration_minute": 60,
       "register_time": {
         "year": 2011,
@@ -1982,7 +1982,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "meeting",
+      "title": "School",
       "duration_minute": 90,
       "register_time": {
         "year": 2011,
@@ -2012,7 +2012,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "SD hospital",
+      "title": "Personal",
       "duration_minute": 60,
       "register_time": {
         "year": 2011,
@@ -2042,7 +2042,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "soccer",
+      "title": "Recreation",
       "duration_minute": 120,
       "register_time": {
         "year": 2011,
@@ -2072,7 +2072,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "El Clásico",
+      "title": "Recreation",
       "duration_minute": 120,
       "register_time": {
         "year": 2011,
@@ -2102,7 +2102,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "alumni dinner",
+      "title": "School",
       "duration_minute": 120,
       "register_time": {
         "year": 2011,
@@ -2132,7 +2132,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "end of class alumni association",
+      "title": "School",
       "duration_minute": 60,
       "register_time": {
         "year": 2011,
@@ -2162,7 +2162,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "grade",
+      "title": "School",
       "duration_minute": 60,
       "register_time": {
         "year": 2011,
@@ -2192,7 +2192,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "El Clásico (Copa del Rey Quarter Round)",
+      "title": "Recreation",
       "duration_minute": 120,
       "register_time": {
         "year": 2012,
@@ -2222,7 +2222,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "admission process result",
+      "title": "School",
       "duration_minute": 60,
       "register_time": {
         "year": 2012,
@@ -2252,7 +2252,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "L wedding",
+      "title": "Personal",
       "duration_minute": 60,
       "register_time": {
         "year": 2011,
@@ -2282,7 +2282,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "1005",
+      "title": "Personal",
       "duration_minute": 60,
       "register_time": {
         "year": 2012,
@@ -2312,7 +2312,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "K kyeongsan",
+      "title": "Personal",
       "duration_minute": 60,
       "register_time": {
         "year": 2012,
@@ -2342,7 +2342,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "K classmate mess",
+      "title": "School",
       "duration_minute": 60,
       "register_time": {
         "year": 2012,
@@ -2372,7 +2372,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "L dinner",
+      "title": "Personal",
       "duration_minute": 60,
       "register_time": {
         "year": 2012,
@@ -2402,7 +2402,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "donate blood",
+      "title": "Personal",
       "duration_minute": 60,
       "register_time": {
         "year": 2012,
@@ -2432,7 +2432,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "K wedding",
+      "title": "Personal",
       "duration_minute": 60,
       "register_time": {
         "year": 2011,
@@ -2462,7 +2462,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "J, P, and J",
+      "title": "Personal",
       "duration_minute": 60,
       "register_time": {
         "year": 2012,
@@ -2492,7 +2492,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "J wedding",
+      "title": "Personal",
       "duration_minute": 60,
       "register_time": {
         "year": 2011,
@@ -2522,7 +2522,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "lunch w/ Jang",
+      "title": "Personal",
       "duration_minute": 60,
       "register_time": {
         "year": 2012,
@@ -2552,7 +2552,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "VL canceled",
+      "title": "School",
       "duration_minute": 60,
       "register_time": {
         "year": 2012,
@@ -2582,7 +2582,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "reserve forces",
+      "title": "Work",
       "duration_minute": 480,
       "register_time": {
         "year": 2012,
@@ -2612,7 +2612,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "K's first-birthday party",
+      "title": "Personal",
       "duration_minute": 60,
       "register_time": {
         "year": 2012,
@@ -2642,7 +2642,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "S",
+      "title": "Personal",
       "duration_minute": 60,
       "register_time": {
         "year": 2012,
@@ -2672,7 +2672,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "eng presentation",
+      "title": "School",
       "duration_minute": 60,
       "register_time": {
         "year": 2012,
@@ -2702,7 +2702,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "Workout registration",
+      "title": "Recreation",
       "duration_minute": 60,
       "register_time": {
         "year": 2012,
@@ -2732,7 +2732,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "blood",
+      "title": "Personal",
       "duration_minute": 60,
       "register_time": {
         "year": 2012,
@@ -2762,7 +2762,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "Haircut",
+      "title": "Personal",
       "duration_minute": 60,
       "register_time": {
         "year": 2012,
@@ -2792,7 +2792,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "final exam",
+      "title": "School",
       "duration_minute": 60,
       "register_time": {
         "year": 2012,
@@ -2822,7 +2822,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "gangnam MFG",
+      "title": "Personal",
       "duration_minute": 120,
       "register_time": {
         "year": 2012,
@@ -2852,7 +2852,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "exam",
+      "title": "School",
       "duration_minute": 180,
       "register_time": {
         "year": 2012,
@@ -2882,7 +2882,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "K",
+      "title": "Personal",
       "duration_minute": 60,
       "register_time": {
         "year": 2012,
@@ -2912,7 +2912,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "K and L lunch",
+      "title": "Personal",
       "duration_minute": 60,
       "register_time": {
         "year": 2012,
@@ -2942,7 +2942,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "K wedding",
+      "title": "Personal",
       "duration_minute": 60,
       "register_time": {
         "year": 2012,
@@ -2972,7 +2972,7 @@
   {
     "input": {
       "email_address": "sample@email.com",
-      "title": "assemble luggage",
+      "title": "Personal",
       "duration_minute": 60,
       "register_time": {
         "year": 2012,

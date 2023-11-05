@@ -1,6 +1,8 @@
 {
   "scripts": {
-    "preprocess": "node ./src/dataset.cjs"
+    "preprocess": "node ./src/dataset.cjs",
+    "AI": "node ./src/model.js",
+    "start": "node ./src/endpoint/index.js"
   },
   "dependencies": {
     "brain.js": "^1.6.1",

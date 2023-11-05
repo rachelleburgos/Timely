@@ -31,6 +31,10 @@ const EventSchema = new Schema({
         ref: 'User',
         required: [true, 'Event user is required'],
     },
+    isScheduled: {
+        type: Boolean,
+        default: false,
+    },
 }, { timestamps: true });
 
 export default mongoose.model('Event', EventSchema);

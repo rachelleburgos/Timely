@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <meta http-equiv="Content-Security-Policy">
+    <title>Change Password</title>
+  </head>
+
+  <body>
+    <section class="section">
+      <h1 class="title">Change Password</h1>
+      We are using Node.js <span id="node-version"></span>,
+      Chromium <span id="chrome-version"></span>,
+      and Electron <span id="electron-version"></span>.
+      <script src="../renderer.js"></script>
+      <div class="container">
+        <div class="form-container">
+          <form id="reset">
+            <div class="field">
+              <input id="password" type="password" placeholder="Password" />
+            </div>
+            <div class="field">
+              <input type="submit" value="Submit Form" />
+            </div>
+          </form>
+          <script src="../passReset.js"></script>
+        </div>
+        <div class="link-container">
+          <a href="login.html">Already have an account? Sign-in!</a>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

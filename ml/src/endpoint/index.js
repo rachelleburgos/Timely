@@ -5,7 +5,7 @@ const fs = require('fs');
 const app = express();
 const port = 3000;
 
-const trainedModel = JSON.parse(fs.readFileSync('../trained.json', 'utf-8'));
+const trainedModel = JSON.parse(fs.readFileSync('./src/trained.json', 'utf-8'));
 const net = new brain.NeuralNetwork().fromJSON(trainedModel);
 
 app.use(express.json());

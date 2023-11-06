@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import PropTypes from 'prop-types'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
 const AddEventForm = ({ onAddEvent }) => {
   const [title, setTitle] = useState('')
@@ -48,7 +50,9 @@ const AddEventForm = ({ onAddEvent }) => {
         onChange={(e) => setDetails(e.target.value)}
         placeholder="Event Details"
       />
-      <button type="submit">Add Event</button>
+      <button type="submit" id="submit-event-button">
+        <FontAwesomeIcon icon={faPlus} />
+      </button>
     </form>
   )
 }

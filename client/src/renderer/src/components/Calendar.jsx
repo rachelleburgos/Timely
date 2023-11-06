@@ -1,13 +1,20 @@
-import { useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin, { Draggable } from '@fullcalendar/interaction'
 import { v4 as uuidv4 } from 'uuid'
-import { parseISO, add } from 'date-fns'
+import { parseISO, add, startOfWeek, addDays, format } from 'date-fns'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCaretLeft, faCaretRight } from '@fortawesome/free-solid-svg-icons'
 
 const Calendar = ({ events, setEvents, removeEventFromInbox }) => {
+  const calendarRef = useRef(null)
+  const [currentWeekStart, setCurrentWeekStart] = useState(
+    startOfWeek(new Date(), { weekStartsOn: 0 })
+  )
+
   useEffect(() => {
     let draggableEl = document.getElementById('external-events')
     if (draggableEl) {
@@ -15,13 +22,12 @@ const Calendar = ({ events, setEvents, removeEventFromInbox }) => {
         itemSelector: '.draggable-event',
         eventData: function (eventEl) {
           let title = eventEl.innerText
-          let id = eventEl.getAttribute('data-id') // Assuming 'data-id' attribute on draggable events
-          // Use the duration from the event element if it exists
+          let id = eventEl.getAttribute('data-id')
           let duration = eventEl.getAttribute('data-duration') || '01:00'
           return {
             title: title,
-            _id: id, // This should be the original ID from the inbox
-            id: uuidv4(), // Generate a new unique ID for the calendar event
+            _id: id,
+            id: uuidv4(),
             duration: duration
           }
         }
@@ -29,13 +35,42 @@ const Calendar = ({ events, setEvents, removeEventFromInbox }) => {
     }
   }, [])
 
+  const handleDatesSet = (dateInfo) => {
+    setCurrentWeekStart(startOfWeek(dateInfo.start, { weekStartsOn: 0 }))
+  }
+
+  const handleWeekDayClick = (dayOffset) => {
+    const newDate = addDays(currentWeekStart, dayOffset)
+    const calendarApi = calendarRef.current.getApi()
+    calendarApi.gotoDate(newDate)
+  }
+
+  const renderWeekDayButtons = () => {
+    return Array.from({ length: 7 }, (_, index) => {
+      const dayDate = addDays(currentWeekStart, index)
+      const dayFormatted = format(dayDate, 'EEE \n d')
+      return (
+        <button key={index} onClick={() => handleWeekDayClick(index)} className="day-button">
+          {dayFormatted}
+        </button>
+      )
+    })
+  }
+
+  const handlePrev = () => {
+    const calendarApi = calendarRef.current.getApi()
+    calendarApi.prev()
+  }
+
+  const handleNext = () => {
+    const calendarApi = calendarRef.current.getApi()
+    calendarApi.next()
+  }
+
   const handleSelect = (selectInfo) => {
     let title = prompt('Enter a title for this event:')
     let duration = prompt('Enter the duration for this event (HH:MM):', '02:00')
     if (title && duration) {
-      let calendarApi = selectInfo.view.calendar
-      calendarApi.unselect() // clear date selection
-
       let start = parseISO(selectInfo.startStr)
       let durationParts = duration.split(':')
       let end = add(start, {
@@ -58,22 +93,20 @@ const Calendar = ({ events, setEvents, removeEventFromInbox }) => {
   const handleEventReceive = (info) => {
     console.log('Event received:', info.event.toPlainObject())
     setEvents((currentEvents) => {
-      const originalId = info.event.extendedProps._id // Access the original ID
+      const originalId = info.event.extendedProps._id
 
-      // If _id is null, log an error and do not add the event
       if (originalId == null) {
         console.error('Received an event without an original ID. This should not happen.')
         return currentEvents
       }
 
-      // Check if the event is already in the calendar using the original ID
       if (currentEvents.some((event) => event._id === originalId)) {
         console.log(`Event with original ID ${originalId} is already in the calendar.`)
         return currentEvents
       }
 
       let start = parseISO(info.event.start.toISOString())
-      let duration = info.event.extendedProps.duration || '01:00' // Provide a default duration of 1 hour
+      let duration = info.event.extendedProps.duration || '01:00'
       let durationParts = duration.split(':')
       let end = add(start, {
         hours: parseInt(durationParts[0], 10),
@@ -82,15 +115,14 @@ const Calendar = ({ events, setEvents, removeEventFromInbox }) => {
 
       const newEvent = {
         ...info.event.toPlainObject(),
-        id: uuidv4(), // Generate a new unique ID for the calendar event
-        _id: originalId, // Preserve the original ID for duplicate checking
+        id: uuidv4(),
+        _id: originalId,
         end: end.toISOString()
       }
       console.log('New event to be added:', newEvent)
       const updatedEvents = [...currentEvents, newEvent]
       console.log('Updated events after adding the new one:', updatedEvents)
 
-      // Call the function to remove the event from the inbox using the original ID
       removeEventFromInbox(originalId)
 
       return updatedEvents
@@ -98,20 +130,31 @@ const Calendar = ({ events, setEvents, removeEventFromInbox }) => {
   }
 
   return (
-    <div id="calendar">
+    <div id="calendar-container">
+      <div className="calendar-navigation">
+        <button onClick={handlePrev} className="calendar-nav-button" id="left-prev-button">
+          <FontAwesomeIcon icon={faCaretLeft} />
+        </button>
+        <div className="week-day-buttons">{renderWeekDayButtons()}</div>
+        <button onClick={handleNext} className="calendar-nav-button" id="right-next-button">
+          <FontAwesomeIcon icon={faCaretRight} />
+        </button>
+      </div>
       <FullCalendar
+        ref={calendarRef}
         plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin]}
         initialView="timeGridDay"
         editable
         selectable
         droppable
         events={events}
+        datesSet={handleDatesSet}
         select={handleSelect}
         eventReceive={handleEventReceive}
         headerToolbar={{
-          start: 'today,prev',
+          start: 'today',
           center: 'title',
-          end: 'next'
+          end: ''
         }}
       />
     </div>

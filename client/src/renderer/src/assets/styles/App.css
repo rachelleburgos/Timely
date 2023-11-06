@@ -1,31 +1,130 @@
-body {
-  background-color: #F6F5FA;
-  color: #050505;
-  overflow: hidden;
-}
-
+/* Base styles */
 .app {
   display: flex;
-  flex-direction: row;
-  align-items: stretch;
-  height: 100vh;
-  width: 100vw;
+  justify-content: space-between;
+  padding: 20px;
   font-family: 'Inter', sans-serif;
+  gap: 20px;
+}
+
+button,
+.calendar-nav-button,
+#submit-event-button {
+  font-family: 'Inter', sans-serif;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+button,
+#submit-event-button {
+  background-color: transparent;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+  background-color: #d0d0d0;
+}
+
+.day-button {
+  font-weight: 500;
+  width: 50px;
+  height: 50px;
+  margin: 10px;
+}
+
+#calendar-container {
+  flex: 1;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.calendar-navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.calendar-nav-button {
+  padding: 5px;
+  margin: 10px;
+  font-size: 14px;
+  box-shadow: none;
+}
+
+.calendar-nav-button:hover {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.week-day-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
 
 #external-events {
-  text-align: center;
   order: -1;
-  margin: 10px;
-  padding: 50px;
-  flex: 1;
+  width: 300px;
+  padding: 15px;
+  text-align: center;
+  justify-content: center;
 }
 
-#calendar {
-  background-color: white;
-  margin: 10px;
-  padding: 50px;
-  flex: 3;
-  border-top-left-radius: 30px;
-  border-top-right-radius: 30px; 
+#external-events h2 {
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+@media (max-width: 768px) {
+  .app {
+    flex-direction: column;
+  }
+
+  #calendar-container,
+  #external-events {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
+
+textarea,
+input,
+select {
+  width: 100%;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+textarea:focus,
+input:focus,
+select:focus,
+button:focus {
+  outline: 1px solid gray;
+}
+
+.calendar-nav-button:focus {
+  outline: none;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#submit-event-button {
+  width: 50px;
+  height: 50px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }

@@ -16,7 +16,7 @@ function App() {
     setIsLoading(true)
     fetchEvents()
       .then((fetchedEvents) => {
-        setInboxEvents(fetchedEvents) // Populate inbox events
+        setInboxEvents(fetchedEvents)
         setIsLoading(false)
       })
       .catch((error) => {
@@ -25,7 +25,6 @@ function App() {
       })
   }, [])
 
-  // Function to fetch events
   const fetchEvents = async () => {
     try {
       const response = await fetch('http://localhost:5000/api/events')
@@ -33,7 +32,7 @@ function App() {
         throw new Error('Network response was not ok')
       }
       const data = await response.json()
-      return data // Assuming your backend returns an array of events
+      return data
     } catch (error) {
       console.error('Failed to fetch events:', error)
       throw error

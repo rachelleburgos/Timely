@@ -9,11 +9,15 @@ import { parseISO, add, startOfWeek, addDays, format } from 'date-fns'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretLeft, faCaretRight } from '@fortawesome/free-solid-svg-icons'
 
+import EventModal from './EventModal.jsx'
+
 const Calendar = ({ events, setEvents, removeEventFromInbox }) => {
   const calendarRef = useRef(null)
   const [currentWeekStart, setCurrentWeekStart] = useState(
     startOfWeek(new Date(), { weekStartsOn: 0 })
   )
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [selectedDate, setSelectedDate] = useState(new Date())
 
   useEffect(() => {
     let draggableEl = document.getElementById('external-events')
@@ -68,26 +72,8 @@ const Calendar = ({ events, setEvents, removeEventFromInbox }) => {
   }
 
   const handleSelect = (selectInfo) => {
-    let title = prompt('Enter a title for this event:')
-    let duration = prompt('Enter the duration for this event (HH:MM):', '02:00')
-    if (title && duration) {
-      let start = parseISO(selectInfo.startStr)
-      let durationParts = duration.split(':')
-      let end = add(start, {
-        hours: parseInt(durationParts[0], 10),
-        minutes: parseInt(durationParts[1], 10)
-      })
-
-      setEvents((currentEvents) => [
-        ...currentEvents,
-        {
-          id: uuidv4(),
-          title,
-          start: start.toISOString(),
-          end: end.toISOString()
-        }
-      ])
-    }
+    setSelectedDate(selectInfo.start)
+    setIsModalOpen(true)
   }
 
   const handleEventReceive = (info) => {
@@ -129,6 +115,27 @@ const Calendar = ({ events, setEvents, removeEventFromInbox }) => {
     })
   }
 
+  const handleModalSubmit = (eventDetails) => {
+    let { title, duration, date } = eventDetails
+    let start = parseISO(date)
+    let durationParts = duration.split(':')
+    let end = add(start, {
+      hours: parseInt(durationParts[0], 10),
+      minutes: parseInt(durationParts[1], 10)
+    })
+
+    setEvents((currentEvents) => [
+      ...currentEvents,
+      {
+        id: uuidv4(),
+        title,
+        start: start.toISOString(),
+        end: end.toISOString()
+      }
+    ])
+    setIsModalOpen(false)
+  }
+
   return (
     <div id="calendar-container">
       <div className="calendar-navigation">
@@ -156,6 +163,12 @@ const Calendar = ({ events, setEvents, removeEventFromInbox }) => {
           center: 'title',
           end: ''
         }}
+      />
+      <EventModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSubmit={handleModalSubmit}
+        defaultDate={selectedDate}
       />
     </div>
   )

@@ -6,7 +6,8 @@ import InboxList from './components/InboxList.jsx'
 import './assets/styles/App.css'
 
 function App() {
-  const [events, setEvents] = useState([])
+  const [calendarEvents, setCalendarEvents] = useState([]) // Renamed to distinguish from inbox events
+  const [inboxEvents, setInboxEvents] = useState([]) // State for inbox events
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState(null)
 
@@ -14,7 +15,7 @@ function App() {
     setIsLoading(true)
     fetchEvents()
       .then((fetchedEvents) => {
-        setEvents(fetchedEvents)
+        setInboxEvents(fetchedEvents) // Populate inbox events
         setIsLoading(false)
       })
       .catch((error) => {
@@ -36,6 +37,12 @@ function App() {
     }
   }
 
+  const removeEventFromInbox = (eventId) => {
+    setInboxEvents((currentInboxEvents) =>
+      currentInboxEvents.filter((event) => event.id !== eventId)
+    )
+  }
+
   // TODO: Replace with actual error handling
   if (error) {
     return <div>Error: {error.message}</div>
@@ -48,8 +55,12 @@ function App() {
 
   return (
     <div className="app">
-      <Calendar events={events} setEvents={setEvents} />
-      <InboxList events={events} setEvents={setEvents} />
+      <Calendar
+        events={calendarEvents}
+        setEvents={setCalendarEvents}
+        removeEventFromInbox={removeEventFromInbox}
+      />
+      <InboxList events={inboxEvents} setEvents={setInboxEvents} />
     </div>
   )
 }

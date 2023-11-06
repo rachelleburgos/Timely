@@ -6,7 +6,7 @@ import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin, { Draggable } from '@fullcalendar/interaction'
 import { v4 as uuidv4 } from 'uuid'
 
-const Calendar = ({ events, setEvents }) => {
+const Calendar = ({ events, setEvents, removeEventFromInbox }) => {
   useEffect(() => {
     let draggableEl = document.getElementById('external-events')
     if (draggableEl) {
@@ -14,10 +14,10 @@ const Calendar = ({ events, setEvents }) => {
         itemSelector: '.draggable-event',
         eventData: function (eventEl) {
           let title = eventEl.innerText
-          let id = `event-${uuidv4()}`
+          let id = eventEl.getAttribute('data-id')
           return {
             title: title,
-            id: id,
+            id: uuidv4(),
             duration: '02:00'
           }
         }
@@ -26,28 +26,38 @@ const Calendar = ({ events, setEvents }) => {
   }, [])
 
   const handleSelect = (selectInfo) => {
-    console.log(selectInfo)
-    // Additional logic to handle date/time selection can be added here
+    // Logic to handle creation of a new event on date/time selection
+    // Example: prompt the user for event title
+    let title = prompt('Enter a title for this event:')
+    if (title) {
+      let calendarApi = selectInfo.view.calendar
+      calendarApi.unselect() // clear date selection
+
+      setEvents((currentEvents) => [
+        ...currentEvents,
+        {
+          id: uuidv4(),
+          title,
+          start: selectInfo.startStr,
+          end: selectInfo.endStr
+        }
+      ])
+    }
   }
 
   const handleEventReceive = (info) => {
-    // Create a new event for the calendar with a new ID
     const newEvent = {
       ...info.event.toPlainObject(),
-      id: String(uuidv4()) // Assign a new unique ID
+      id: String(uuidv4()) // Generate a new ID for the calendar event
     }
 
-    setEvents((currentEvents) => {
-      // Filter out the event from the current events array by its title
-      // This assumes titles are unique. If not, additional identifying information should be used.
-      const updatedEvents = currentEvents.filter((event) => event.title !== newEvent.title)
+    // Add the new event to the calendar's events
+    setEvents((currentEvents) => [...currentEvents, newEvent])
 
-      // Add the new event to the events array for the calendar
-      return [...updatedEvents, newEvent]
-    })
-
-    // Remove the event from the calendar so it doesn't show up twice
-    info.event.remove()
+    if (typeof removeEventFromInbox === 'function') {
+      // Remove the event from the inbox
+      removeEventFromInbox(info.event.id)
+    }
   }
 
   return (
@@ -73,7 +83,8 @@ const Calendar = ({ events, setEvents }) => {
 
 Calendar.propTypes = {
   events: PropTypes.array.isRequired,
-  setEvents: PropTypes.func.isRequired
+  setEvents: PropTypes.func.isRequired,
+  removeEventFromInbox: PropTypes.func.isRequired
 }
 
 export default Calendar

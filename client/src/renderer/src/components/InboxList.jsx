@@ -5,42 +5,46 @@ import { Draggable } from '@fullcalendar/interaction'
 import InboxItem from './InboxItem'
 
 const InboxList = ({ events, setEvents }) => {
-  // add setEvents here to update state
   useEffect(() => {
-    new Draggable(document.getElementById('external-events'), {
+    // Create the Draggable for the external events list
+    let draggable = new Draggable(document.getElementById('external-events'), {
       itemSelector: '.draggable-event',
       eventData: function (eventEl) {
         let event = JSON.parse(eventEl.getAttribute('data-event'))
         return {
-          ...event, // spread the event to maintain all its properties
-          duration: '02:00' // you can specify duration here if needed
+          ...event,
+          _id: event.id, // Preserve the original ID
+          duration: '02:00'
         }
       }
     })
-  }, [])
 
-  // Function to remove an event from the inbox after dragging
+    // Cleanup function to destroy Draggable instance when the component unmounts
+    return () => {
+      if (draggable) {
+        draggable.destroy()
+      }
+    }
+  }, []) // Empty array ensures this effect runs once on mount
+
   const removeEventFromInbox = (eventId) => {
+    // Update the events by filtering out the event with the given ID
     setEvents((currentEvents) => currentEvents.filter((event) => event.id !== eventId))
   }
 
   return (
     <div id="external-events">
       <h2>Inbox</h2>
-      {events &&
-        events.map(
-          (event) =>
-            event && (
-              <InboxItem key={event.id} event={event} removeEventFromInbox={removeEventFromInbox} />
-            )
-        )}
+      {events.map((event) => (
+        <InboxItem key={event.id} event={event} removeEventFromInbox={removeEventFromInbox} />
+      ))}
     </div>
   )
 }
 
 InboxList.propTypes = {
   events: PropTypes.array.isRequired,
-  setEvents: PropTypes.func.isRequired // Add the setEvents function to the prop types
+  setEvents: PropTypes.func.isRequired
 }
 
 export default InboxList

@@ -14,10 +14,11 @@ const Calendar = ({ events, setEvents, removeEventFromInbox }) => {
         itemSelector: '.draggable-event',
         eventData: function (eventEl) {
           let title = eventEl.innerText
-          let id = eventEl.getAttribute('data-id')
+          let id = eventEl.getAttribute('data-id') // Assuming 'data-id' attribute on draggable events
           return {
             title: title,
-            id: uuidv4(),
+            _id: id, // This should be the original ID from the inbox
+            id: uuidv4(), // Generate a new unique ID for the calendar event
             duration: '02:00'
           }
         }
@@ -26,8 +27,6 @@ const Calendar = ({ events, setEvents, removeEventFromInbox }) => {
   }, [])
 
   const handleSelect = (selectInfo) => {
-    // Logic to handle creation of a new event on date/time selection
-    // Example: prompt the user for event title
     let title = prompt('Enter a title for this event:')
     if (title) {
       let calendarApi = selectInfo.view.calendar
@@ -46,18 +45,36 @@ const Calendar = ({ events, setEvents, removeEventFromInbox }) => {
   }
 
   const handleEventReceive = (info) => {
-    const newEvent = {
-      ...info.event.toPlainObject(),
-      id: String(uuidv4()) // Generate a new ID for the calendar event
-    }
+    console.log('Event received:', info.event.toPlainObject())
+    setEvents((currentEvents) => {
+      const originalId = info.event.extendedProps._id // Access the original ID
 
-    // Add the new event to the calendar's events
-    setEvents((currentEvents) => [...currentEvents, newEvent])
+      // If _id is null, log an error and do not add the event
+      if (originalId == null) {
+        console.error('Received an event without an original ID. This should not happen.')
+        return currentEvents
+      }
 
-    if (typeof removeEventFromInbox === 'function') {
-      // Remove the event from the inbox
-      removeEventFromInbox(info.event.id)
-    }
+      // Check if the event is already in the calendar using the original ID
+      if (currentEvents.some((event) => event._id === originalId)) {
+        console.log(`Event with original ID ${originalId} is already in the calendar.`)
+        return currentEvents
+      }
+
+      const newEvent = {
+        ...info.event.toPlainObject(),
+        id: uuidv4(), // Generate a new unique ID for the calendar event
+        _id: originalId // Preserve the original ID for duplicate checking
+      }
+      console.log('New event to be added:', newEvent)
+      const updatedEvents = [...currentEvents, newEvent]
+      console.log('Updated events after adding the new one:', updatedEvents)
+
+      // Call the function to remove the event from the inbox using the original ID
+      removeEventFromInbox(originalId)
+
+      return updatedEvents
+    })
   }
 
   return (
@@ -72,9 +89,9 @@ const Calendar = ({ events, setEvents, removeEventFromInbox }) => {
         select={handleSelect}
         eventReceive={handleEventReceive}
         headerToolbar={{
-          start: 'today prev,next',
+          start: 'today,prev',
           center: 'title',
-          end: 'dayGridMonth,timeGridWeek,timeGridDay'
+          end: 'next'
         }}
       />
     </div>

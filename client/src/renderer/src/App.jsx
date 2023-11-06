@@ -6,8 +6,8 @@ import InboxList from './components/InboxList.jsx'
 import './assets/styles/App.css'
 
 function App() {
-  const [calendarEvents, setCalendarEvents] = useState([]) // Renamed to distinguish from inbox events
-  const [inboxEvents, setInboxEvents] = useState([]) // State for inbox events
+  const [calendarEvents, setCalendarEvents] = useState([])
+  const [inboxEvents, setInboxEvents] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState(null)
 

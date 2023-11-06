@@ -11,6 +11,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState(null)
 
+  // Fetch events from the backend
   useEffect(() => {
     setIsLoading(true)
     fetchEvents()
@@ -24,16 +25,18 @@ function App() {
       })
   }, [])
 
+  // Function to fetch events
   const fetchEvents = async () => {
     try {
-      // TODO: Replace with actual API call to the backend
-      return [
-        { id: '1', title: 'Event 1', duration: '02:00' },
-        { id: '2', title: 'Event 2', duration: '02:00' }
-      ]
+      const response = await fetch('http://localhost:5000/api/events')
+      if (!response.ok) {
+        throw new Error('Network response was not ok')
+      }
+      const data = await response.json()
+      return data // Assuming your backend returns an array of events
     } catch (error) {
       console.error('Failed to fetch events:', error)
-      throw error // Re-throw the error to be caught by the calling code
+      throw error
     }
   }
 
@@ -43,12 +46,10 @@ function App() {
     )
   }
 
-  // TODO: Replace with actual error handling
   if (error) {
     return <div>Error: {error.message}</div>
   }
 
-  // TODO: Replace with actual loading indicator
   if (isLoading) {
     return <div>Loading...</div>
   }

@@ -17,7 +17,7 @@ const Calendar = ({ events, setEvents, removeEventFromInbox }) => {
           let title = eventEl.innerText
           let id = eventEl.getAttribute('data-id') // Assuming 'data-id' attribute on draggable events
           // Use the duration from the event element if it exists
-          let duration = eventEl.getAttribute('data-duration') || '02:00'
+          let duration = eventEl.getAttribute('data-duration') || '01:00'
           return {
             title: title,
             _id: id, // This should be the original ID from the inbox
@@ -73,8 +73,12 @@ const Calendar = ({ events, setEvents, removeEventFromInbox }) => {
       }
 
       let start = parseISO(info.event.start.toISOString())
-      let duration = info.event.extendedProps.duration.split(':')
-      let end = add(start, { hours: parseInt(duration[0], 10), minutes: parseInt(duration[1], 10) })
+      let duration = info.event.extendedProps.duration || '01:00' // Provide a default duration of 1 hour
+      let durationParts = duration.split(':')
+      let end = add(start, {
+        hours: parseInt(durationParts[0], 10),
+        minutes: parseInt(durationParts[1], 10)
+      })
 
       const newEvent = {
         ...info.event.toPlainObject(),

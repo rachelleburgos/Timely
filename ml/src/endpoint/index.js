@@ -13,9 +13,7 @@ app.use(express.json());
 app.post('/predict', (req, res) => {
     try {
         const inputData = req.body;
-
         const predictions = net.run(inputData);
-
         res.json({predictions});
     } catch(error) {
         res.status(500).json({ error: 'Prediction failed.' });
@@ -23,5 +21,5 @@ app.post('/predict', (req, res) => {
 });
 
 app.listen(port, () =>{
-    console.log(`server is running on ${port}`);
+    console.log(`AI server running on ${port}`);
 })

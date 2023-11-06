@@ -17,7 +17,7 @@ const InboxList = ({ events }) => {
 
   return (
     <div id="external-events">
-      <h4>Inbox</h4>
+      <h2>Inbox</h2>
       {events && events.map((event) => event && <InboxItem key={event.id} event={event} />)}
     </div>
   )

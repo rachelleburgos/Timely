@@ -1,37 +1,55 @@
 import { useState, useEffect } from 'react'
 
-import MyCalendar from './components/calendar/Calendar.jsx'
-import InboxList from './components/inbox/InboxList.jsx'
+import Calendar from './components/Calendar.jsx'
+import InboxList from './components/InboxList.jsx'
 
-import './assets/App.css'
+import './assets/styles/App.css'
 
 function App() {
   const [events, setEvents] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState(null)
 
   useEffect(() => {
-    fetchEvents().then((fetchedEvents) => {
-      setEvents(fetchedEvents)
-    })
+    setIsLoading(true)
+    fetchEvents()
+      .then((fetchedEvents) => {
+        setEvents(fetchedEvents)
+        setIsLoading(false)
+      })
+      .catch((error) => {
+        setError(error)
+        setIsLoading(false)
+      })
   }, [])
 
-  // Fetch events from API or other data source
-  // TODO: Replace with actual API call to the backend
   const fetchEvents = async () => {
-    return [
-      { id: '1', title: 'Event 1', duration: '02:00' },
-      { id: '2', title: 'Event 2', duration: '02:00' }
-      // ... other events
-    ]
+    try {
+      // TODO: Replace with actual API call to the backend
+      return [
+        { id: '1', title: 'Event 1', duration: '02:00' },
+        { id: '2', title: 'Event 2', duration: '02:00' }
+      ]
+    } catch (error) {
+      console.error('Failed to fetch events:', error)
+      throw error // Re-throw the error to be caught by the calling code
+    }
   }
 
-  if (events.length === 0) {
-    return <div>Loading events...</div>
+  // TODO: Replace with actual error handling
+  if (error) {
+    return <div>Error: {error.message}</div>
+  }
+
+  // TODO: Replace with actual loading indicator
+  if (isLoading) {
+    return <div>Loading...</div>
   }
 
   return (
     <div className="app">
-      <MyCalendar />
-      <InboxList events={events} />
+      <Calendar events={events} setEvents={setEvents} />
+      <InboxList events={events} setEvents={setEvents} />
     </div>
   )
 }

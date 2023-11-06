@@ -1,0 +1,22 @@
+.app {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  height: 100vh;
+  width: 100vw;
+}
+
+#external-events {
+  order: -1;
+  background-color: lightblue;
+  margin: 10px;
+  padding: 10px;
+  flex: 1;
+}
+
+#calendar {
+  background-color: lightcoral;
+  margin: 10px;
+  padding: 10px;
+  flex: 3;
+}

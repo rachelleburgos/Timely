@@ -1,12 +1,12 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
+import PropTypes from 'prop-types'
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
+import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin, { Draggable } from '@fullcalendar/interaction'
 import { v4 as uuidv4 } from 'uuid'
 
-const MyCalendar = () => {
-  const [events, setEvents] = useState([])
-
+const Calendar = ({ events, setEvents }) => {
   useEffect(() => {
     let draggableEl = document.getElementById('external-events')
     if (draggableEl) {
@@ -31,18 +31,30 @@ const MyCalendar = () => {
   }
 
   const handleEventReceive = (info) => {
+    // Create a new event for the calendar with a new ID
     const newEvent = {
       ...info.event.toPlainObject(),
       id: String(uuidv4()) // Assign a new unique ID
     }
-    setEvents((currentEvents) => [...currentEvents, newEvent])
+
+    setEvents((currentEvents) => {
+      // Filter out the event from the current events array by its title
+      // This assumes titles are unique. If not, additional identifying information should be used.
+      const updatedEvents = currentEvents.filter((event) => event.title !== newEvent.title)
+
+      // Add the new event to the events array for the calendar
+      return [...updatedEvents, newEvent]
+    })
+
+    // Remove the event from the calendar so it doesn't show up twice
+    info.event.remove()
   }
 
   return (
-    <div id="my-calendar">
+    <div id="calendar">
       <FullCalendar
-        plugins={[dayGridPlugin, interactionPlugin]}
-        initialView="dayGridDay"
+        plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin]}
+        initialView="timeGridDay"
         editable
         selectable
         droppable
@@ -52,11 +64,16 @@ const MyCalendar = () => {
         headerToolbar={{
           start: 'today prev,next',
           center: 'title',
-          end: 'dayGridMonth,dayGridWeek,dayGridDay'
+          end: 'dayGridMonth,timeGridWeek,timeGridDay'
         }}
       />
     </div>
   )
 }
 
-export default MyCalendar
+Calendar.propTypes = {
+  events: PropTypes.array.isRequired,
+  setEvents: PropTypes.func.isRequired
+}
+
+export default Calendar

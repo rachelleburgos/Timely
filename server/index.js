@@ -4,8 +4,8 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
 
-import userRoutes from './routes/user.js'; // Import routes from user.js
-import eventRoutes from './routes/event.js'; // Import routes from event.js
+import userRoutes from './routes/userRoutes.js'; // Import routes from user.js
+import eventRoutes from './routes/eventRoutes.js'; // Import routes from event.js
 
 const app = express();
 

@@ -5,6 +5,7 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin, { Draggable } from '@fullcalendar/interaction'
 import { v4 as uuidv4 } from 'uuid'
+import { parseISO, add } from 'date-fns'
 
 const Calendar = ({ events, setEvents, removeEventFromInbox }) => {
   useEffect(() => {
@@ -15,11 +16,13 @@ const Calendar = ({ events, setEvents, removeEventFromInbox }) => {
         eventData: function (eventEl) {
           let title = eventEl.innerText
           let id = eventEl.getAttribute('data-id') // Assuming 'data-id' attribute on draggable events
+          // Use the duration from the event element if it exists
+          let duration = eventEl.getAttribute('data-duration') || '02:00'
           return {
             title: title,
             _id: id, // This should be the original ID from the inbox
             id: uuidv4(), // Generate a new unique ID for the calendar event
-            duration: '02:00'
+            duration: duration
           }
         }
       })
@@ -28,17 +31,25 @@ const Calendar = ({ events, setEvents, removeEventFromInbox }) => {
 
   const handleSelect = (selectInfo) => {
     let title = prompt('Enter a title for this event:')
-    if (title) {
+    let duration = prompt('Enter the duration for this event (HH:MM):', '02:00')
+    if (title && duration) {
       let calendarApi = selectInfo.view.calendar
       calendarApi.unselect() // clear date selection
+
+      let start = parseISO(selectInfo.startStr)
+      let durationParts = duration.split(':')
+      let end = add(start, {
+        hours: parseInt(durationParts[0], 10),
+        minutes: parseInt(durationParts[1], 10)
+      })
 
       setEvents((currentEvents) => [
         ...currentEvents,
         {
           id: uuidv4(),
           title,
-          start: selectInfo.startStr,
-          end: selectInfo.endStr
+          start: start.toISOString(),
+          end: end.toISOString()
         }
       ])
     }
@@ -61,10 +72,15 @@ const Calendar = ({ events, setEvents, removeEventFromInbox }) => {
         return currentEvents
       }
 
+      let start = parseISO(info.event.start.toISOString())
+      let duration = info.event.extendedProps.duration.split(':')
+      let end = add(start, { hours: parseInt(duration[0], 10), minutes: parseInt(duration[1], 10) })
+
       const newEvent = {
         ...info.event.toPlainObject(),
         id: uuidv4(), // Generate a new unique ID for the calendar event
-        _id: originalId // Preserve the original ID for duplicate checking
+        _id: originalId, // Preserve the original ID for duplicate checking
+        end: end.toISOString()
       }
       console.log('New event to be added:', newEvent)
       const updatedEvents = [...currentEvents, newEvent]

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Draggable } from '@fullcalendar/interaction'
 
 import InboxItem from './InboxItem'
+import AddEventForm from './AddEventForm'
 
 const InboxList = ({ events, setEvents }) => {
   useEffect(() => {
@@ -32,12 +33,20 @@ const InboxList = ({ events, setEvents }) => {
     setEvents((currentEvents) => currentEvents.filter((event) => event.id !== eventId))
   }
 
+  const addEventToInbox = (newEvent) => {
+    setEvents((currentEvents) => [
+      ...currentEvents,
+      { ...newEvent, id: Math.random().toString(36).substr(2, 9) } // or use a more robust ID generation method
+    ])
+  }
+
   return (
     <div id="external-events">
       <h2>Inbox</h2>
       {events.map((event) => (
         <InboxItem key={event.id} event={event} removeEventFromInbox={removeEventFromInbox} />
       ))}
+      <AddEventForm onAddEvent={addEventToInbox} />
     </div>
   )
 }

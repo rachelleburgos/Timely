@@ -25,5 +25,8 @@ release
 *.sln
 *.sw?
 
+# Scrap - Work in Progress
+scrap/*
+
 # Environment Variables
 *.env

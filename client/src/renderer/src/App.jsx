@@ -1,46 +1,67 @@
-import { useState } from 'react'
-import { DndProvider } from 'react-dnd'
-import { HTML5Backend } from 'react-dnd-html5-backend'
+import { useState, useEffect } from 'react'
 
-import MyCalendar from './components/calendar/Calendar.jsx'
-import InboxList from './components/inbox/InboxList.jsx'
+import Calendar from './components/Calendar.jsx'
+import InboxList from './components/InboxList.jsx'
 
-import './assets/App.css'
+import './assets/styles/App.css'
 
 function App() {
-  const [inboxItems, setInboxItems] = useState([])
+  const [calendarEvents, setCalendarEvents] = useState([])
+  const [inboxEvents, setInboxEvents] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState(null)
 
-  const removeFromInbox = (id) => {
-    setInboxItems((prevItems) => prevItems.filter((item) => item.id !== id))
+  // Fetch events from the backend
+  useEffect(() => {
+    setIsLoading(true)
+    fetchEvents()
+      .then((fetchedEvents) => {
+        setInboxEvents(fetchedEvents)
+        setIsLoading(false)
+      })
+      .catch((error) => {
+        setError(error)
+        setIsLoading(false)
+      })
+  }, [])
+
+  const fetchEvents = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/api/events')
+      if (!response.ok) {
+        throw new Error('Network response was not ok')
+      }
+      const data = await response.json()
+      return data
+    } catch (error) {
+      console.error('Failed to fetch events:', error)
+      throw error
+    }
   }
 
-  const addInboxItem = (item) => {
-    const newId = Date.now().toString() // for simplicity, using timestamp as ID
-    const newItem = { id: newId, ...item } // spread the item to include both title and duration
-    setInboxItems((prevItems) => [...prevItems, newItem])
+  const removeEventFromInbox = (eventId) => {
+    setInboxEvents((currentInboxEvents) =>
+      currentInboxEvents.filter((event) => event.id !== eventId)
+    )
   }
 
-  // Function to handle the drop of an item onto the calendar
-  const onDropToCalendar = (item, date) => {
-    // Define the logic to add the item as an event to the calendar here
-    // You may need to define an 'addEventToCalendar' function and call it
-    console.log('Dropped item on calendar:', item, 'on date:', date)
-    // For now, just removing the item from the inbox
-    removeFromInbox(item.id)
+  if (error) {
+    return <div>Error: {error.message}</div>
+  }
+
+  if (isLoading) {
+    return <div>Loading...</div>
   }
 
   return (
-    <DndProvider backend={HTML5Backend}>
-      <div className="app-container">
-        <InboxList
-          inboxItems={inboxItems}
-          onRemoveFromInbox={removeFromInbox}
-          onAddToInbox={addInboxItem}
-          onDropToCalendar={onDropToCalendar} // Pass the function here
-        />
-        <MyCalendar onRemoveFromInbox={removeFromInbox} />
-      </div>
-    </DndProvider>
+    <div className="app">
+      <Calendar
+        events={calendarEvents}
+        setEvents={setCalendarEvents}
+        removeEventFromInbox={removeEventFromInbox}
+      />
+      <InboxList events={inboxEvents} setEvents={setInboxEvents} />
+    </div>
   )
 }
 

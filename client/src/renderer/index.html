@@ -1,20 +1,28 @@
 <!doctype html>
 <html>
   <head>
-    <script src="http://localhost:8097"></script> <!-- TODO: For using React Dev Tools, remove this later! -->
+    <!-- If you are using React Dev Tools, keep this during development -->
+    <script src="http://localhost:8097"></script>
     <meta charset="UTF-8" />
     <title>Timely</title>
-    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <!-- Updated CSP with backend server and React Dev Tools -->
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'"
+      content="
+        default-src 'self';
+        script-src 'self' 'unsafe-inline' http://localhost:8097;
+        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+        font-src 'self' https://fonts.gstatic.com;
+        connect-src 'self' http://localhost:5000;
+      "
     />
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    </style>
   </head>
 
   <body>
-    <!-- This is the entry point for the renderer process. -->
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
-
   </body>
 </html>

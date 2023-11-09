@@ -1,6 +1,6 @@
 import express from 'express';
 
-import { createEvent, getEvent, getAllEvents, updateEvent, deleteEvent } from '../controllers/event.js'
+import { createEvent, getEvent, getAllEvents, updateEvent, deleteEvent } from '../controllers/eventController.js'
 
 const router = express.Router();
 

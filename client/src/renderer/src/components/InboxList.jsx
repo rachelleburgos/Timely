@@ -1,9 +1,11 @@
 import { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Draggable } from '@fullcalendar/interaction'
-
+import { parseISO, add, startOfWeek, addDays, format } from 'date-fns'
 import InboxItem from './InboxItem'
 import AddEventForm from './AddEventForm'
+import moment from "moment"
+import Glob from './Glob.jsx'
 
 const InboxList = ({ events, setEvents }) => {
   useEffect(() => {
@@ -12,10 +14,12 @@ const InboxList = ({ events, setEvents }) => {
       itemSelector: '.draggable-event',
       eventData: function (eventEl) {
         let event = JSON.parse(eventEl.getAttribute('data-event'))
+
+        Glob.userC=Glob.userCarray.find(o=>o.id==event.id);
         return {
           ...event,
           _id: event.id, // Preserve the original ID
-          duration: '02:00'
+          duration: Glob.userC.duration
         }
       }
     })
@@ -30,13 +34,23 @@ const InboxList = ({ events, setEvents }) => {
 
   const removeEventFromInbox = (eventId) => {
     // Update the events by filtering out the event with the given ID
+
     setEvents((currentEvents) => currentEvents.filter((event) => event.id !== eventId))
   }
 
   const addEventToInbox = (newEvent) => {
+    var ids=Math.random().toString(36).substr(2, 9)
+    while(Glob.userCarray.find(o=>o.id==ids)!=null){ids=Math.random().toString(36).substr(2, 9)}
+    Glob.userCarray.push(
+      {
+        id:ids,
+        title:newEvent.title,
+        duration:newEvent.duration,
+      }
+    );
     setEvents((currentEvents) => [
       ...currentEvents,
-      { ...newEvent, id: Math.random().toString(36).substr(2, 9) } // or use a more robust ID generation method
+      { ...newEvent, id:ids  } // or use a more robust ID generation method
     ])
   }
 

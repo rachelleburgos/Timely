@@ -2,6 +2,7 @@ import { useState } from 'react'
 import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import Glob from "./Glob.jsx"
 
 const AddEventForm = ({ onAddEvent }) => {
   const [title, setTitle] = useState('')

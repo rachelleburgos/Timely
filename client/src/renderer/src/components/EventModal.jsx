@@ -4,7 +4,7 @@ import { format } from 'date-fns'
 
 const EventModal = ({ isOpen, onClose, onSubmit, defaultDate }) => {
   const [title, setTitle] = useState('')
-  const [duration, setDuration] = useState('02:00')
+  const [duration, setDuration] = useState('08:00')
   // Initialize the date state with formatted defaultDate
   const [date, setDate] = useState(format(defaultDate, 'yyyy-MM-dd'))
 
@@ -12,7 +12,7 @@ const EventModal = ({ isOpen, onClose, onSubmit, defaultDate }) => {
     // The onSubmit function needs to be updated to handle the date as well
     onSubmit({ title, duration, date })
     setTitle('')
-    setDuration('01:00') // Reset to default duration if needed
+    setDuration('06:30') // Reset to default duration if needed
     setDate(format(defaultDate, 'yyyy-MM-dd')) // Reset date to the default date
     onClose() // Close the modal after submission
   }

@@ -9,6 +9,8 @@ import { parseISO, add, startOfWeek, addDays, format } from 'date-fns'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretLeft, faCaretRight } from '@fortawesome/free-solid-svg-icons'
 
+import Glob from  "./Glob.jsx"
+
 import EventModal from './EventModal.jsx'
 
 const Calendar = ({ events, setEvents, removeEventFromInbox }) => {
@@ -27,7 +29,7 @@ const Calendar = ({ events, setEvents, removeEventFromInbox }) => {
         eventData: function (eventEl) {
           let title = eventEl.innerText
           let id = eventEl.getAttribute('data-id')
-          let duration = eventEl.getAttribute('data-duration') || '01:00'
+          let duration = eventEl.getAttribute('data-duration') || '06:00'
           return {
             title: title,
             _id: id,
@@ -92,7 +94,8 @@ const Calendar = ({ events, setEvents, removeEventFromInbox }) => {
       }
 
       let start = parseISO(info.event.start.toISOString())
-      let duration = info.event.extendedProps.duration || '01:00'
+      //problem
+      let duration = Glob.userC.duration || '08:00'
       let durationParts = duration.split(':')
       let end = add(start, {
         hours: parseInt(durationParts[0], 10),

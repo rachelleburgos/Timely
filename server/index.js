@@ -1,27 +1,28 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import cors from 'cors';
 import dotenv from 'dotenv';
-import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
+import morgan from 'morgan';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-import userRoutes from './routes/userRoutes.js'; // Import routes from user.js
-import eventRoutes from './routes/eventRoutes.js'; // Import routes from event.js
+import { connectDatabase } from './database.js';
+import userRoutes from './routes/userRoutes.js';
+import eventRoutes from './routes/eventRoutes.js';
+import { applySecurityMiddleware } from './middlewares/security.js';
+import { errorHandler } from './middlewares/errorHandler.js';
 
 const app = express();
 
 // Load environment variables from .env file
 dotenv.config();
 
-// Security-related HTTP headers
-app.use(helmet());
+// Apply security-related middleware
+applySecurityMiddleware(app);
 
-// Allow cross-origin requests with CORS configuration
-const corsOptions = {
-  origin: process.env.CORS_ORIGIN || '*', // Replace '*' with your domain in production
-  optionsSuccessStatus: 200,
-};
-app.use(cors(corsOptions));
+// Use error handling middleware
+app.use(errorHandler);
 
 // Apply rate limiting to all requests
 const limiter = rateLimit({
@@ -31,28 +32,32 @@ const limiter = rateLimit({
 app.use(limiter);
 
 // Built-in middleware for json and urlencoded form data
-app.use(express.json({ limit: "30mb" }));
-app.use(express.urlencoded({ limit: "30mb", extended: true }));
+app.use(express.json({ limit: "1mb" }));
+app.use(express.urlencoded({ limit: "1mb", extended: true }));
+
+// Define __dirname in ES module scope
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Use morgan for logging
+const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' });
+app.use(morgan('combined', { stream: accessLogStream }));
 
 // Use the routes
 app.use('/api/users', userRoutes);
 app.use('/api/events', eventRoutes);
 
-// Central error handling middleware
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send({ message: 'Something broke on the server!', error: err.message });
-});
-
 const CONNECTION_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/Timely';
 const PORT = process.env.PORT || 5000;
 
-mongoose.connect(CONNECTION_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-.then(() => app.listen(PORT, () => console.log(`Server running on port: ${PORT}`)))
-.catch((error) => {
-  console.error('Database connection failed', error);
-  process.exit(1);
-});
+const startServer = async () => {
+  try {
+    await connectDatabase(CONNECTION_URI);
+    app.listen(PORT, () => console.log(`Server running on port: ${PORT}`));
+  } catch (error) {
+    console.error('Database connection failed', error);
+    process.exit(1);
+  }
+}
+
+startServer();

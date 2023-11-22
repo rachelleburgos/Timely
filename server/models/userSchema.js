@@ -28,14 +28,14 @@ const UserSchema = new Schema({
         required: [true, 'Email is required'],
         unique: true,
         lowercase: true,
+        match: [/\S+@\S+\.\S+/, 'Please enter a valid email address'],
         minLength: [6, 'Email should be at least 6 characters'],
         maxLength: [254, 'Email cannot exceed 254 characters'],
-    },
+      },
     password: {
         type: String,
         required: [true, 'Password is required'],
         minLength: [6, 'Password should be at least 6 characters'],
-        maxLength: [254, 'Password cannot exceed 254 characters'],
     },
 }, { timestamps: true });
 

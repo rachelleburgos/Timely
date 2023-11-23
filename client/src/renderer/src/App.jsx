@@ -4,6 +4,8 @@ import Calendar from './components/Calendar.jsx'
 import InboxList from './components/InboxList.jsx'
 
 import './assets/styles/App.css'
+import PopUp from './components/popUp.jsx'
+import './assets/styles/Ipop.css'
 
 function App() {
   const [calendarEvents, setCalendarEvents] = useState([])
@@ -34,7 +36,7 @@ function App() {
       const data = await response.json()
       return data
     } catch (error) {
-      console.error('Failed to fetch events:', error)
+      console.error('Failed nom fetch events:', error)
       throw error
     }
   }
@@ -54,7 +56,9 @@ function App() {
   }
 
   return (
+    
     <div className="app">
+      <PopUp/>
       <Calendar
         events={calendarEvents}
         setEvents={setCalendarEvents}

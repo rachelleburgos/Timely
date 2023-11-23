@@ -9,5 +9,12 @@ class Glob{
         title:"dummy",
         duration:"0:00",
     }]
+    static Ipop=false;
+    static IpopObject={
+        title:"dum",
+        start:"1:00",
+        end:"2:00",
+        description:"the stuff is cool"
+    }
 }
 export default Glob;

@@ -1,4 +1,5 @@
 import { useRef, useEffect, useState } from 'react'
+import '../assets/styles/Calendar.css'
 import PropTypes from 'prop-types'
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
@@ -8,7 +9,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { parseISO, add, startOfWeek, addDays, format } from 'date-fns'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretLeft, faCaretRight } from '@fortawesome/free-solid-svg-icons'
-
+import popUp from "./popUp.jsx"
 import Glob from  "./Glob.jsx"
 
 import EventModal from './EventModal.jsx'
@@ -54,11 +55,15 @@ const Calendar = ({ events, setEvents, removeEventFromInbox }) => {
   const renderWeekDayButtons = () => {
     return Array.from({ length: 7 }, (_, index) => {
       const dayDate = addDays(currentWeekStart, index)
-      const dayFormatted = format(dayDate, 'EEE \n d')
+      const dayFormatted = format(dayDate, 'EEE');
+      const dayNum=format(dayDate, "d");
       return (
+        <div>
+        <p className="dayname">{dayFormatted}</p>
         <button key={index} onClick={() => handleWeekDayClick(index)} className="day-button">
-          {dayFormatted}
+          {dayNum}
         </button>
+        </div>
       )
     })
   }
@@ -160,6 +165,7 @@ const Calendar = ({ events, setEvents, removeEventFromInbox }) => {
         events={events}
         datesSet={handleDatesSet}
         select={handleSelect}
+        eventContent={contents}
         eventReceive={handleEventReceive}
         headerToolbar={{
           start: 'today',
@@ -167,6 +173,7 @@ const Calendar = ({ events, setEvents, removeEventFromInbox }) => {
           end: ''
         }}
       />
+      
       <EventModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
@@ -176,7 +183,20 @@ const Calendar = ({ events, setEvents, removeEventFromInbox }) => {
     </div>
   )
 }
-
+function contents(eventInfo){
+  return (
+   <div>
+  <p className="start-date">{eventInfo.event.start.getHours()}:{timeCorrection(eventInfo.event.start.getMinutes())}</p>
+  <h1 className="title">{eventInfo.event.title}</h1>
+  </div> 
+  );
+}
+function timeCorrection(minutes){
+  if(minutes=="0"){
+    return "00";
+  }
+  return minutes;
+}
 Calendar.propTypes = {
   events: PropTypes.array.isRequired,
   setEvents: PropTypes.func.isRequired,

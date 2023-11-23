@@ -1,0 +1,24 @@
+.fc-event {
+    width:50px;
+    border-radius: 25px;
+  }
+  .start-date{
+    position:absolute; 
+    color:black;
+    margin-left:50px;
+    top:-30px;
+  }
+  .end-date{
+    color:black;
+    margin-left:50px;
+  }
+  .dayname{
+    margin-left:20px;
+  }
+  .title{
+    position:relative;
+    color:black;
+    margin-left:50px;
+    width:200px;
+    top:-20px;
+  }

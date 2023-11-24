@@ -171,13 +171,13 @@ form {
 }
 
 /* Input fields in the modal */
-.modal input[type="text"],
-.modal input[type="time"] {
+.modal input[type='text'],
+.modal input[type='time'] {
   margin: 10px 0;
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 5px;
-  width: 100%
+  width: 100%;
 }
 
 /* Submit button in the modal */

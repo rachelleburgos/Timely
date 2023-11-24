@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types' // Corrected the import
-import Glob from "./Glob"
+import Glob from './Glob'
 const InboxItem = ({ event, removeEventFromInbox }) => {
   // Optional: A handler that could be called to remove an event after a certain action
   const handleDragEnd = () => {
@@ -11,7 +11,7 @@ const InboxItem = ({ event, removeEventFromInbox }) => {
   return (
     <div
       className="draggable-event"
-      onClick={()=>Glob.Ipop=true}
+      onClick={() => (Glob.Ipop = true)}
       data-event={JSON.stringify(event)}
       // Optional: if you want to handle the end of the drag action
       onDragEnd={handleDragEnd}

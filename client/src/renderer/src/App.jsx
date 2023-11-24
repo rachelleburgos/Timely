@@ -57,9 +57,8 @@ function App() {
   }
 
   return (
-    
     <div className="app">
-      <PopUp/>
+      <PopUp />
       <Calendar
         events={calendarEvents}
         setEvents={setCalendarEvents}

@@ -1,52 +1,47 @@
-.info{
-    position:absolute;
+.info {
+  position: absolute;
 
-    width:300px;
-    height:300px;
-    box-shadow: 3px 3px 5px 5px grey;
-    padding-left:30px;
-    padding-top:10px;
-    background:white;
-    border-radius:10px;
+  width: 300px;
+  height: 300px;
+  box-shadow: 3px 3px 5px 5px grey;
+  padding-left: 30px;
+  padding-top: 10px;
+  background: white;
+  border-radius: 10px;
 
-    font-family: Arial, Helvetica, sans-serif ;
-    color:rgb(86, 86, 86);
-    z-index: 100;
+  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(86, 86, 86);
+  z-index: 100;
 }
-.title{
-margin-left:0; 
-margin-bottom:0;
+.title {
+  margin-left: 0;
+  margin-bottom: 0;
 }
-.time{
-margin-top:0;
-
+.time {
+  margin-top: 0;
 }
-.stuff{
-
+.stuff {
 }
-.closeButton{
-    position:absolute;
-    bottom:30px;
-    padding:5px;
-    border-radius:5px;
+.closeButton {
+  position: absolute;
+  bottom: 30px;
+  padding: 5px;
+  border-radius: 5px;
 }
-.closeButton:hover{
-    background:lightgrey;
+.closeButton:hover {
+  background: lightgrey;
 }
-.closeButton:active{
-    background:grey;
+.closeButton:active {
+  background: grey;
 }
-.description{
-
+.description {
 }
-.editbutton{
-
-    padding:5px;
-    margin-right:10px;
-    float:right;
-    border-radius:3px;
+.editbutton {
+  padding: 5px;
+  margin-right: 10px;
+  float: right;
+  border-radius: 3px;
 }
-.editbutton:hover{
-
-    background:grey;
+.editbutton:hover {
+  background: grey;
 }

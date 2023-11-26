@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 import { v4 as uuidv4 } from 'uuid'
 
 import InboxItem from './InboxItem'
-import EventForm from './EventForm'
+import EventForm from '../EventForm/EventForm'
 
-import { useDraggable } from '../hooks/useDraggable'
+import { useDraggable } from '../../hooks/useDraggable'
 
 const InboxList = ({ events, setEvents }) => {
   const inboxRef = useRef(null)

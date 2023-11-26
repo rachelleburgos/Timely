@@ -7,10 +7,10 @@ import interactionPlugin from '@fullcalendar/interaction'
 import { startOfWeek, addDays } from 'date-fns'
 import { faCaretLeft, faCaretRight } from '@fortawesome/free-solid-svg-icons'
 
-import EventForm from './EventForm'
-import WeekDayButtons from './WeekDayButtons'
-import NavigationButton from './NavigationButton'
-import { useDraggable } from '../hooks/useDraggable' // Assuming useDraggable is in hooks folder
+import EventForm from '../EventForm'
+import WeekDayButtons from '../WeekDayButtons'
+import NavigationButton from '../NavigationButton'
+import { useDraggable } from '../../hooks/useDraggable' // Assuming useDraggable is in hooks folder
 
 const Calendar = ({ events, setEvents }) => {
   const calendarRef = useRef(null)

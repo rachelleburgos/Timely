@@ -30,3 +30,10 @@ scrap/*
 
 # Environment Variables
 *.env
+
+#AI 
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+venv/

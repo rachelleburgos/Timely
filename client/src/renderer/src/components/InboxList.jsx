@@ -1,65 +1,35 @@
-import { useEffect } from 'react'
+import { useRef } from 'react'
 import PropTypes from 'prop-types'
-import { Draggable } from '@fullcalendar/interaction'
+import { v4 as uuidv4 } from 'uuid'
+
 import InboxItem from './InboxItem'
-import AddEventForm from './AddEventForm'
-// import moment from 'moment'
-import Glob from './Glob.jsx'
+import EventForm from './EventForm'
+
+import { useDraggable } from '../hooks/useDraggable'
 
 const InboxList = ({ events, setEvents }) => {
-  useEffect(() => {
-    // Create the Draggable for the external events list
-    let draggable = new Draggable(document.getElementById('external-events'), {
-      itemSelector: '.draggable-event',
-      eventData: function (eventEl) {
-        let event = JSON.parse(eventEl.getAttribute('data-event'))
-
-        Glob.userC = Glob.userCarray.find((o) => o.id == event.id)
-        return {
-          ...event,
-          _id: event.id, // Preserve the original ID
-          duration: Glob.userC.duration
-        }
-      }
-    })
-
-    // Cleanup function to destroy Draggable instance when the component unmounts
-    return () => {
-      if (draggable) {
-        draggable.destroy()
-      }
-    }
-  }, []) // Empty array ensures this effect runs once on mount
+  const inboxRef = useRef(null)
+  useDraggable(inboxRef)
 
   const removeEventFromInbox = (eventId) => {
-    // Update the events by filtering out the event with the given ID
-
-    setEvents((currentEvents) => currentEvents.filter((event) => event.id !== eventId))
+    setEvents((prevEvents) => prevEvents.filter((event) => event.id !== eventId))
   }
 
-  const addEventToInbox = (newEvent) => {
-    var ids = Math.random().toString(36).substr(2, 9)
-    while (Glob.userCarray.find((o) => o.id == ids) != null) {
-      ids = Math.random().toString(36).substr(2, 9)
-    }
-    Glob.userCarray.push({
-      id: ids,
-      title: newEvent.title,
-      duration: newEvent.duration
-    })
-    setEvents((currentEvents) => [
-      ...currentEvents,
-      { ...newEvent, id: ids } // or use a more robust ID generation method
-    ])
+  const addEventToInbox = (event) => {
+    setEvents((prevEvents) => [...prevEvents, { ...event, id: uuidv4() }])
   }
 
   return (
-    <div id="external-events">
+    <div id="inbox-list" ref={inboxRef}>
       <h2>Inbox</h2>
       {events.map((event) => (
-        <InboxItem key={event.id} event={event} removeEventFromInbox={removeEventFromInbox} />
+        <InboxItem
+          key={event.id || uuidv4()}
+          event={event}
+          removeEventFromInbox={removeEventFromInbox}
+        />
       ))}
-      <AddEventForm onAddEvent={addEventToInbox} />
+      <EventForm onAddEvent={addEventToInbox} isForInbox={true} />
     </div>
   )
 }

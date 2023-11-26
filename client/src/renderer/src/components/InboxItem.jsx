@@ -1,29 +1,52 @@
-import PropTypes from 'prop-types' // Corrected the import
-import Glob from './Glob'
-const InboxItem = ({ event, removeEventFromInbox }) => {
-  // Optional: A handler that could be called to remove an event after a certain action
+import PropTypes from 'prop-types'
+
+const InboxItem = ({ event, removeEventFromInbox, confirmDrop, setCurrentDraggedEventId }) => {
+  const handleDragStart = (e) => {
+    e.dataTransfer.setData('text/plain', event.id)
+    e.dataTransfer.effectAllowed = 'move'
+    setCurrentDraggedEventId(event.id)
+  }
+
   const handleDragEnd = () => {
-    // Assuming you want to remove the event from the inbox when the drag ends
-    // This logic might need to be adjusted based on when you want to trigger this
-    removeEventFromInbox(event.id)
+    if (confirmDrop(event.id)) {
+      removeEventFromInbox(event.id)
+    }
+    setCurrentDraggedEventId(null)
   }
 
   return (
     <div
       className="draggable-event"
-      onClick={() => (Glob.Ipop = true)}
-      data-event={JSON.stringify(event)}
-      // Optional: if you want to handle the end of the drag action
+      draggable="true"
+      onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
+      role="listitem"
     >
-      {event.title}
+      <h3>{event.title}</h3>
+      <p>Duration: {event.duration || 'Unscheduled'}</p>
+      {event.location && <p>Location: {event.location}</p>}
+      {event.url && (
+        <a href={event.url} target="_blank" rel="noopener noreferrer">
+          More Info
+        </a>
+      )}
+      {event.description && <p>Description: {event.description}</p>}
     </div>
   )
 }
 
 InboxItem.propTypes = {
-  event: PropTypes.object.isRequired,
-  removeEventFromInbox: PropTypes.func.isRequired // This prop should be required if you're using it
+  event: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    duration: PropTypes.string,
+    location: PropTypes.string,
+    url: PropTypes.string,
+    description: PropTypes.string
+  }).isRequired,
+  removeEventFromInbox: PropTypes.func.isRequired,
+  confirmDrop: PropTypes.func.isRequired,
+  setCurrentDraggedEventId: PropTypes.func.isRequired
 }
 
 export default InboxItem

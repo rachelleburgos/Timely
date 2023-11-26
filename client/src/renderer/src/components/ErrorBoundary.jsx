@@ -8,7 +8,6 @@ class ErrorBoundary extends Component {
   }
 
   static getDerivedStateFromError(error) {
-    console.log('getDerivedStateFromError', error)
     return { hasError: true }
   }
 
@@ -17,7 +16,8 @@ class ErrorBoundary extends Component {
       error: error,
       errorInfo: errorInfo
     })
-    // logErrorToMyService(error, errorInfo);
+
+    logErrorToMyService(error, errorInfo)
   }
 
   render() {
@@ -43,3 +43,11 @@ ErrorBoundary.propTypes = {
 }
 
 export default ErrorBoundary
+
+function logErrorToMyService(error, errorInfo) {
+  console.error('ErrorBoundary caught an error', error, errorInfo)
+
+  // Here you would send the error and errorInfo to your logging service
+  // For example, if you're using a service like Sentry:
+  // Sentry.captureException(error, { extra: errorInfo });
+}

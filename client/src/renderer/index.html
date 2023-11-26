@@ -1,11 +1,12 @@
 <!doctype html>
 <html>
   <head>
-    <!-- If you are using React Dev Tools, keep this during development -->
-    <script src="http://localhost:8097"></script>
+    <!-- TODO: For using React Dev Tools, keep this during development -->
+    <script defer src="http://localhost:8097"></script>
     <meta charset="UTF-8" />
     <title>Timely</title>
-    <!-- Updated CSP with backend server and React Dev Tools -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Timely" />
     <meta
       http-equiv="Content-Security-Policy"
       content="
@@ -14,15 +15,18 @@
         style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
         font-src 'self' https://fonts.gstatic.com;
         connect-src 'self' http://localhost:5000;
+        img-src 'self' data:;
       "
     />
+    <!-- Google Fonts -->
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
     </style>
   </head>
 
   <body>
+    <!-- React App -->
     <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+    <script defer type="module" src="/src/main.jsx"></script>
   </body>
 </html>

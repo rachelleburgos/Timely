@@ -19,11 +19,6 @@ const UserSchema = new Schema(
       minLength: [1, 'Last name should be at least 1 character'],
       maxLength: [50, 'Last name cannot exceed 50 characters'],
     },
-    age: {
-      type: Number,
-      min: [1, 'Age should be at least 1'],
-      max: [100, 'Age cannot exceed 100'],
-    },
     email: {
       type: String,
       required: [true, 'Email is required'],

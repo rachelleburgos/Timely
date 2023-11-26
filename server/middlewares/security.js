@@ -7,7 +7,7 @@ export const applySecurityMiddleware = app => {
 
   // Allow cross-origin requests with CORS configuration
   const corsOptions = {
-    origin: process.env.CORS_ORIGIN || '*', // Replace '*' with your domain in production
+    origin: process.env.CORS_ORIGIN || '*', // TODO: Replace '*' with your domain in production
     optionsSuccessStatus: 200,
   };
   app.use(cors(corsOptions));

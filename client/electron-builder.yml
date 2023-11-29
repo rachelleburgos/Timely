@@ -1,5 +1,5 @@
-appId: com.electron.app
-productName: client
+appId: com.timely.app
+productName: Timely
 directories:
   buildResources: build
 files:

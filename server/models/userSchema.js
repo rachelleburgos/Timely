@@ -1,3 +1,47 @@
+/**
+ * @file UserSchema.js
+ * @brief Schema definition for the User model in an application.
+ *
+ * This file defines the `UserSchema` for MongoDB using Mongoose. It's structured to manage user data in an application,
+ * focusing on personal and authentication information. The schema includes fields for the user's first and last names,
+ * email, and password. Each field is appropriately validated for length and format. The email field is unique, ensuring
+ * no duplicate registrations.
+ *
+ * Additional features include a virtual property to retrieve a user's full name and a pre-save hook to hash passwords before
+ * saving them to the database. The schema also defines an index on the email field for optimized querying.
+ *
+ * @requires mongoose - For schema definition and data modeling.
+ * @requires bcrypt - For password hashing.
+ *
+ * @schema
+ * @param {String} firstName - The first name of the user, required with lowercase and length constraints.
+ * @param {String} lastName - The last name of the user, required with lowercase and length constraints.
+ * @param {String} email - The user's email address, required, unique, and formatted as an email.
+ * @param {String} password - The user's password, required with a minimum length constraint.
+ *
+ * @virtual
+ * fullName - A computed property that combines firstName and lastName.
+ *
+ * @hook
+ * pre-save - Hashes the password before saving the user document.
+ *
+ * @index
+ * email - A unique index on the email field to ensure no duplicate emails.
+ *
+ * @export
+ * User - The Mongoose model created from UserSchema.
+ *
+ * @example
+ * // Creating a new user
+ * const newUser = new User({
+ *   firstName: 'John',
+ *   lastName: 'Doe',
+ *   email: 'john.doe@example.com',
+ *   password: 'SecurePassword123'
+ * });
+ * newUser.save();
+ */
+
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
 
@@ -5,6 +49,7 @@ const { Schema } = mongoose;
 
 const UserSchema = new Schema(
   {
+    // Personal Information
     firstName: {
       type: String,
       required: [true, 'First name is required'],
@@ -19,6 +64,8 @@ const UserSchema = new Schema(
       minLength: [1, 'Last name should be at least 1 character'],
       maxLength: [50, 'Last name cannot exceed 50 characters'],
     },
+
+    // Authentication Details
     email: {
       type: String,
       required: [true, 'Email is required'],
@@ -37,12 +84,13 @@ const UserSchema = new Schema(
   { timestamps: true }
 );
 
-// Create a virtual property for full name
+// Virtuals for Additional Properties
 UserSchema.virtual('fullName').get(function () {
   return `${this.firstName} ${this.lastName}`;
 });
 
-// Pre-save hook for hashing the password before saving
+// Middleware for Data Processing
+// Hashing Password before Saving
 UserSchema.pre('save', async function (next) {
   if (!this.isModified('password')) {
     return next();
@@ -57,7 +105,7 @@ UserSchema.pre('save', async function (next) {
   }
 });
 
-// Create a unique index on the email field
+// Ensuring Email Uniqueness
 UserSchema.index({ email: 1 }, { unique: true });
 
 export default mongoose.model('User', UserSchema);

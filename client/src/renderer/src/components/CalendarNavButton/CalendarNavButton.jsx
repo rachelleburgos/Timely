@@ -5,7 +5,6 @@
  * This file defines the `CalendarNavButton` component, which is used for navigating through a calendar interface.
  * It is a specialized button that displays an icon, typically used for moving to the next or previous week/month in a calendar.
  * The component utilizes FontAwesome icons and requires a click handler function and an icon object as props.
- * This consistent and reusable UI element enhances the user experience in calendar navigation.
  *
  * @requires prop-types - For prop type validation.
  * @requires @fortawesome/react-fontawesome - To render FontAwesome icons.

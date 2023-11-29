@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
 
 import Calendar from '../components/Calendar.jsx'
-import InboxList from '../components/Inbox/InboxList.jsx'
+import InboxList from '../../components/Inbox/InboxList.jsx'
 import ErrorMessage from '../components/ErrorMessage.jsx'
 
 import fetchEvents from '../api/events.js'

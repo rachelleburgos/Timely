@@ -28,6 +28,7 @@ import * as Sentry from '@sentry/react'
 
 import App from './App'
 
+// Sentry initialization for error tracking and performance monitoring
 Sentry.init({
   dsn: 'process.env.REACT_APP_SENTRY_DSN',
   integrations: [

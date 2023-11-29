@@ -21,7 +21,6 @@
  *   <Suspense fallback={<LoadingPage />}>
  *     <Routes>
  *       <Route path="/" element={<DashboardPage />} />
- *       <Route path="*" element={<NotFoundPage />} />
  *       Other Routes ...
  *     </Routes>
  *   </Suspense>
@@ -32,9 +31,9 @@ import { Suspense, lazy } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 // Lazy loading of components
-const DashboardPage = lazy(() => import('./pages/DashboardPage'))
-const NotFoundPage = lazy(() => import('./pages/NotFoundPage'))
-const LoadingPage = lazy(() => import('./pages/LoadingPage'))
+const DashboardPage = lazy(() => import('./pages/Dashboard/Dashboard'))
+const NotFoundPage = lazy(() => import('./pages/NotFound/NotFound'))
+const LoadingPage = lazy(() => import('./pages/Loading/Loading'))
 
 function App() {
   return (

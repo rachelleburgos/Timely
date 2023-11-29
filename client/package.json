@@ -1,7 +1,7 @@
 {
-  "name": "client",
+  "name": "timely",
   "version": "1.0.0",
-  "description": "An Electron application with React",
+  "description": "An AI-powered scheduling app designed to help you manage your time and get more done.",
   "main": "./out/main/index.js",
   "author": "example.com",
   "homepage": "https://www.electronjs.org",

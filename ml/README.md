@@ -1,5 +1,5 @@
 To run TensorFlow run 
-    venv\Scripts\activate
+    .\ml\venv\Scripts\activate
 This will activate a virtual environment. Once you do this, run
     cd src
 This will move you to the src folder which contains the requirements.txt. Once in here, run the comman

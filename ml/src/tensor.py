@@ -27,7 +27,7 @@ df['status'] = (df['status'] == 'CONFIRMED').astype(int)
 numerical_features = ['dtstart']
 
 # Exclude non-numerical columns from features
-non_numerical_columns = ['dtend', 'dtstamp', 'organizer', 'uid', 'attendee', 'created', 'last-modified', 'location', 'sequence', 'status', 'transp']
+non_numerical_columns = ['dtend', 'dtstamp', 'created', 'last-modified', 'location', 'sequence', 'status']
 features = df.drop(['status', 'uid'] + non_numerical_columns, axis=1)
 
 # Normalize numerical features
@@ -48,9 +48,17 @@ X_train, X_test, Y_train_start, Y_test_start, Y_train_end, Y_test_end = train_te
 model_start = tf.keras.Sequential([
     tf.keras.layers.Dense(64, activation='relu', input_shape=(X_train.shape[1],)),
     tf.keras.layers.Dense(32, activation='relu'),
-    tf.keras.layers.Dense(1, activation='linear')  # Use linear activation for regression
+    tf.keras.layers.Dense(1, activation='linear') # Use linear activation for regression
 ])
 
 model_start.compile(optimizer='adam', loss='mean_squared_error', metrics=['mean_absolute_error'])
 
 model_start.fit(X_train, Y_train_start, epochs=10, validation_data=(X_test, Y_test_start))
+
+# Make predictions on the test set
+predictions_start = model_start.predict(X_test)
+
+# Print actual vs predicted values for 'dtstart'
+results = pd.DataFrame({'Actual': Y_test_start, 'Predicted': predictions_start.flatten()})
+print(results)
+

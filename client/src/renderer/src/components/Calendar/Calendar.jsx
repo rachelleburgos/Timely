@@ -1,20 +1,20 @@
 import { useRef, useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import FullCalendar from '@fullcalendar/react'
-import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import { startOfWeek, addDays } from 'date-fns'
 import { faCaretLeft, faCaretRight } from '@fortawesome/free-solid-svg-icons'
 
-import EventForm from '../EventForm'
-import WeekDayButtons from '../WeekDayButtons'
-import NavigationButton from '../NavigationButton'
-import { useDraggable } from '../../hooks/useDraggable' // Assuming useDraggable is in hooks folder
+import EventForm from '../EventForm/EventForm'
+import WeekDayButtons from '../CalendarWeekNavigation/CalendarWeekNavigation'
+import NavigationButton from '../CalendarNavButton/CalendarNavButton'
+import { useDraggable } from '../../hooks/useDraggable'
 
 const Calendar = ({ events, setEvents }) => {
   const calendarRef = useRef(null)
-  const externalEventsRef = useRef(null) // Ref for external draggable events
+  const externalEventsRef = useRef(null)
+
   useDraggable(externalEventsRef, {
     itemSelector: '.draggable-event',
     eventData: function (eventEl) {
@@ -77,7 +77,7 @@ const Calendar = ({ events, setEvents }) => {
       </div>
       <FullCalendar
         ref={calendarRef}
-        plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin]}
+        plugins={[interactionPlugin, timeGridPlugin]}
         initialView="timeGridWeek"
         editable
         selectable

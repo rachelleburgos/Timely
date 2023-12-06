@@ -1,7 +1,3 @@
-/**
- * @fileoverview Not Found Page component.
- */
-
 import { Link } from 'react-router-dom'
 
 const NotFoundPage = () => {

@@ -1,51 +1,50 @@
-/**
- * @file App.jsx
- * @brief Main component of the React application that sets up routing and lazy loading.
- *
- * This file defines the `App` component, which is the main component of the React application.
- * It uses React Router for client-side routing and React's lazy loading feature to dynamically
- * load components. `Suspense` from React is used to render a fallback component (`LoadingPage`)
- * while the lazy-loaded components are being fetched.
- *
- * The application has routes for different pages, with the DashboardPage as the root route
- * and NotFoundPage for any unmatched routes (404 pages). More routes can be added as needed.
- *
- * @requires react
- * @requires react-router-dom - For client-side routing.
- * @requires ./pages/DashboardPage - Lazy loaded Dashboard page component.
- * @requires ./pages/NotFoundPage - Lazy loaded NotFound (404) page component.
- * @requires ./pages/LoadingPage - Component displayed while lazy loaded components are loading.
- *
- * @example
- * <Router>
- *   <Suspense fallback={<LoadingPage />}>
- *     <Routes>
- *       <Route path="/" element={<DashboardPage />} />
- *       Other Routes ...
- *     </Routes>
- *   </Suspense>
- * </Router>
- */
+import React, { Suspense } from 'react'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
-import { Suspense, lazy } from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary'
+import LoadingPage from './pages/Loading/Loading'
 
-// Lazy loading of components
-const DashboardPage = lazy(() => import('./pages/Dashboard/Dashboard'))
-const NotFoundPage = lazy(() => import('./pages/NotFound/NotFound'))
-const LoadingPage = lazy(() => import('./pages/Loading/Loading'))
+// Function to delay the import
+const delay = (duration) => new Promise((resolve) => setTimeout(resolve, duration))
 
+// Lazy load the pages with delay
+const HomePage = React.lazy(
+  () => delay(3000).then(() => import('./pages/Home/Home')) // Delays the import by 3000ms
+)
+const NotFoundPage = React.lazy(() => delay(3000).then(() => import('./pages/NotFound/NotFound')))
+
+// Wrapper component that includes the ErrorBoundary
+const ErrorBoundaryWrapper = ({ children }) => <ErrorBoundary>{children}</ErrorBoundary>
+
+ErrorBoundaryWrapper.propTypes = {
+  children: PropTypes.node.isRequired
+}
+
+// Main App component
 function App() {
   return (
-    // Suspense is used to display a fallback component while the lazy loaded components are being loaded
     <Router>
-      <Suspense fallback={<LoadingPage />}>
+      <ErrorBoundaryWrapper>
         <Routes>
-          <Route path="/" element={<DashboardPage />} />
-          <Route path="*" element={<NotFoundPage />} />
-          {/* Other Routes ... */}
+          <Route
+            path="/"
+            element={
+              <Suspense fallback={<LoadingPage />}>
+                <HomePage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="*"
+            element={
+              <Suspense fallback={<LoadingPage />}>
+                <NotFoundPage />
+              </Suspense>
+            }
+          />
         </Routes>
-      </Suspense>
+      </ErrorBoundaryWrapper>
     </Router>
   )
 }

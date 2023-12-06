@@ -1,27 +1,3 @@
-/**
- * @file main.jsx
- * @brief Entry point for the React application.
- *
- * This file is the starting point of the React application. It initializes Sentry for error tracking
- * and performance monitoring. The Sentry DSN is retrieved from environment variables for security.
- * Sentry's BrowserTracing integration is set up for distributed tracing, and Replay is also initialized.
- * The application is wrapped in React.StrictMode for development. StrictMode is a tool for highlighting
- * potential problems in an application and does not impact the production build.
- *
- * @requires react
- * @requires react-dom
- * @requires @sentry/react
- * @requires ./App - The root component of the application.
- *
- * @example
- * Sentry.init({
- *   dsn: process.env.REACT_APP_SENTRY_DSN,
- *   // other configurations...
- * });
- *
- * ReactDOM.createRoot(document.getElementById('root')).render(<App />);
- */
-
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import * as Sentry from '@sentry/react'
@@ -30,7 +6,7 @@ import App from './App'
 
 // Sentry initialization for error tracking and performance monitoring
 Sentry.init({
-  dsn: 'process.env.REACT_APP_SENTRY_DSN',
+  dsn: 'https://4fc52bc722c372978bb1875850d211d2@o4506294371287040.ingest.sentry.io/4506294374891520',
   integrations: [
     new Sentry.BrowserTracing({
       // Set 'tracePropagationTargets' to control for which URLs distributed tracing should be enabled
@@ -40,8 +16,9 @@ Sentry.init({
   ],
   // Performance Monitoring
   tracesSampleRate: 1.0, // Capture 100% of the transactions
-  replaysSessionSampleRate: 1.0, // This sets the sample rate at 10%. You may want to change it to 100% while in development and then sample at a lower rate in production.
-  replaysOnErrorSampleRate: 1.0 // If you're not already sampling the entire session, change the sample rate to 100% when sampling sessions where errors occur.
+  // Session Replay
+  replaysSessionSampleRate: 1.0, // Sample rate for session replay
+  replaysOnErrorSampleRate: 1.0 // Sample rate for sessions where errors occur
 })
 
 const root = ReactDOM.createRoot(document.getElementById('root'))

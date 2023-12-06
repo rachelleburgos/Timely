@@ -5,6 +5,8 @@ import morgan from 'morgan'
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import * as Sentry from '@sentry/node'
+import { ProfilingIntegration } from '@sentry/profiling-node'
 
 import { connectDatabase } from './database/DatabaseConnection.js'
 
@@ -20,11 +22,23 @@ const app = express()
 // Load environment variables from .env file
 dotenv.config()
 
+// Initialize Sentry
+Sentry.init({
+  dsn: process.env.SENTRY_DSN,
+  integrations: [
+    new Sentry.Integrations.Http({ tracing: true }),
+    new Sentry.Integrations.Express({ app }),
+    new ProfilingIntegration()
+  ],
+  tracesSampleRate: 1.0,
+  profilesSampleRate: 1.0
+})
+
+// The request handler must be the first middleware on the app
+app.use(Sentry.Handlers.requestHandler())
+
 // Apply security-related middleware
 applySecurityMiddleware(app)
-
-// Use error handling middleware
-app.use(errorHandler)
 
 // Apply rate limiting to all requests
 const limiter = rateLimit({
@@ -45,13 +59,22 @@ const __dirname = path.dirname(__filename)
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'logs/access.log'), {
   flags: 'a'
 })
-
 app.use(morgan('combined', { stream: accessLogStream }))
 
 // Use the routes
 app.use('/api/users', userRoutes)
 app.use('/api/events', eventRoutes)
 app.use('/api/inboxitems', inboxItemRoutes)
+
+// TracingHandler creates a trace for every incoming request
+app.use(Sentry.Handlers.tracingHandler())
+
+// The error handler must be registered before any other error middleware and after all controllers
+app.use(Sentry.Handlers.errorHandler())
+
+// Use error handling middleware
+app.use(errorHandler)
+
 const CONNECTION_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/Timely'
 const PORT = process.env.PORT || 5000
 
@@ -60,7 +83,8 @@ const startServer = async () => {
     await connectDatabase(CONNECTION_URI)
     app.listen(PORT, () => console.log(`Server running on port: ${PORT}`))
   } catch (error) {
-    next(error)
+    console.error('Failed to start the server:', error)
+    process.exit(1)
   }
 }
 

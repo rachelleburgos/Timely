@@ -1,24 +1,3 @@
-/**
- * @file ErrorBoundary.jsx
- * @brief ErrorBoundary component for catching JavaScript errors in child component trees.
- *
- * This component is an error boundary used to catch JavaScript errors in its child component tree,
- * log these errors to Sentry, and display a fallback UI. The fallback UI can be customized via props.
- * It's typically used in higher-level components like the app root or main page layouts to prevent
- * the entire app from crashing due to uncaught errors. It also includes a retry mechanism that
- * attempts to reload the component tree in case of an error.
- *
- * @component
- * @param {object} props - Component props
- * @param {React.Node} props.children - The child components that the ErrorBoundary is wrapping.
- * @param {React.Element} [props.customFallback] - Optional custom fallback UI to be displayed in case of an error.
- *
- * @example
- * <ErrorBoundary customFallback={<CustomErrorComponent />}>
- *   <MyComponent />
- * </ErrorBoundary>
- */
-
 import { Component } from 'react'
 import PropTypes from 'prop-types'
 import * as Sentry from '@sentry/react'
@@ -27,32 +6,31 @@ class ErrorBoundary extends Component {
   constructor(props) {
     super(props)
     this.state = { hasError: false, error: null, errorInfo: null }
+    this.retry = this.retry.bind(this)
   }
 
   static getDerivedStateFromError(error) {
-    return { hasError: true }
+    // Update state so the next render will show the fallback UI.
+    return { hasError: true, error: error }
   }
 
   componentDidCatch(error, errorInfo) {
-    this.setState({
-      error: error,
-      errorInfo: errorInfo
-    })
+    // Update the state with error information
+    this.setState({ error: error, errorInfo: errorInfo })
 
-    this.logErrorToSentry(error, errorInfo)
-  }
-
-  logErrorToSentry(error, errorInfo) {
+    // Log the error to Sentry
     Sentry.captureException(error, { extra: errorInfo })
   }
 
   retry() {
+    // Reset the state before reloading the page
+    this.setState({ hasError: false, error: null, errorInfo: null })
     window.location.reload()
-    this.setState({ hasError: false })
   }
 
   render() {
     if (this.state.hasError) {
+      // Use customFallback if provided, else default fallback UI
       return (
         this.props.customFallback || (
           <div>
@@ -60,7 +38,7 @@ class ErrorBoundary extends Component {
             <details style={{ whiteSpace: 'pre-wrap' }}>
               {this.state.error && this.state.error.toString()}
               <br />
-              {this.state.errorInfo.componentStack}
+              {this.state.errorInfo && this.state.errorInfo.componentStack}
             </details>
             <button onClick={this.retry}>Retry</button>
           </div>

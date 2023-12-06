@@ -1,10 +1,9 @@
 import { useState, useEffect, useCallback } from 'react'
 
-import Calendar from '../components/Calendar.jsx'
-import InboxList from '../../components/Inbox/InboxList.jsx'
-import ErrorMessage from '../components/ErrorMessage.jsx'
+import Calendar from '../../components/Calendar/Calendar'
+import InboxList from '../../components/Inbox/InboxList'
 
-import fetchEvents from '../api/events.js'
+import fetchEvents from '../../utils/api/events'
 
 function Dashboard() {
   const [calendarEvents, setCalendarEvents] = useState(
@@ -12,16 +11,11 @@ function Dashboard() {
   )
   const [inboxEvents, setInboxEvents] = useState([])
   const [currentDraggedEventId, setCurrentDraggedEventId] = useState(null)
-  const [error, setError] = useState(null)
 
   useEffect(() => {
-    fetchEvents()
-      .then((fetchedEvents) => {
-        setInboxEvents(fetchedEvents)
-      })
-      .catch((err) => {
-        setError({ message: err.message, retry: fetchEvents })
-      })
+    fetchEvents().then((fetchedEvents) => {
+      setInboxEvents(fetchedEvents)
+    })
   }, [])
 
   useEffect(() => {
@@ -40,21 +34,6 @@ function Dashboard() {
     },
     [currentDraggedEventId]
   )
-
-  const retryFetchEvents = () => {
-    setError(null)
-    fetchEvents()
-      .then((fetchedEvents) => {
-        setInboxEvents(fetchedEvents)
-      })
-      .catch((err) => {
-        setError({ message: err.message, retry: fetchEvents })
-      })
-  }
-
-  if (error) {
-    return <ErrorMessage message={error.message} retry={retryFetchEvents} />
-  }
 
   return (
     <div>

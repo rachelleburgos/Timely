@@ -1,0 +1,101 @@
+  .notAppear{
+    display: none;
+  }
+
+    .clockElement{
+      z-index:100;
+      left:25%;
+      top:12%;
+      position: absolute;
+      width:50%;
+      aspect-ratio: 1/1;
+    }
+    .hammerleft{
+      top:10%;left:70%;
+      position: absolute;
+      transform:rotate(45deg);
+      width:40%;
+      height:5%;
+      border-radius:12.5px;
+      background-color:purple;
+    }
+    .hammerright{
+      top:10%;left:-10%;
+      position: absolute;
+      width:40%;
+      height:5%;
+      border-radius:12.5px;
+      background-color:purple;
+      transform:rotate(-45deg);
+    
+    }
+    .clock{
+        position:absolute;
+        left:5%;
+        top:5%;
+        width:80%;
+        height:80%;
+        border-radius:100%;
+        background-color:white;
+        border:purple 20px solid;
+    }
+    .hour {
+        position:relative;
+        top:49%;
+        left:45%;
+        transform:rotate(-45deg);
+        width: 50%;
+        height: 7%;
+        background-color: purple;
+        
+        transform-origin:7%;
+        
+    }
+    .minute{
+      position:relative;
+      top:45%;
+      left:45%;
+      width: 30%;
+      height: 7%;
+      transform:rotate(-135deg);
+      animation-name: MinuteMovement;
+      animation-duration: 1s;
+      animation-delay: 0.3s;
+      transform-origin:7%;
+      background:purple;
+      
+  }
+  .fade_out{
+    animation-name:fade_out;
+    animation-duration: 1s;
+    animation-delay: 1s;
+    animation-fill-mode: forwards;
+    }
+    .startAnimationHour{
+      animation-timing-function:ease-in;
+      animation-fill-mode:forwards;
+      animation-name: HourMovement;
+      animation-duration: 1.3s;
+      animation-delay: 0s;
+    }
+
+    .startAnimationMinute{
+      animation-timing-function:ease-in;
+      animation-fill-mode:forwards;
+      animation-name: MinuteMovement;
+        animation-duration: 1s;
+        animation-delay: 0s;
+    }
+    @keyframes fade_out {
+      0%{opacity: 1.0;}
+      99.9%{opacity:0.0;}
+      100%{opacity:0.0; display:none;}
+    }
+    @keyframes HourMovement {
+      0%   {transform:rotate(-45deg);}
+      100% {transform:rotate(315deg);}
+    }
+    @keyframes MinuteMovement {
+      0%   { transform:rotate(-135deg);}
+      100% { transform:rotate(225deg);}
+    }

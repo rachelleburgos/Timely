@@ -1,0 +1,12 @@
+@font-face {
+    font-family: 'Inter';
+    src: url('../fonts/Inter-VariableFont_slnt,wght.ttf') format('truetype');
+}
+
+/* Use the custom font in your styles */
+body {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400; /* Normal weight */
+    font-style: normal; /* Normal style */
+}
+

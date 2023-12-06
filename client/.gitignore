@@ -2,5 +2,9 @@ node_modules
 dist
 out
 *.log*
-.DS_Store
-.vscode/*
+
+# Sentry Config File
+.env.sentry-build-plugin
+
+# Sentry Config File
+.env.sentry-build-plugin

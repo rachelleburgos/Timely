@@ -8,12 +8,10 @@ files:
   - '!electron.vite.config.{js,ts,mjs,cjs}'
   - '!{.eslintignore,.eslintrc.cjs,.prettierignore,.prettierrc.yaml,dev-app-update.yml,CHANGELOG.md,README.md}'
   - '!{.env,.env.*,.npmrc,pnpm-lock.yaml}'
-  - '!{tsconfig.json,tsconfig.node.json,tsconfig.web.json}'
 asarUnpack:
   - resources/**
 win:
-  executableName: Timely
-  icon: ../resources/icons/win/icon.ico
+  executableName: client
 nsis:
   artifactName: ${name}-${version}-setup.${ext}
   shortcutName: ${productName}
@@ -21,7 +19,6 @@ nsis:
   createDesktopShortcut: always
 mac:
   entitlementsInherit: build/entitlements.mac.plist
-  icon: ../resources/icons/mac/icon.icns
   extendInfo:
     - NSCameraUsageDescription: Application requests access to the device's camera.
     - NSMicrophoneUsageDescription: Application requests access to the device's microphone.
@@ -35,7 +32,6 @@ linux:
     - AppImage
     - snap
     - deb
-  icon: ../resources/icons/png/
   maintainer: electronjs.org
   category: Utility
 appImage:
@@ -43,4 +39,4 @@ appImage:
 npmRebuild: false
 publish:
   provider: generic
-  url: www.example.com
+  url: https://example.com/auto-updates

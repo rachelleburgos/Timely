@@ -1,19 +1,24 @@
-import { useRef, useState, useEffect } from 'react'
-import PropTypes from 'prop-types'
+import { useRef, useEffect } from 'react'
 import FullCalendar from '@fullcalendar/react'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import { startOfWeek, addDays } from 'date-fns'
 import { faCaretLeft, faCaretRight } from '@fortawesome/free-solid-svg-icons'
+import { useSelector, useDispatch } from 'react-redux'
 
 import EventForm from '../EventForm/EventForm'
-import WeekDayButtons from '../CalendarWeekNavigation/CalendarWeekNavigation'
-import NavigationButton from '../CalendarNavButton/CalendarNavButton'
+import WeekDayButtons from './CalendarWeekNavigation'
+import NavigationButton from './CalendarNavButton'
 import { useDraggable } from '../../hooks/useDraggable'
 
-const Calendar = ({ events, setEvents }) => {
+// Redux actions
+import { addEvent, updateEvents } from '../../redux/actions/eventActions'
+
+const Calendar = () => {
   const calendarRef = useRef(null)
   const externalEventsRef = useRef(null)
+  const dispatch = useDispatch()
+  const events = useSelector((state) => state.events) // Assuming 'events' is the state slice name
 
   useDraggable(externalEventsRef, {
     itemSelector: '.draggable-event',
@@ -45,11 +50,11 @@ const Calendar = ({ events, setEvents }) => {
       duration: duration,
       allDay: info.event.allDay
     }
-    setEvents((currentEvents) => [...currentEvents, newEvent])
+    dispatch(addEvent(newEvent)) // Dispatching an action to add event
   }
 
   const handleAddEvent = (eventDetails) => {
-    setEvents([...events, { ...eventDetails, id: new Date().getTime() }])
+    dispatch(addEvent({ ...eventDetails, id: new Date().getTime() })) // Dispatching an action to add event
   }
 
   const handleWeekDayClick = (dayOffset) => {
@@ -65,7 +70,6 @@ const Calendar = ({ events, setEvents }) => {
 
   const handleSelect = (selectInfo) => {
     setSelectedDate(selectInfo.start)
-    setIsModalOpen(true)
   }
 
   return (
@@ -94,23 +98,8 @@ const Calendar = ({ events, setEvents }) => {
           end: ''
         }}
       />
-      <EventForm
-        onAddEvent={handleAddEvent}
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        defaultDate={selectedDate}
-        isForInbox={false}
-      />
-      <div ref={externalEventsRef} id="external-events">
-        {/* Your draggable events here */}
-      </div>
     </div>
   )
-}
-
-Calendar.propTypes = {
-  events: PropTypes.array.isRequired,
-  setEvents: PropTypes.func.isRequired
 }
 
 export default Calendar

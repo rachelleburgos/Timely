@@ -5,14 +5,9 @@ import PropTypes from 'prop-types'
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary'
 import LoadingPage from './pages/Loading/Loading'
 
-// Function to delay the import
-const delay = (duration) => new Promise((resolve) => setTimeout(resolve, duration))
-
 // Lazy load the pages with delay
-const HomePage = React.lazy(
-  () => delay(3000).then(() => import('./pages/Home/Home')) // Delays the import by 3000ms
-)
-const NotFoundPage = React.lazy(() => delay(3000).then(() => import('./pages/NotFound/NotFound')))
+const AuthPage = React.lazy(() => import('./pages/Auth/Auth'))
+const NotFoundPage = React.lazy(import('./pages/NotFound/NotFound'))
 
 // Wrapper component that includes the ErrorBoundary
 const ErrorBoundaryWrapper = ({ children }) => <ErrorBoundary>{children}</ErrorBoundary>
@@ -31,7 +26,7 @@ function App() {
             path="/"
             element={
               <Suspense fallback={<LoadingPage />}>
-                <HomePage />
+                <AuthPage />
               </Suspense>
             }
           />

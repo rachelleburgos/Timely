@@ -2,7 +2,7 @@ import { useState } from 'react'
 import LogInForm from '../../components/LoginSignUpForms/LogInForm'
 import SignUpForm from '../../components/LoginSignUpForms/SignUpForm'
 
-// import './Auth.css'
+import './Auth.css'
 
 const AuthForm = () => {
   // State to track whether to show the login form or the signup form
@@ -14,26 +14,34 @@ const AuthForm = () => {
   }
 
   return (
-    <div>
+    <div className="form-container">
       {showLogin ? (
         <>
-          <h2>Welcome back to Timely</h2>
+          <h1>Welcome back to Timely</h1>
           <LogInForm />
           <p>
-            Don&apos;t have an account?
-            <button onClick={toggleForm}>Sign Up</button>
+            Don&apos;t have an account? {}
+            <button onClick={toggleForm} className="toggle-form-button">
+              Sign Up
+            </button>
           </p>
         </>
       ) : (
         <>
-          <h2>Welcome to Timely</h2>
+          <h1>Welcome to Timely</h1>
           <SignUpForm />
           <p>
-            Already have an account?
-            <button onClick={toggleForm}>Log In</button>
+            Already have an account? {}
+            <button onClick={toggleForm} className="toggle-form-button">
+              Log In
+            </button>
           </p>
         </>
       )}
+
+      <div className="divider">
+        <span id="divider-text">or</span>
+      </div>
     </div>
   )
 }

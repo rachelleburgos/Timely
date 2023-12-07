@@ -31,31 +31,50 @@ const LogInForm = () => {
 
   return (
     <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
-      <Form>
-        <div className="input-icon-container">
-          <Field type="email" name="email" placeholder="Email" className="text-field" />
-          <FontAwesomeIcon icon={faEnvelope} className="input-icon email-icon" />
-        </div>
-        <ErrorMessage name="email" component="div" />
+      {({ touched, errors }) => (
+        <Form>
+          <div className="input-icon-container">
+            <FontAwesomeIcon icon={faEnvelope} className="input-icon" />
+            <Field
+              type="email"
+              name="email"
+              className={`text-field ${touched.email && 'touched'}`}
+            />
+            <label htmlFor="email" className="label-float">
+              Email
+            </label>
+            <ErrorMessage
+              name="email"
+              component="div"
+              className={`errorMessage ${errors.email && touched.email ? 'active' : ''}`}
+            />
+          </div>
 
-        <div className="input-icon-container">
-          <Field
-            type={showPassword ? 'text' : 'password'}
-            name="password"
-            placeholder="Password"
-            className="text-field"
-          />
-          <FontAwesomeIcon icon={faLock} className="input-icon lock-icon" />
-          <FontAwesomeIcon
-            icon={showPassword ? faEye : faEyeSlash}
-            className="input-icon toggle-icon"
-            onClick={togglePasswordVisibility}
-          />
-        </div>
-        <ErrorMessage name="password" component="div" />
+          <div className="input-icon-container">
+            <FontAwesomeIcon icon={faLock} className="input-icon" />
+            <Field
+              type={showPassword ? 'text' : 'password'}
+              name="password"
+              className={`text-field ${touched.password && 'touched'}`}
+            />
+            <label htmlFor="password" className="label-float">
+              Password
+            </label>
+            <FontAwesomeIcon
+              icon={showPassword ? faEyeSlash : faEye}
+              className="toggle-icon"
+              onClick={togglePasswordVisibility}
+            />
+            <ErrorMessage
+              name="password"
+              component="div"
+              className={`errorMessage ${errors.password && touched.password ? 'active' : ''}`}
+            />
+          </div>
 
-        <button type="submit">Log In</button>
-      </Form>
+          <button type="submit">Log In</button>
+        </Form>
+      )}
     </Formik>
   )
 }

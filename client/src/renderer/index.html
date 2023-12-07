@@ -2,7 +2,7 @@
 <html>
   <head>
     <!-- TODO: For using React Dev Tools, keep this during development -->
-    <script defer src="http://localhost:8097"></script>
+    <!-- <script defer src="http://localhost:8097"></script> -->
     <meta charset="UTF-8" />
     <title>Timely</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -13,7 +13,7 @@
     <meta
       http-equiv="Content-Security-Policy"
       content="
-        default-src 'self' 'unsafe-inline';
+        default-src 'self' 'unsafe-inline' ws://localhost:8097/;
         script-src 'self' http://localhost:8097 https://browser.sentry-cdn.com;
         connect-src 'self' https://*.ingest.sentry.io https://sentry.io;
         img-src 'self' data:;

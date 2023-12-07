@@ -1,86 +1,202 @@
+/* Background gradient */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  background: rgb(208,200,251);
+  background: radial-gradient(circle, rgba(208,200,251,1) 0%, rgba(255,255,255,1) 100%);
+}
+
+/* Style for the header */
+h1 {
+  text-align: center;
+}
+
+/* Style for the toggles */
+p {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
 /* Base styles for the forms */
 .form-container {
-    max-width: 400px;
-    margin: 40px auto;
-    background: #FFF;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  }
+  width: 350px;
+  margin: 40px auto;
+  background-color: rgba(255, 255, 255, 0.65); /* Adjusted opacity for better visibility */
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
 
-  /* Style for form fields and icons */
-  .input-icon-container {
-    position: relative;
-    margin-bottom: 20px;
+/* Style for form fields and icons */
+.input-icon-container {
+  position: relative;
+  margin-bottom: 25px;
+}
+
+/* Style for the floating labels */
+.label-float {
+  position: absolute;
+  left: 45px; /* Space for the icon */
+  top: 50%;
+  transform: translateY(-50%);
+  transition: top 0.3s ease, font-size 0.3s ease, color 0.3s ease; /* Animate the position, font size, and color changes */
+  font-size: 16px;
+  color: #888;
+  pointer-events: none;
+}
+
+/* Adjust the label position and font size when the input is focused or contains text */
+.text-field:focus + .label-float,
+.text-field:not(:focus):not(:placeholder-shown) + .label-float,
+.text-field:valid + .label-float {
+  top: 10px;
+  font-size: 12px;
+  color: #555;
+}
+
+/* Style for the input fields */
+.text-field {
+  padding: 20px 40px 20px 40px;
+  font-size: 16px;
+  border-radius: 15px;
+  border: 1px solid #ccc;
+  width: 100%;
+  box-sizing: border-box;
+  padding-top: 25px;
+  transition: padding 0.3s ease;
+}
+
+.text-field:focus {
+  outline: none;
+  border-color: #6200ee;
+}
+
+/* Style for the icons */
+.input-icon {
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  transform: translateY(-50%);
+  z-index: 10;
+  color: gray;
+}
+
+.toggle-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  z-index: 20;
+  color: gray;
+}
+
+.errorMessage {
+  color: #620005;
+  margin-top: 5px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  font-size: 0.8em;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.3s, opacity 0.3s ease;
+  z-index: 5;
+}
+
+.errorMessage.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+
+/* Style for the buttons */
+button[type="submit"] {
+  width: 100%;
+  background-color: #6200ee;
+  color: #fff;
+  padding: 15px;
+  border: none;
+  border-radius: 5px;
+  margin-top: 20px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background-color: #5700d1;
+}
+
+/* Style for the toggle button */
+.toggle-form-button {
+  background: none;
+  border: none;
+  padding: 0;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: inherit;
+}
+
+.toggle-form-button:hover {
+  text-decoration: underline;
+}
+
+/* Placeholder style */
+::placeholder {
+  color: transparent;
+}
+
+/* Style for divider */
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid gray;
+}
+
+#divider-text {
+  padding: 0 10px;
+  color: gray;
+  font-size: 14px;
+}
+
+/* Optional: Add responsiveness */
+@media (max-width: 480px) {
+  .form-container {
+    width: 90%;
+    padding: 20px;
   }
 
   .text-field {
-    width: 100%;
-    padding: 10px 35px 10px 35px;
-    font-size: 16px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
+    padding: 10px 35px;
   }
 
-  /* Style for the icons */
+  .label-float {
+    left: 35px;
+  }
+
   .input-icon {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 10;
-  }
-
-  .lock-icon,
-  .email-icon {
     left: 10px;
   }
 
   .toggle-icon {
     right: 10px;
-    cursor: pointer;
   }
 
-  /* Style for the error messages */
   .errorMessage {
-    color: red;
-    font-size: 14px;
-    margin-bottom: 15px;
-    display: block;
+    top: 100%;
+    left: 0;
   }
-
-  /* Style for the buttons */
-  button[type="submit"] {
-    width: 100%;
-    background-color: #6200ee;
-    color: #fff;
-    padding: 15px;
-    border: none;
-    border-radius: 5px;
-    margin-top: 20px;
-    font-size: 18px;
-    cursor: pointer;
-  }
-
-  button[type="submit"]:hover {
-    background-color: #5700d1;
-  }
-
-  /* Placeholder style */
-  ::placeholder {
-    color: #888;
-  }
-
-  /* Social login icons */
-  .social-login img {
-    width: 30px;
-    height: 30px;
-    cursor: pointer;
-  }
-
-  /* Optional: Add responsiveness */
-  @media (max-width: 480px) {
-    .form-container {
-      padding: 20px;
-    }
-  }
+}

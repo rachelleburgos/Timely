@@ -8,7 +8,7 @@ function Example(){
   const [hourAnimation,setHourAnimation]=useState("")
     const animate=()=>{
     setDisplay("notAppear")
-    setDisplayAnimation("")
+    setFadeOutAnimation("")
     setMinuteAnimation("")
     setHourAnimation("")
     setInterval(loadingAnimation, 0.003);

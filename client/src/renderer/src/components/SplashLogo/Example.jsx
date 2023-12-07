@@ -1,17 +1,17 @@
 import SplashLogo from './SplashLogo.jsx'
 import { useState } from 'react'
 
-function Example() {
-  const [loaddisplay, setDisplay] = useState('notAppear')
-  const [fade_out, setFadeOutAnimation] = useState('')
-  const [minuteAnimation, setMinuteAnimation] = useState('')
-  const [hourAnimation, setHourAnimation] = useState('')
-  const animate = () => {
-    setDisplay('notAppear')
-    setDisplayAnimation('')
-    setMinuteAnimation('')
-    setHourAnimation('')
-    setInterval(loadingAnimation, 0.003)
+function Example(){
+    const [loaddisplay,setDisplay] =useState("notAppear")
+  const [fade_out,setFadeOutAnimation]=useState("")
+  const [minuteAnimation,setMinuteAnimation]=useState("")
+  const [hourAnimation,setHourAnimation]=useState("")
+    const animate=()=>{
+    setDisplay("notAppear")
+    setFadeOutAnimation("")
+    setMinuteAnimation("")
+    setHourAnimation("")
+    setInterval(loadingAnimation, 0.003);
   }
   const loadingAnimation = () => {
     setDisplay('')

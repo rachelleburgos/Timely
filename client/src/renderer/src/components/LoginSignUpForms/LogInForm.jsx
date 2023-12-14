@@ -25,6 +25,7 @@ const LogInForm = () => {
     password: Yup.string().required('Required')
   })
 
+  // TODO: Replace this with a call to the API
   const onSubmit = (values) => {
     console.log(values)
   }
@@ -33,12 +34,15 @@ const LogInForm = () => {
     <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
       {({ touched, errors }) => (
         <Form>
+          {/* Email field */}
           <div className="input-icon-container">
             <FontAwesomeIcon icon={faEnvelope} className="input-icon" />
             <Field
               type="email"
               name="email"
+              placeholder=""
               className={`text-field ${touched.email && 'touched'}`}
+              id="email"
             />
             <label htmlFor="email" className="label-float">
               Email
@@ -50,18 +54,21 @@ const LogInForm = () => {
             />
           </div>
 
+          {/* Password field */}
           <div className="input-icon-container">
             <FontAwesomeIcon icon={faLock} className="input-icon" />
             <Field
               type={showPassword ? 'text' : 'password'}
               name="password"
+              placeholder=""
               className={`text-field ${touched.password && 'touched'}`}
+              id="password"
             />
             <label htmlFor="password" className="label-float">
               Password
             </label>
             <FontAwesomeIcon
-              icon={showPassword ? faEyeSlash : faEye}
+              icon={showPassword ? faEye : faEyeSlash}
               className="toggle-icon"
               onClick={togglePasswordVisibility}
             />

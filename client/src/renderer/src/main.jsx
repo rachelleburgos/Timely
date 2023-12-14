@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import * as Sentry from '@sentry/react'
+import { GoogleOAuthProvider } from '@react-oauth/google'
 
 import App from './App'
 
@@ -23,9 +24,11 @@ Sentry.init({
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 
+// TODO: Remove StrictMode in production
 root.render(
-  // TODO: Remove StrictMode in production
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <GoogleOAuthProvider clientId="90480351981-rbuuqm2bfcas5h1kfsvol3fkudg5mdvr.apps.googleusercontent.com">
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  </GoogleOAuthProvider>
 )

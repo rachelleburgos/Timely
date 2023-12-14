@@ -99,7 +99,7 @@ const SignUpForm = () => {
               Password
             </label>
             <FontAwesomeIcon
-              icon={showPassword ? faEyeSlash : faEye}
+              icon={showPassword ? faEye : faEyeSlash}
               className="toggle-icon"
               onClick={togglePasswordVisibility}
             />

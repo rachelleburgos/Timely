@@ -8,6 +8,7 @@ import LoadingPage from './pages/Loading/Loading'
 // Lazy load the pages with delay
 const AuthPage = React.lazy(() => import('./pages/Auth/Auth'))
 const NotFoundPage = React.lazy(import('./pages/NotFound/NotFound'))
+const DashboardPage = React.lazy(() => import('./pages/Dashboard/Dashboard'))
 
 // Wrapper component that includes the ErrorBoundary
 const ErrorBoundaryWrapper = ({ children }) => <ErrorBoundary>{children}</ErrorBoundary>
@@ -35,6 +36,14 @@ function App() {
             element={
               <Suspense fallback={<LoadingPage />}>
                 <NotFoundPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/dashboard"
+            element={
+              <Suspense fallback={<LoadingPage />}>
+                <DashboardPage />
               </Suspense>
             }
           />

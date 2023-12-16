@@ -43,7 +43,7 @@ const EventForm = () => (
       color: '#FFFFFF',
       faIcon: 'fa-calendar',
       isCompleted: false
-      // user and recurringEventId fields would also be included here
+      // TODO: FINISH THIS
     }}
     validationSchema={EventFormSchema}
     onSubmit={(values, { setSubmitting }) => {

@@ -11,9 +11,6 @@ import WeekDayButtons from './CalendarWeekNavigation'
 import NavigationButton from './CalendarNavButton'
 import { useDraggable } from '../../hooks/useDraggable'
 
-// Redux actions
-import { addEvent, updateEvents } from '../../redux/actions/eventActions'
-
 const Calendar = () => {
   const calendarRef = useRef(null)
   const externalEventsRef = useRef(null)
@@ -58,14 +55,18 @@ const Calendar = () => {
   }
 
   const handleWeekDayClick = (dayOffset) => {
-    const newDate = addDays(currentWeekStart, dayOffset)
-    const calendarApi = calendarRef.current.getApi()
-    calendarApi.gotoDate(newDate)
+    if (calendarRef.current) {
+      const newDate = addDays(currentWeekStart, dayOffset)
+      const calendarApi = calendarRef.current.getApi()
+      calendarApi.gotoDate(newDate)
+    }
   }
 
   const handleNavigation = (direction) => {
-    const calendarApi = calendarRef.current.getApi()
-    direction === 'prev' ? calendarApi.prev() : calendarApi.next()
+    if (calendarRef.current) {
+      const calendarApi = calendarRef.current.getApi()
+      direction === 'prev' ? calendarApi.prev() : calendarApi.next()
+    }
   }
 
   const handleSelect = (selectInfo) => {

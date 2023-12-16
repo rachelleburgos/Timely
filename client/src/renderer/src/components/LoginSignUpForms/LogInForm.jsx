@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -10,6 +11,8 @@ library.add(faEnvelope, faEye, faEyeSlash, faLock)
 
 const LogInForm = () => {
   const [showPassword, setShowPassword] = useState(false)
+
+  let navigate = useNavigate()
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword)
@@ -26,12 +29,17 @@ const LogInForm = () => {
   })
 
   // TODO: Replace this with a call to the API
-  const onSubmit = (values) => {
+  const handleSubmit = (values) => {
     console.log(values)
+    navigate('/dashboard')
   }
 
   return (
-    <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+    <Formik
+      initialValues={initialValues}
+      validationSchema={validationSchema}
+      onSubmit={handleSubmit}
+    >
       {({ touched, errors }) => (
         <Form>
           {/* Email field */}
@@ -79,7 +87,9 @@ const LogInForm = () => {
             />
           </div>
 
-          <button type="submit">Log In</button>
+          <button type="submit" onClick={handleSubmit}>
+            Log In
+          </button>
         </Form>
       )}
     </Formik>

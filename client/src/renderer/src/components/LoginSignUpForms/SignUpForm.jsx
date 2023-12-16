@@ -22,11 +22,33 @@ const SignUpForm = () => {
     password: ''
   }
 
+  // Regular expression for password validation
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
+
   const validationSchema = Yup.object().shape({
     firstName: Yup.string().required('Required'),
     lastName: Yup.string().required('Required'),
-    email: Yup.string().email('Invalid email').required('Required'),
-    password: Yup.string().required('Required')
+    email: Yup.string()
+      .email('Invalid email')
+      .required('Required')
+      .test('unique-email', 'Email already in use', async (value) => {
+        if (value) {
+          // TODO: Replace this with a call to the API to check if the email is already in use
+          return new Promise((resolve) => {
+            setTimeout(() => {
+              resolve(false)
+            }, 1000)
+          })
+        } else {
+          return false
+        }
+      }),
+    password: Yup.string()
+      .required('Required')
+      .matches(
+        passwordRegex,
+        'Password must be at least 8 characters long and contain at least one number, one lowercase letter, one uppercase letter, and one special character'
+      )
   })
 
   const onSubmit = (values) => {
@@ -43,6 +65,8 @@ const SignUpForm = () => {
               type="text"
               name="firstName"
               className={`text-field ${touched.firstName && 'touched'}`}
+              placeholder=""
+              id="firstName"
             />
             <label htmlFor="firstName" className="label-float">
               First Name
@@ -60,6 +84,8 @@ const SignUpForm = () => {
               type="text"
               name="lastName"
               className={`text-field ${touched.lastName && 'touched'}`}
+              placeholder=""
+              id="lastName"
             />
             <label htmlFor="lastName" className="label-float">
               Last Name
@@ -77,6 +103,8 @@ const SignUpForm = () => {
               type="email"
               name="email"
               className={`text-field ${touched.email && 'touched'}`}
+              placeholder=""
+              id="email"
             />
             <label htmlFor="email" className="label-float">
               Email
@@ -94,6 +122,8 @@ const SignUpForm = () => {
               type={showPassword ? 'text' : 'password'}
               name="password"
               className={`text-field ${touched.password && 'touched'}`}
+              placeholder=""
+              id="password"
             />
             <label htmlFor="password" className="label-float">
               Password

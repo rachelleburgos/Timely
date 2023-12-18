@@ -22,15 +22,7 @@ const InboxItem = ({ event, removeEventFromInbox, confirmDrop, setCurrentDragged
       onDragEnd={handleDragEnd}
       role="listitem"
     >
-      <h3>{event.title}</h3>
-      <p>Duration: {event.duration || 'Unscheduled'}</p>
-      {event.location && <p>Location: {event.location}</p>}
-      {event.url && (
-        <a href={event.url} target="_blank" rel="noopener noreferrer">
-          More Info
-        </a>
-      )}
-      {event.description && <p>Description: {event.description}</p>}
+      <div className="draggable-event__title">{event.title}</div>
     </div>
   )
 }

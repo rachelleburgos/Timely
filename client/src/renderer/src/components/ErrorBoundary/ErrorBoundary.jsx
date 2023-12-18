@@ -1,6 +1,12 @@
 import { Component } from 'react'
 import PropTypes from 'prop-types'
 import * as Sentry from '@sentry/react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowsRotate } from '@fortawesome/free-solid-svg-icons'
+import { library } from '@fortawesome/fontawesome-svg-core'
+
+// Adding icons to the library
+library.add(faArrowsRotate)
 
 class ErrorBoundary extends Component {
   constructor(props) {
@@ -28,9 +34,9 @@ class ErrorBoundary extends Component {
     window.location.reload()
   }
 
+  // Render the fallback UI if an error occurs
   render() {
     if (this.state.hasError) {
-      // Use customFallback if provided, else default fallback UI
       return (
         this.props.customFallback || (
           <div>
@@ -40,7 +46,7 @@ class ErrorBoundary extends Component {
               <br />
               {this.state.errorInfo && this.state.errorInfo.componentStack}
             </details>
-            <button onClick={this.retry}>Retry</button>
+            <FontAwesomeIcon icon={faArrowsRotate} className="input-icon" onClick={this.retry} />
           </div>
         )
       )

@@ -1,0 +1,245 @@
+/* Define root variables for colors */
+:root {
+  --color-bg1: rgba(196, 186, 255, 0.8);
+  --color-bg2: rgba(241, 244, 247, 0.8);
+  --color1: rgba(158, 255, 247, 0.8);
+  --color2: rgba(112, 154, 251, 0.8);
+  --color3: rgba(205, 141, 254, 0.8);
+  --color4: rgba(174, 254, 183, 0.8);
+  --color5: rgba(255, 222, 137, 0.8);
+  --circle-size: 100%;
+  --blending: hard-light;
+  --text-color: rgb(93, 93, 93);
+  --border-color: rgb(93, 93, 93);
+  --button-color: rgb(92, 82, 229);
+  --button-hover-color: rgb(71, 62, 196);
+  --error-color: rgb(132, 35, 40);
+  --divider-color: rgb(126, 126, 126);
+}
+
+/* Full-page gradient background */
+body, html {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: radial-gradient(circle at center, var(--color-bg1) 0%, var(--color-bg2) 100%);
+}
+
+/* Container for gradient circles */
+.gradients-container {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  overflow: hidden;
+  background-blend-mode: var(--blending);
+}
+
+/* Individual gradient circles */
+.gradient-circle {
+  position: absolute;
+  width: var(--circle-size);
+  height: var(--circle-size);
+  border-radius: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-blend-mode: var(--blending);
+}
+
+/* Additional classes for gradient circles with different colors and animations */
+.gradient-circle.color1 {
+  background: radial-gradient(circle at center, var(--color1) 0%, transparent 40%);
+  animation: moveVertical 20s ease infinite;
+}
+
+.gradient-circle.color2 {
+  background: radial-gradient(circle at center, var(--color2) 0%, transparent 30%);
+  animation: moveInCircle 40s linear infinite;
+}
+
+.gradient-circle.color3 {
+  background: radial-gradient(circle at center, var(--color3) 0%, transparent 30%);
+  animation: moveHorizontal 40s ease infinite;
+}
+
+.gradient-circle.color4 {
+  background: radial-gradient(circle at center, var(--color4) 0%, transparent 30%);
+  animation: moveInCircle 60s ease infinite;
+}
+
+.gradient-circle.color5.interactive-layer {
+  background: radial-gradient(circle at center, var(--color5) 0%, transparent 40%);
+  top: unset;
+  left: unset;
+}
+
+/* Keyframes for animations */
+@keyframes moveInCircle {
+  0% { transform: translateX(0) translateY(0); }
+  25% { transform: translateX(50vw) translateY(-50vh); }
+  50% { transform: translateX(0) translateY(-100vh); }
+  75% { transform: translateX(-50vw) translateY(-50vh); }
+  100% { transform: translateX(0) translateY(0); }
+}
+
+@keyframes moveVertical {
+  0% { transform: translate(-50%, -50%) translateY(-25vh); }
+  50% { transform: translate(-50%, -50%) translateY(25vh); }
+  100% { transform: translate(-50%, -50%) translateY(-25vh); }
+}
+
+@keyframes moveHorizontal {
+  0% { transform: translate(-50%, -50%) translateX(-25vw); }
+  50% { transform: translate(-50%, -50%) translateX(25vw); }
+  100% { transform: translate(-50%, -50%) translateX(-25vw); }
+}
+
+/* Auth form container and styles */
+.auth-form-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+h1 { text-align: center; }
+p { text-align: center; margin-bottom: 20px; font-size: 14px; }
+
+.form-container {
+  position: relative;
+  z-index: 2;
+  width: 350px;
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 40px;
+  border-radius: 30px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  user-select: none;
+}
+
+.input-icon-container { position: relative; margin-bottom: 25px; }
+
+.label-float {
+  position: absolute;
+  left: 45px;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: top 0.3s, font-size 0.3s, color 0.3s;
+  font-size: 16px;
+  color: var(--text-color);
+  pointer-events: none;
+}
+
+.text-field:focus + .label-float, .text-field:not(:placeholder-shown) + .label-float {
+  top: 10px;
+  font-size: 12px;
+}
+
+.text-field {
+  padding: 20px 40px;
+  font-size: 16px;
+  border-radius: 15px;
+  border: 1px solid var(--border-color);
+  width: 100%;
+  box-sizing: border-box;
+  padding-top: 25px;
+  transition: padding 0.3s, border-color 0.3s;
+  background: transparent;
+}
+
+.text-field:focus {
+  outline: none;
+  border-color: var(--button-color);
+  box-shadow: 0 3px 1px rgba(0, 0, 0, 0.1);
+}
+
+::placeholder { color: transparent; }
+
+.text-field:-webkit-autofill + .label-float {
+  top: 10px;
+  font-size: 12px;
+  color: var(--text-color);
+}
+
+.input-icon, .toggle-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  color: var(--border-color);
+}
+
+.input-icon { left: 15px; }
+
+.toggle-icon { right: 10px; cursor: pointer; z-index: 20; }
+
+.errorMessage {
+  color: var(--error-color);
+  margin-top: 5px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  font-size: 0.8em;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.3s, opacity 0.3s;
+  z-index: 5;
+}
+
+.errorMessage.active { visibility: visible; opacity: 1; }
+
+button[type="submit"] {
+  width: 100%;
+  background-color: var(--button-color);
+  color: white;
+  padding: 15px;
+  border: none;
+  border-radius: 5px;
+  margin-top: 20px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover { background-color: var(--button-hover-color); }
+
+.toggle-form-button {
+  background: none;
+  border: none;
+  padding: 0;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: inherit;
+  text-decoration: underline;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.divider::before, .divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid var(--divider-color);
+}
+
+#divider-text { padding: 0 10px; color: var(--divider-color); font-size: 12px; }
+
+@media (max-width: 480px) {
+  .form-container { width: 90%; padding: 20px; }
+  .text-field { padding: 10px 35px; }
+  .label-float { left: 35px; }
+  .input-icon { left: 10px; }
+  .toggle-icon { right: 10px; }
+  .errorMessage { top: 100%; left: 0; }
+}

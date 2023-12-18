@@ -1,16 +1,21 @@
 import { useState, useEffect } from 'react'
-import LogInForm from '../../components/LoginSignUpForms/LogInForm'
-import SignUpForm from '../../components/LoginSignUpForms/SignUpForm'
+import LogInForm from './LogInForm'
+import SignUpForm from './SignUpForm'
 import { GoogleLogin } from '@react-oauth/google'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faEnvelope, faEye, faEyeSlash, faLock, faUser } from '@fortawesome/free-solid-svg-icons'
 
 import './Auth.css'
 import './Grained'
 
+// Add FontAwesome icons to the library
+library.add(faEnvelope, faEye, faEyeSlash, faLock, faUser)
+
 const AuthForm = () => {
   const [showLogin, setShowLogin] = useState(true)
 
+  // Create a new grained instance, it will be used to add the grain effect to the background
   useEffect(() => {
-    // Assuming grained.js is included in your HTML and available globally
     window.grained('#container', {
       animate: false,
       patternWidth: 100,
@@ -101,6 +106,7 @@ const AuthForm = () => {
           </div>
 
           <GoogleLogin
+            // TODO: Replace this with a call to the API
             onSuccess={(response) => console.log(response)}
             onFailure={(response) => console.log(response)}
           />

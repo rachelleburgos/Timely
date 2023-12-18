@@ -2,11 +2,11 @@
 :root {
   --color-bg1: rgba(196, 186, 255, 0.8);
   --color-bg2: rgba(241, 244, 247, 0.8);
-  --color1: rgba(122, 255, 244, 0.8);
-  --color2: rgba(112, 202, 251, 0.8);
-  --color3: rgba(185, 97, 252, 0.8);
-  --color4: rgba(151, 255, 163, 0.8);
-  --color5: rgba(255, 213, 107, 0.8);
+  --color1: rgba(158, 255, 247, 0.8);
+  --color2: rgba(112, 154, 251, 0.8);
+  --color3: rgba(205, 141, 254, 0.8);
+  --color4: rgba(174, 254, 183, 0.8);
+  --color5: rgba(255, 222, 137, 0.8);
   --circle-size: 100%;
   --blending: hard-light;
   --text-color: rgb(93, 93, 93);

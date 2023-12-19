@@ -7,7 +7,7 @@ import App from './App'
 
 // Sentry initialization for error tracking and performance monitoring
 Sentry.init({
-  dsn: 'https://4fc52bc722c372978bb1875850d211d2@o4506294371287040.ingest.sentry.io/4506294374891520',
+  dsn: import.meta.env.RENDERER_VITE_SENTRY_DSN,
   integrations: [
     new Sentry.BrowserTracing({
       // Set 'tracePropagationTargets' to control for which URLs distributed tracing should be enabled
@@ -26,7 +26,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'))
 
 // TODO: Remove StrictMode in production
 root.render(
-  <GoogleOAuthProvider clientId="90480351981-rbuuqm2bfcas5h1kfsvol3fkudg5mdvr.apps.googleusercontent.com">
+  <GoogleOAuthProvider clientId={import.meta.env.RENDERER_VITE_GOOGLE_CLIENT_ID}>
     <React.StrictMode>
       <App />
     </React.StrictMode>

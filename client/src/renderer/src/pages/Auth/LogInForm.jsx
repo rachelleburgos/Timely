@@ -21,8 +21,10 @@ const LogInForm = () => {
   }
 
   const validationSchema = Yup.object().shape({
-    email: Yup.string().matches(emailRegex, 'Invalid email address').required('Required'),
-    password: Yup.string().required('Required')
+    email: Yup.string()
+      .matches(emailRegex, 'Invalid email address')
+      .required('This is a required field'),
+    password: Yup.string().required('This is a required field')
   })
 
   const handleSubmit = (values) => {

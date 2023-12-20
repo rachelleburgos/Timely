@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Field, ErrorMessage } from 'formik'
+import { Field, ErrorMessage, useField } from 'formik'
 import { useState } from 'react'
 
 export const InputField = ({
@@ -12,6 +12,11 @@ export const InputField = ({
   togglePasswordVisibility
 }) => {
   const [showPassword, setShowPassword] = useState(false)
+  const [field, meta] = useField(name)
+  const fieldHasError = meta.touched && meta.error
+  const fieldClass = fieldHasError ? 'text-field error-field' : 'text-field'
+
+  const errorMessageClass = fieldHasError ? 'errorMessage active' : 'errorMessage' // Class for error message
 
   const handleToggleVisibility = () => {
     togglePasswordVisibility()
@@ -22,10 +27,10 @@ export const InputField = ({
     <div className="input-icon-container">
       <FontAwesomeIcon icon={icon} className="input-icon" />
       <Field
+        {...field}
         type={isPassword && !showPassword ? 'password' : 'text'}
-        name={name}
         placeholder={placeholder}
-        className="text-field"
+        className={fieldClass}
         id={name}
       />
       <label htmlFor={name} className="label-float">
@@ -38,7 +43,7 @@ export const InputField = ({
           onClick={handleToggleVisibility}
         />
       )}
-      <ErrorMessage name={name} component="div" className="errorMessage" />
+      <ErrorMessage name={name} component="div" className={errorMessageClass} />
     </div>
   )
 }

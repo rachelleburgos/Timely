@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Formik, Form } from 'formik'
+import { Formik, Form, Field } from 'formik'
 import * as Yup from 'yup'
 import { InputField } from './InputField'
 
@@ -11,34 +11,28 @@ const SignUpForm = () => {
   }
 
   const initialValues = {
-    firstName: '',
-    lastName: '',
+    name: '',
     email: '',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
+    agreeToTerms: false // Added for terms agreement
   }
 
   const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
 
   const validationSchema = Yup.object().shape({
-    firstName: Yup.string().required('Required'),
-    lastName: Yup.string().required('Required'),
-    email: Yup.string()
-      .email('Invalid email address')
-      .required('Required')
-      .test('log', (value) => {
-        console.log('Validating email:', value)
-        return true // Just for logging, actual validation is done by email()
-      }),
+    name: Yup.string().required('This is a required field'),
+    email: Yup.string().email('Invalid email address').required('This is a required field'),
     password: Yup.string()
-      .required('Password is required')
+      .required('This is a required field')
       .matches(
         passwordRegex,
         'Password must be at least 8 characters long and contain at least one number, one lowercase letter, one uppercase letter, and one special character'
       ),
     confirmPassword: Yup.string()
       .required('Please confirm your password')
-      .oneOf([Yup.ref('password'), null], 'Passwords must match')
+      .oneOf([Yup.ref('password'), null], 'Passwords must match'),
+    agreeToTerms: Yup.boolean().oneOf([true], 'You must agree to the terms and services') // Validation for terms agreement
   })
 
   const onSubmit = (values) => {
@@ -48,8 +42,7 @@ const SignUpForm = () => {
   return (
     <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
       <Form>
-        <InputField icon="user" name="firstName" label="First Name" />
-        <InputField icon="user" name="lastName" label="Last Name" />
+        <InputField icon="user" name="name" label="Name" />
         <InputField icon="envelope" name="email" label="Email" />
         <InputField
           icon="lock"
@@ -65,6 +58,9 @@ const SignUpForm = () => {
           isPassword={true}
           togglePasswordVisibility={togglePasswordVisibility}
         />
+        <label>
+          <Field type="checkbox" name="agreeToTerms" />I agree to the Terms and Services
+        </label>
         <button type="submit">Sign Up</button>
       </Form>
     </Formik>

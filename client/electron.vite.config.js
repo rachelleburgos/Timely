@@ -25,11 +25,14 @@ export default defineConfig({
     sourcemap: true
   },
 
-  plugins: [sentryVitePlugin({
-    org: 'timely-v2',
-    project: 'javascript-react'
-  }), sentryVitePlugin({
-    org: "timely-v2",
-    project: "timely-client"
-  })]
+  plugins: [
+    sentryVitePlugin({
+      org: 'timely-v2',
+      project: 'javascript-react'
+    }),
+    sentryVitePlugin({
+      org: 'timely-v2',
+      project: 'timely-client'
+    })
+  ]
 })

@@ -1,6 +1,5 @@
-<!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
 <a name="readme-top"></a>
-<!-- PROJECT SHIELDS -->
+
 <!--
 *** I'm using markdown "reference style" links for readability.
 *** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
@@ -8,6 +7,11 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
+
+<!-- PROJECT SHIELDS -->
+
+<div align="center">
+
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
@@ -17,26 +21,26 @@
 
 <!-- PROJECT LOGO -->
 <br />
-<div align="center">
+
   <a href="https://github.com/rachelleburgos/Timely">
     <img src="client/resources/icon.png" alt="Logo" width="80" height="80">
   </a>
 
 <h3 align="center">Timely</h3>
-
   <p align="center">
     An AI-powered scheduling app designed to help you manage your time and get more done.
     <br />
-    <a href="https://github.com/rachelleburgos/Timely"><strong>Explore the docs »</strong></a>
+    <!-- <a href="https://github.com/rachelleburgos/Timely"><strong>Explore the docs »</strong></a> -->
     <br />
-    <br />
-    <a href="https://github.com/rachelleburgos/Timely">View Demo</a>
+    <a href="https://github.com/rachelleburgos/Timely/releases">Releases</a>
     ·
     <a href="https://github.com/rachelleburgos/Timely/issues">Report Bug</a>
     ·
     <a href="https://github.com/rachelleburgos/Timely/issues">Request Feature</a>
   </p>
 </div>
+
+<br />
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -55,21 +59,21 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
+    <!-- <li><a href="#usage">Usage</a></li> -->
     <li><a href="#roadmap">Roadmap</a></li>
     <!-- <li><a href="#contributing">Contributing</a></li> -->
     <li><a href="#license">License</a></li>
-    <!-- <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li> -->
+    <!-- <li><a href="#contact">Contact</a></li> -->
+    <li><a href="#acknowledgments">Acknowledgments & Resources</a></li>
   </ol>
 </details>
+
+<br />
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-
-<!-- TODO -->
+[![Product Screen Shot][product-screenshot]]()
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -100,9 +104,18 @@ To get a local copy up and running follow these steps.
   npm install npm@latest -g
   ```
 
+* API keys
+  * In order to fully utilize the application's functionalities, you will need to obtain API keys from the following services:
+    * [Google Cloud Platform](https://console.cloud.google.com/)
+      * Create a new project in the Google Cloud Platform Console and enable OAuth 2.0 for the project. Follow the instructions [here](https://developers.google.com/identity/protocols/oauth2) to obtain a client ID and secret. In order to integrate Google authentication with MongoDB Realm, please follow the instructions under the MongoDB section below.
+    * [Sentry](https://sentry.io/)
+      * Create a new project in Sentry and obtain a DSN.
+    * [MongoDB](https://www.mongodb.com/cloud/atlas)
+      * You will need to create a MongoDB Cluster and enable Device Sync. You will also need to [enable email/password authentication](https://www.mongodb.com/docs/atlas/app-services/authentication/email-password/#std-label-email-password-authentication) as well as [Google authentication](https://www.mongodb.com/docs/atlas/app-services/authentication/google/).
+
 ### Installation
 
-1. Clone the repo
+1. Clone the repository
 
    ```sh
    git clone https://github.com/rachelleburgos/Timely.git
@@ -114,7 +127,7 @@ To get a local copy up and running follow these steps.
    cd Timely/client
    ```
 
-3. Create a .env file in the root of the client folder and add the following:
+3. Create a `.env` file in the root of the client folder and add the following:
 
     ```sh
     RENDERER_VITE_SENTRY_DSN=<YOUR_SENTRY_DSN>
@@ -123,13 +136,15 @@ To get a local copy up and running follow these steps.
     RENDERER_VITE_REALM_APP_ID=<YOUR_REALM_APP_ID>
     ```
 
-3. Install NPM packages
+    The `RENDERER_VITE` prefix is required for the renderer process to access the environment variables.
+
+4. Install NPM packages
 
    ```sh
    npm install
    ```
 
-4. Build the project
+5. Build the project
 
    * For Windows
 
@@ -152,9 +167,9 @@ To get a local copy up and running follow these steps.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- USAGE EXAMPLES -->
-## Usage
+<!-- ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources. -->
 
 <!-- _For more examples, please refer to the [Documentation](https://example.com)_ -->
 
@@ -163,12 +178,16 @@ Use this space to show useful examples of how a project can be used. Additional 
 <!-- ROADMAP -->
 ## Roadmap
 
-* [ ] Feature 1
-* [ ] Feature 2
-* [ ] Feature 3
-  * [ ] Nested Feature
+Below is an outline of planned features and enhancements.
 
-See the [open issues](https://github.com/rachelleburgos/Timely/issues) for a full list of proposed features (and known issues).
+* [ ] Migration to TypeScript
+* [ ] Add testing frameworks
+* [ ] Add CI/CD using GitHub Actions
+* [ ] Add integration with other calendar services
+* [ ] Add support for mobile devices
+* [ ] Add support for web browsers
+
+<!-- See the [open issues](https://github.com/rachelleburgos/Timely/issues) for a full list of proposed features (and known issues). -->
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -205,11 +224,16 @@ Project Link: [https://github.com/rachelleburgos/Timely](https://github.com/rach
 <!-- <p align="right">(<a href="#readme-top">back to top</a>)</p> -->
 
 <!-- ACKNOWLEDGMENTS -->
-<!-- ## Acknowledgments
+## Acknowledgments & Resources
 
-* []()
-* []()
-* []() -->
+* [FullCalendar](https://fullcalendar.io/): Calendar library used for the main dashboard's calendar
+* [Formik](https://formik.org/): Form library used for the login and signup forms
+* [Yup](https://github.com/jquense/yup): Form validation library used for the login and signup forms in conjunction with Formik
+* [React Router](https://reactrouter.com/): Routing library used for the application
+* [Font Awesome](https://fontawesome.com): Icons used for the application
+* [Image Shields](https://shields.io): Shields used for the README
+* [README Template](https://github.com/othneildrew/Best-README-Template/tree/master): README template used for this README 😉
+
 
 <!-- <p align="right">(<a href="#readme-top">back to top</a>)</p> -->
 
@@ -230,7 +254,7 @@ Project Link: [https://github.com/rachelleburgos/Timely](https://github.com/rach
 [license-shield]: https://img.shields.io/github/license/rachelleburgos/Timely.svg?style=for-the-badge
 [license-url]: https://github.com/rachelleburgos/Timely/blob/master/LICENSE.txt
 
-[product-screenshot]: images/screenshot.png
+[product-screenshot]: https://i.imgur.com/U079MsE.jpg
 
 [React.js]: https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB
 [React-url]: https://react.dev/

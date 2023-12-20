@@ -49,6 +49,8 @@
     <li>
       <a href="#about-the-project">About The Project</a>
       <ul>
+        <li><a href="#why-timely">Why Timely?</a></li>
+        <li> <a href="#for-whom">For Whom?</a></li>
         <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
@@ -73,7 +75,27 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Screen Shot][product-screenshot]]()
+<!-- ![Product Screen Shot][product-screenshot] -->
+
+**Timely** is an AI-powered scheduling application that redefines the approach to personal and professional time management. Unlike traditional scheduling tools, **Timely** stands out in the crowded market by not just organizing your tasks but also optimizing how you handle your workload.
+
+### Why Timely?
+
+In an era where productivity tools often add to our workload rather than reduce it, **Timely** offers a refreshing change. Here's what makes it unique:
+
+* **AI-Driven Efficiency**: At its core, Timely harnesses advanced AI algorithms to analyze your work habits. It intelligently suggests an optimized schedule based on your past performance and preferences, helping you work smarter, not harder.
+
+* **Personal Productivity Insights**: Timely goes beyond just scheduling tasks. It provides valuable insights into your productivity patterns, offering daily and weekly summaries that help you understand and improve your work habits.
+
+* **Stress-Free Scheduling**: The app intuitively reschedules and prioritizes tasks, reducing the often overwhelming burden of manual planning. Its user-friendly interface ensures that managing your time is a seamless and stress-free experience.
+
+* **Seamless Integration**: Designed to integrate effortlessly with existing tools and workflows, Timely syncs with other apps and services to bring all aspects of your schedule into one coherent picture.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+### For Whom?
+
+Timely is for everyone who seeks to take control of their time - from busy professionals juggling multiple deadlines to students managing their study schedules. It's more than an app; it's your personal time management assistant.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -186,6 +208,16 @@ Below is an outline of planned features and enhancements.
 * [ ] Add integration with other calendar services
 * [ ] Add support for mobile devices
 * [ ] Add support for web browsers
+* [ ] Account for mood and energy levels when scheduling tasks
+* [ ] Account for geographical location when scheduling tasks
+* [ ] Account for uncompleted tasks when scheduling tasks
+* [ ] Add support for recurring tasks
+* [ ] Add support for subtasks
+* [ ] Add support for task dependencies
+* [ ] Add support for task prioritization
+* [ ] Add support for task categorization
+* [ ] Accessibility improvements
+* [ ] Add support for multiple languages
 
 <!-- See the [open issues](https://github.com/rachelleburgos/Timely/issues) for a full list of proposed features (and known issues). -->
 

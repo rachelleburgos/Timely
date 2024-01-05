@@ -152,13 +152,11 @@ To get a local copy up and running follow these steps.
 3. Create a `.env` file in the root of the client folder and add the following:
 
     ```sh
-    RENDERER_VITE_SENTRY_DSN=<YOUR_SENTRY_DSN>
+    ELECTRON_VITE_SENTRY_DSN=<YOUR_SENTRY_DSN>
     RENDERER_VITE_GOOGLE_CLIENT_ID=<YOUR_GOOGLE_CLIENT_ID>
     RENDERER_VITE_GOOGLE_SECRET=<YOUR_GOOGLE_SECRET>
     RENDERER_VITE_REALM_APP_ID=<YOUR_REALM_APP_ID>
     ```
-
-    The `RENDERER_VITE` prefix is required for the renderer process to access the environment variables.
 
 4. Install NPM packages
 
@@ -262,6 +260,8 @@ Project Link: [https://github.com/rachelleburgos/Timely](https://github.com/rach
 * [Formik](https://formik.org/): Form library used for the login and signup forms
 * [Yup](https://github.com/jquense/yup): Form validation library used for the login and signup forms in conjunction with Formik
 * [React Router](https://reactrouter.com/): Routing library used for the application
+* [Flowbite React](https://flowbite.com/react/): UI library used for the application
+* [Protocol Registry](https://github.com/Shubham-Kumar-2000/protocol-registry): Protocol registry used for redirecting the user to the application after authenticating with Google
 * [Font Awesome](https://fontawesome.com): Icons used for the application
 * [Image Shields](https://shields.io): Shields used for the README
 * [README Template](https://github.com/othneildrew/Best-README-Template/tree/master): README template used for this README 😉

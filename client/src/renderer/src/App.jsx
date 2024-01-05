@@ -2,7 +2,7 @@ import React, { Suspense } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
-import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary'
+import ErrorBoundary from './components/common/ErrorBoundary/ErrorBoundary'
 import LoadingPage from './pages/Loading/Loading'
 
 // Lazy load the pages with delay
@@ -21,8 +21,11 @@ ErrorBoundaryWrapper.propTypes = {
 function App() {
   return (
     <Router>
+      {/* All the routes are wrapped in the ErrorBoundaryWrapper component */}
+      {/* Suspense is used to show a fallback component while the page is loading, in this case the LoadingPage component */}
       <ErrorBoundaryWrapper>
         <Routes>
+          {/* AuthPage */}
           <Route
             path="/"
             element={
@@ -31,14 +34,7 @@ function App() {
               </Suspense>
             }
           />
-          <Route
-            path="*"
-            element={
-              <Suspense fallback={<LoadingPage />}>
-                <NotFoundPage />
-              </Suspense>
-            }
-          />
+          {/* Dashboard */}
           <Route
             path="/dashboard"
             element={
@@ -47,6 +43,16 @@ function App() {
               </Suspense>
             }
           />
+          {/* NotFoundPage */}
+          <Route
+            path="*"
+            element={
+              <Suspense fallback={<LoadingPage />}>
+                <NotFoundPage />
+              </Suspense>
+            }
+          />
+          {/* Add more routes as needed here... */}
         </Routes>
       </ErrorBoundaryWrapper>
     </Router>

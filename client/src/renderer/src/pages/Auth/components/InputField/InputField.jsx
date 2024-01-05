@@ -1,7 +1,9 @@
 import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Field, ErrorMessage, useField } from 'formik'
+import { faCircleExclamation, faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
+import { Field, useField } from 'formik'
 import { useState } from 'react'
+import { Tooltip } from 'flowbite-react'
 
 export const InputField = ({
   icon,
@@ -15,8 +17,6 @@ export const InputField = ({
   const [field, meta] = useField(name)
   const fieldHasError = meta.touched && meta.error
   const fieldClass = fieldHasError ? 'text-field error-field' : 'text-field'
-
-  const errorMessageClass = fieldHasError ? 'errorMessage active' : 'errorMessage' // Class for error message
 
   const handleToggleVisibility = () => {
     togglePasswordVisibility()
@@ -38,12 +38,16 @@ export const InputField = ({
       </label>
       {isPassword && (
         <FontAwesomeIcon
-          icon={showPassword ? 'eye' : 'eye-slash'}
+          icon={showPassword ? faEye : faEyeSlash}
           className="toggle-icon"
           onClick={handleToggleVisibility}
         />
       )}
-      <ErrorMessage name={name} component="div" className={errorMessageClass} />
+      {fieldHasError && (
+        <Tooltip content={meta.error} style="light">
+          <FontAwesomeIcon icon={faCircleExclamation} className="error-icon" />
+        </Tooltip>
+      )}
     </div>
   )
 }

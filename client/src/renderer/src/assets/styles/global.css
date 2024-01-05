@@ -3,9 +3,37 @@
   src: url('../fonts/Inter-VariableFont_slnt,wght.ttf') format('truetype');
 }
 
-/* Use the custom font in your styles */
+@font-face {
+  font-family: 'Open Dyslexic';
+  src: url('../fonts/OpenDyslexic-Regular.otf') format('opentype');
+}
+
 body {
   font-family: 'Inter', sans-serif;
-  font-weight: 400; /* Normal weight */
-  font-style: normal; /* Normal style */
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Font Families */
+:root {
+  --font-family-default: 'Inter', sans-serif;
+  --font-family-alternate: 'Open Dyslexic', sans-serif;
+}
+
+/* Light Mode */
+:root {
+  --background-color: #fff;
+  --text-color: #333;
+  --primary-color: #5b63d8;
+  --secondary-color: #f3f4f6;
+  /* ... other colors */
+}
+
+/* Dark Mode */
+[data-theme='dark'] {
+  --background-color: #1a1a1a;
+  --text-color: #f5f5f5;
+  --primary-color: #4f5b93;
+  --secondary-color: #2a2c31;
+  /* ... other colors */
 }

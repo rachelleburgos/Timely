@@ -27,12 +27,8 @@ export default defineConfig({
 
   plugins: [
     sentryVitePlugin({
-      org: 'timely-v2',
-      project: 'javascript-react'
-    }),
-    sentryVitePlugin({
-      org: 'timely-v2',
-      project: 'timely-client'
+      org: 'timelyai',
+      project: 'timely-desktop'
     })
   ]
 })

@@ -1,7 +1,5 @@
-// import { useState, useEffect, useCallback } from 'react'
-
-import Calendar from '../../components/Calendar/Calendar'
-import InboxList from '../../components/Inbox/InboxList'
+import Calendar from '../../components/specific/Calendar/Calendar'
+import InboxList from '../../components/specific/Inbox/InboxList'
 
 function Dashboard() {
   return (

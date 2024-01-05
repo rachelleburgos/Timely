@@ -1,7 +1,13 @@
 import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
+const Sentry = require('@sentry/electron')
 import icon from '../../resources/icon.png?asset'
+
+Sentry.init({
+  dsn: process.env.ELECTRON_VITE_SENTRY_DSN,
+  environment: process.env.NODE_ENV
+})
 
 function createWindow() {
   // Create the browser window.

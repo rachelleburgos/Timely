@@ -5,9 +5,11 @@ import { GoogleOAuthProvider } from '@react-oauth/google'
 
 import App from './App'
 
+const isDevelopment = process.env.NODE_ENV === 'development'
+
 // Sentry initialization for error tracking and performance monitoring
 Sentry.init({
-  dsn: import.meta.env.RENDERER_VITE_SENTRY_DSN,
+  dsn: import.meta.env.ELECTRON_VITE_SENTRY_DSN,
   integrations: [
     new Sentry.BrowserTracing({
       // Set 'tracePropagationTargets' to control for which URLs distributed tracing should be enabled
@@ -16,19 +18,25 @@ Sentry.init({
     new Sentry.Replay()
   ],
   // Performance Monitoring
-  tracesSampleRate: 1.0, // Capture 100% of the transactions
+  // Adjust the rates based on the environment; in development, higher rates are used
+  tracesSampleRate: isDevelopment ? 0.1 : 1.0,
   // Session Replay
-  replaysSessionSampleRate: 1.0, // Sample rate for session replay
-  replaysOnErrorSampleRate: 1.0 // Sample rate for sessions where errors occur
+  replaysSessionSampleRate: isDevelopment ? 0.1 : 1.0,
+  replaysOnErrorSampleRate: isDevelopment ? 0.1 : 1.0
 })
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 
-// TODO: Remove StrictMode in production
 root.render(
+  // Conditionally use React.StrictMode only in development
+  // https://reactjs.org/docs/strict-mode.html
   <GoogleOAuthProvider clientId={import.meta.env.RENDERER_VITE_GOOGLE_CLIENT_ID}>
-    <React.StrictMode>
+    {isDevelopment ? (
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    ) : (
       <App />
-    </React.StrictMode>
+    )}
   </GoogleOAuthProvider>
 )

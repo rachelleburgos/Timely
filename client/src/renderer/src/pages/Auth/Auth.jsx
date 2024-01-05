@@ -1,65 +1,28 @@
-import { useState, useEffect } from 'react'
-import LogInForm from './LogInForm'
-import SignUpForm from './SignUpForm'
+import { useState } from 'react'
+import LogInForm from './components/LogInForm/LogInForm'
+import SignUpForm from './components/SignUpForm/SignUpForm'
 import { GoogleLogin } from '@react-oauth/google'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faEnvelope, faEye, faEyeSlash, faLock, faUser } from '@fortawesome/free-solid-svg-icons'
+import {
+  faEnvelope,
+  faEye,
+  faEyeSlash,
+  faLock,
+  faUser,
+  faCircleExclamation
+} from '@fortawesome/free-solid-svg-icons'
 
 import './Auth.css'
-import './Grained'
+import { useGrainEffect } from '../../hooks/useGrained'
 
 // Add FontAwesome icons to the library
-library.add(faEnvelope, faEye, faEyeSlash, faLock, faUser)
+library.add(faEnvelope, faEye, faEyeSlash, faLock, faUser, faCircleExclamation)
 
 const AuthForm = () => {
   const [showLogin, setShowLogin] = useState(true)
 
-  // Create a new grained instance, it will be used to add the grain effect to the background
-  useEffect(() => {
-    window.grained('#container', {
-      animate: false,
-      patternWidth: 100,
-      patternHeight: 100,
-      grainOpacity: 0.03,
-      grainDensity: 1,
-      grainWidth: 1,
-      grainHeight: 1
-    })
-
-    const interactiveLayer = document.querySelector('.interactive-layer')
-
-    if (!interactiveLayer) {
-      console.error('Interactive layer not found')
-      return
-    }
-
-    let mouseX = 0
-    let mouseY = 0
-    let posX = 0
-    let posY = 0
-
-    const move = () => {
-      // Easing effect: The layer moves a fraction of the distance towards the mouse coordinates
-      posX += (mouseX - posX) * 0.01 // Adjust the 0.1 to control the speed of the easing
-      posY += (mouseY - posY) * 0.01 // Adjust the 0.1 to control the speed of the easing
-
-      interactiveLayer.style.transform = `translate3d(${posX}px, ${posY}px, 0)`
-      requestAnimationFrame(move)
-    }
-
-    const handleMouseMove = (event) => {
-      // Set the mouse coordinates
-      mouseX = event.clientX - interactiveLayer.offsetWidth / 2
-      mouseY = event.clientY - interactiveLayer.offsetHeight / 2
-    }
-
-    document.addEventListener('mousemove', handleMouseMove)
-    move()
-
-    return () => {
-      document.removeEventListener('mousemove', handleMouseMove)
-    }
-  }, [])
+  // Add the grain effect to the background
+  useGrainEffect('.interactive-layer')
 
   const toggleForm = () => {
     setShowLogin(!showLogin)
@@ -76,6 +39,7 @@ const AuthForm = () => {
           <div className="gradient-circle color4"></div>
           <div className="gradient-circle color5 interactive-layer"></div>
         </div>
+        {/* Conditional rendering of the login or signup form */}
         <div className="form-container">
           {showLogin ? (
             <>
@@ -108,7 +72,9 @@ const AuthForm = () => {
           <GoogleLogin
             // TODO: Replace this with a call to the API
             onSuccess={(response) => console.log(response)}
-            onFailure={(response) => console.log(response)}
+            onError={(response) => console.log(response)}
+            type="icon"
+            shape="circle"
           />
         </div>
       </div>

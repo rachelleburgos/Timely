@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Formik, Form, Field } from 'formik'
 import * as Yup from 'yup'
-import { InputField } from './InputField'
+import { InputField } from '../InputField/InputField'
 
 const SignUpForm = () => {
   const [showPassword, setShowPassword] = useState(false)
@@ -37,6 +37,7 @@ const SignUpForm = () => {
 
   const onSubmit = (values) => {
     console.log(values)
+    // TODO: Replace this with a call to the API
   }
 
   return (
